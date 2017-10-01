@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Role;
 use App\User;
 use App\Http\Controllers\Controller;
 use App\UserProfile;
@@ -68,7 +69,13 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $userProfile = UserProfile::create([
+        $user = User::create([
+            'name' => $data['username'],
+            'email' => $data['email'],
+            'password' => bcrypt($data['password']),
+        ]);
+
+        $userProfile = new UserProfile([
             'name' => $data['name'],
             'surname' => $data['surname'],
             'phone' => $data['phone'],
@@ -76,13 +83,9 @@ class RegisterController extends Controller
             'postcode' => $data['postcode'],
             'city_id' => $data['city']
         ]);
-        $user = User::create([
-            'name' => $data['username'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
 
-        $user->userProfile()->attach($userProfile);
+        $user->userProfile()->save($userProfile);
+        $user->roles()->attach(Role::where('name', 'User')->first());
 
         return $user;
     }

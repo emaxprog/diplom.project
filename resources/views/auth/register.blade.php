@@ -5,6 +5,18 @@
         <form action="{{url('/register')}}" method="post" class="form form-horizontal">{{csrf_field()}}
             <h2 class="text-center">Регистрация</h2>
             <div class="form-group">
+                <label for="username" class="control-label col-md-2">Имя пользователя</label>
+                <div class="col-md-9">
+                    <input type="text" name="username" class="form-control" id="username" placeholder="Введите имя пользователя"
+                           value="{{ old('username') }}">
+                    @if ($errors->has('username'))
+                        <div class="alert alert-danger">
+                            <strong>{{ $errors->first('username') }}</strong>
+                        </div>
+                    @endif
+                </div>
+            </div>
+            <div class="form-group">
                 <label for="email" class="control-label col-md-2">E-Mail</label>
                 <div class="col-md-9">
                     <input type="email" class="form-control" name="email" id="email" placeholder="Введите Email"
