@@ -25,7 +25,11 @@ class ProductController extends Controller
 
     public function index()
     {
-        return view('product.index');
+        $products = Product::paginate(15);
+        $data = [
+            'products' => $products
+        ];
+        return view('product.index', $data);
     }
 
     /**
@@ -130,7 +134,7 @@ class ProductController extends Controller
         $this->validate($request, Product::$rules);
 
         $product = Product::find($id);
-        $product->alias=$request->alias;
+        $product->alias = $request->alias;
         $product->name = $request->name;
         $product->category_id = $request->category_id;
         $product->manufacturer_id = $request->manufacturer_id;
