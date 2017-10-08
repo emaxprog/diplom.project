@@ -10,11 +10,11 @@ class City extends Model
 
     public function region()
     {
-        return $this->belongsTo('App\Region');
+        return $this->belongsTo(Region::class);
     }
 
-    public function users()
+    public function profiles()
     {
-        return $this->belongsToMany('App\User');
+        return $this->belongsToMany(Profile::class);
     }
 }

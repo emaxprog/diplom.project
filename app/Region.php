@@ -10,11 +10,11 @@ class Region extends Model
 
     public function country()
     {
-        return $this->belongsTo('App\Country');
+        return $this->belongsTo(Country::class);
     }
 
     public function cities()
     {
-        return $this->hasMany('App\City');
+        return $this->hasMany(City::class);
     }
 }

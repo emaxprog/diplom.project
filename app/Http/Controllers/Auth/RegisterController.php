@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Role;
 use App\User;
 use App\Http\Controllers\Controller;
-use App\UserProfile;
+use App\Profile;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -70,12 +70,12 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $user = User::create([
-            'name' => $data['username'],
+            'username' => $data['username'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
 
-        $userProfile = new UserProfile([
+        $userProfile = new Profile([
             'name' => $data['name'],
             'surname' => $data['surname'],
             'phone' => $data['phone'],
@@ -84,7 +84,7 @@ class RegisterController extends Controller
             'city_id' => $data['city']
         ]);
 
-        $user->userProfile()->save($userProfile);
+        $user->profile()->save($userProfile);
         $user->roles()->attach(Role::where('name', 'User')->first());
 
         return $user;

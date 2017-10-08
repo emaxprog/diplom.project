@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Validation\Rule;
 
 class User extends Authenticatable
 {
@@ -15,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'username', 'email', 'password',
     ];
 
     /**
@@ -27,14 +28,38 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function userProfile()
+    public static function rules($id = null)
     {
-        return $this->hasOne('App\UserProfile');
+        return $id ? [
+            'username' => 'required|string|max:255',
+            'email' => [
+                'required',
+                'string',
+                'email',
+                'max:255',
+                Rule::unique('users')->ignore($id),
+            ],
+//            'password' => 'string|min:6|confirmed',
+        ] : [
+            'username' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6|confirmed',
+        ];
+    }
+
+    public function profile()
+    {
+        return $this->hasOne(Profile::class);
     }
 
     public function roles()
     {
-        return $this->belongsToMany('App\Role', 'user_role');
+        return $this->belongsToMany(Role::class, 'user_role');
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
     }
 
     public function hasAnyRole($roles)

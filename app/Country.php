@@ -10,16 +10,16 @@ class Country extends Model
 
     public function regions()
     {
-        return $this->hasMany('App\Region');
+        return $this->hasMany(Region::class);
     }
 
     public function cities()
     {
-        return $this->hasManyThrough('App\City', 'App\Region');
+        return $this->hasManyThrough(City::class, Region::class);
     }
 
     public function manufacturers()
     {
-        return $this->belongsToMany('App\Manufacturer');
+        return $this->belongsToMany(Manufacturer::class);
     }
 }

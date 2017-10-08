@@ -1,0 +1,86 @@
+@import "../templates";
+
+.wrapper-content > .mid .center {
+  flex-basis: 1200px;
+  .about-product {
+    display: flex;
+    border: 1px solid $LIGHT_GREY_COLOR;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 20px 0;
+    .info-product {
+      ul {
+        @extend %ul-clear;
+        li {
+
+        }
+      }
+      a {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        width: 220px;
+        text-decoration: none;
+        color: #ffffff;
+        background: $AQUA_COLOR;
+        padding: 10px;
+        font: {
+          size: 18px;
+        }
+        &:hover {
+          background: $DARK_GREY_COLOR;
+        }
+      }
+      margin: {
+        left: 20px;
+      }
+    }
+  }
+
+  #tabs {
+    margin: 20px 0px;
+    border-radius: 5px;
+    ul {
+      display: flex;
+      justify-content: space-around;
+      background: #ffffff;
+      li {
+        padding: 0;
+        margin: 0 5px;
+        display: flex;
+        justify-content: center;
+        flex-grow: 1;
+        a {
+          width: 100%;
+          text-align: center;
+          background: $AQUA_COLOR;
+          color: #ffffff;
+          &:hover {
+            background: $DARK_GREY_COLOR;
+          }
+        }
+      }
+    }
+  }
+
+  .table-params {
+    width: 100%;
+    border-collapse: collapse;
+    tr {
+      &:nth-child(odd) {
+        background: $LIGHT_GREY_COLOR;
+      }
+      td {
+        font-size: 18px;
+        padding: 5px;
+      }
+    }
+  }
+
+  .ui-tabs-nav{
+    border: none;
+    .ui-tabs-tab{
+      border: none;
+    }
+  }
+}
