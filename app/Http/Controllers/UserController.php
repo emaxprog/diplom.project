@@ -150,26 +150,4 @@ class UserController extends Controller
 
         return "Пользователь успешно удален!";
     }
-
-    public function uploadRegions($id)
-    {
-        $regions = Country::find($id)->regions;
-
-        $data = [
-            'regions' => $regions
-        ];
-
-        return view('upload.regions', $data);
-    }
-
-    public function uploadCities($id)
-    {
-        $cities = Region::find($id)->cities;
-
-        $data = [
-            'cities' => $cities
-        ];
-
-        return view('upload.cities', $data);
-    }
 }

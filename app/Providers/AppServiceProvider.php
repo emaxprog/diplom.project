@@ -24,8 +24,8 @@ class AppServiceProvider extends ServiceProvider
         $regions = Region::all();
         $cities = City::all();
         view()->share('countries', $countries);
-        view()->share('regions', $regions);
-        view()->share('cities', $cities);
+//        view()->share('regions', $regions);
+//        view()->share('cities', $cities);
         view()->share('categories', $categories);
         view()->share('header', $header);
     }

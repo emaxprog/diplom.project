@@ -7,7 +7,8 @@
             <div class="form-group">
                 <label for="username" class="control-label col-md-2">Имя пользователя</label>
                 <div class="col-md-9">
-                    <input type="text" name="username" class="form-control" id="username" placeholder="Введите имя пользователя"
+                    <input type="text" name="username" class="form-control" id="username"
+                           placeholder="Введите имя пользователя"
                            value="{{ old('username') }}">
                     @if ($errors->has('username'))
                         <div class="alert alert-danger">
@@ -92,6 +93,7 @@
                 <label class="control-label col-md-2">Страна</label>
                 <div class="col-md-9">
                     <select name="country" class="form-control" id="country">
+                        <option value="0">Выбрать...</option>
                         @foreach($countries as $country)
                             <option value="{{$country->id}}">{!! $country->name !!}</option>
                         @endforeach
@@ -101,20 +103,20 @@
             <div class="form-group">
                 <label class="control-label col-md-2">Регион</label>
                 <div class="col-md-9">
-                    <select name="region" class="form-control" id="region">
-                        @foreach($regions as $region)
-                            <option value="{{$region->id}}">{!! $region->name !!}</option>
-                        @endforeach
+                    <select name="region" class="form-control depdrop" id="region"
+                            data-depends="[&quot;country&quot;]"
+                            data-url="{{route('location.regions')}}"
+                            data-placeholder="Выбрать...">
                     </select>
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-md-2">Город</label>
                 <div class="col-md-9">
-                    <select name="city" class="form-control" id="city">
-                        @foreach($cities as $city)
-                            <option value="{{$city->id}}">{!! $city->name !!}</option>
-                        @endforeach
+                    <select name="city" class="form-control depdrop" id="city"
+                            data-depends="[&quot;country&quot;,&quot;region&quot;]"
+                            data-url="{{route('location.cities')}}"
+                            data-placeholder="Выбрать...">
                     </select>
                 </div>
             </div>

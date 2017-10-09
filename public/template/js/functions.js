@@ -121,7 +121,7 @@ $(document).ready(function () {
             $.ajax({
                 url: '/admin/user/' + userId,
                 type: 'DELETE',
-                data: {userId: userId},
+                data: {userd: product_id},
                 success: function () {
                     tr.remove();
                 },
@@ -401,38 +401,9 @@ $(document).ready(function () {
         });
     });
 
-    /*Подгрузка регионов*/
-    $('select#country').change(function () {
-        var countryId = $(this).val();
-        var selectRegion = $('select#region');
-        $.ajax({
-            url: '/user/regions/' + countryId,
-            type: 'GET',
-            success: function (data) {
-                selectRegion.html(data);
-                selectRegion.trigger('change');
-            },
-            error: function (msg) {
-                console.log(msg);
-            }
-        });
-    });
-
-    /*Подгрузка городов*/
-    $('select#region').change(function () {
-        var regionId = $(this).val();
-        var selectCity = $('select#city');
-        $.ajax({
-            url: '/user/cities/' + regionId,
-            type: 'GET',
-            success: function (data) {
-                selectCity.html(data);
-            },
-            error: function (msg) {
-                console.log(msg);
-            }
-        });
-    });
+    $('#country').select2();
+    $('#region').select2();
+    $('#city').select2();
 
     function total_cost() {
         var order = JSON.parse($.cookie('basket'));
