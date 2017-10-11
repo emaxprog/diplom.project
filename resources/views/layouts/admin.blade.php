@@ -12,6 +12,10 @@
     <script rel="script" type="text/javascript" src="/template/js/jQuery/jquery-3.1.1.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/template/js/jquery-ui-1.12.0.custom/jquery-ui.css">
     <script rel="script" type="text/javascript" src="/template/js/jquery-ui-1.12.0.custom/jquery-ui.min.js"></script>
+    <link href="/template/js/select2/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="/template/js/select2/dist/js/select2.min.js"></script>
+    <script rel="script" type="text/javascript" src="/template/js/dependent-dropdown/js/dependent-dropdown.js"></script>
+    <link href="/template/js/dependent-dropdown/css/dependent-dropdown.min.css" media="all" rel="stylesheet" type="text/css" />
     {{--<script rel="script" type="text/javascript" src="/template/js/uploadProducts.js"></script>--}}
     <script rel="script" type="text/javascript" src="/template/js/functions.js"></script>
 

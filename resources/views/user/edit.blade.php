@@ -114,6 +114,7 @@
                     <label class="control-label col-md-2">Страна</label>
                     <div class="col-md-9">
                         <select name="country" class="form-control" id="country">
+                            <option value="0">Выбрать...</option>
                             @foreach($countries as $country)
                                 <option value="{{$country->id}}"
                                         @if($country->id==$user->profile->city->region->country_id) selected @endif>{!! $country->name !!}</option>
@@ -124,7 +125,10 @@
                 <div class="form-group">
                     <label class="control-label col-md-2">Регион</label>
                     <div class="col-md-9">
-                        <select name="region" class="form-control" id="region">
+                        <select name="region" class="form-control depdrop" id="region"
+                                data-depends="[&quot;country&quot;]"
+                                data-url="{{route('location.regions')}}"
+                                data-placeholder="Выбрать...">
                             @foreach($regions as $region)
                                 <option value="{{$region->id}}"
                                         @if($region->id==$user->profile->city->region_id) selected @endif>{!! $region->name !!}</option>
@@ -135,7 +139,10 @@
                 <div class="form-group">
                     <label class="control-label col-md-2">Город</label>
                     <div class="col-md-9">
-                        <select name="city" class="form-control" id="city">
+                        <select name="city" class="form-control depdrop" id="city"
+                                data-depends="[&quot;country&quot;,&quot;region&quot;]"
+                                data-url="{{route('location.cities')}}"
+                                data-placeholder="Выбрать...">
                             @foreach($cities as $city)
                                 <option value="{{$city->id}}"
                                         @if($city->id==$user->profile->city_id) selected @endif>{!! $city->name !!}</option>

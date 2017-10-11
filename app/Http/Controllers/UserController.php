@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\City;
 use App\Profile;
 use App\Role;
 use App\User;
@@ -95,8 +96,14 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
+        $countries = Country::all();
+        $regions = $user->profile->city->region->country->regions;
+        $cities = $user->profile->city->region->cities;
         $data = [
-            'user' => $user
+            'user' => $user,
+            'countries' => $countries,
+            'regions' => $regions,
+            'cities' => $cities
         ];
 
         return view('user.edit', $data);

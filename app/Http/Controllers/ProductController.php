@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Country;
 use App\Product;
 use App\ProductAttribute;
 use App\ProductAttributeValue;
@@ -42,10 +43,12 @@ class ProductController extends Controller
         $subcategories = $this->category->getSubcategoriesAll();
         $manufacturers = Manufacturer::all();
         $productAttributes = ProductAttribute::all();
+        $countries = Country::all();
         $data = [
             'subcategories' => $subcategories,
             'manufacturers' => $manufacturers,
-            'productAttributes' => $productAttributes
+            'productAttributes' => $productAttributes,
+            'countries' => $countries
         ];
         return view('product.create', $data);
     }
@@ -111,13 +114,15 @@ class ProductController extends Controller
         $subcategories = $this->category->getSubcategoriesAll();
         $params = Product::getParams($id);
         $productAttributes = ProductAttribute::all();
+        $countries = Country::all();
         $data = [
             'product' => $product,
             'images' => $images,
             'manufacturers' => $manufacturers,
             'subcategories' => $subcategories,
             'params' => $params,
-            'productAttributes' => $productAttributes
+            'productAttributes' => $productAttributes,
+            'countries' => $countries
         ];
         return view('product.edit', $data);
     }

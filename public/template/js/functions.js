@@ -404,6 +404,7 @@ $(document).ready(function () {
     $('#country').select2();
     $('#region').select2();
     $('#city').select2();
+    $('#manufacturer').select2();
 
     function total_cost() {
         var order = JSON.parse($.cookie('basket'));

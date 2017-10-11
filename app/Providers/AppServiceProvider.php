@@ -20,12 +20,6 @@ class AppServiceProvider extends ServiceProvider
     {
         $categories = $category->getCategories();
         $header = Header::find(1);
-        $countries = Country::all();
-        $regions = Region::all();
-        $cities = City::all();
-        view()->share('countries', $countries);
-//        view()->share('regions', $regions);
-//        view()->share('cities', $cities);
         view()->share('categories', $categories);
         view()->share('header', $header);
     }

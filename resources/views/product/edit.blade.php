@@ -35,7 +35,7 @@
                 <div class="form-group">
                     <label class="control-label col-md-2">Производитель</label>
                     <div class="col-md-8">
-                        <select name="manufacturer_id" class="form-control">
+                        <select name="manufacturer_id" class="form-control" id="manufacturer">
                             @foreach($manufacturers as $manufacturer)
                                 <option value="{{$manufacturer->id}}"
                                         @if($manufacturer->id==$product->manufacturer_id) selected @endif>
@@ -245,7 +245,7 @@
                     </div>
                     <div class="form-group">
                         <label class="control-label">Страна производства</label>
-                        <select name="manufacturer-country" class="form-control">
+                        <select name="manufacturer-country" class="form-control" id="country">
                             @foreach($countries as $country)
                                 <option value="{{$country->id}}">{!! $country->name !!}</option>
                             @endforeach
