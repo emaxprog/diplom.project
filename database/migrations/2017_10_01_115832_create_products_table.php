@@ -25,7 +25,6 @@ class CreateProductsTable extends Migration
             $table->boolean('is_new')->default(true);
             $table->boolean('is_recommended')->default(false);
             $table->boolean('visibility')->default(true);
-            $table->string('images')->nullable();
             $table->mediumInteger('amount')->unsigned();
 
             $table->foreign('category_id')->references('id')->on('categories')
