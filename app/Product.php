@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use DB;
+use Illuminate\Http\File;
+use Illuminate\Support\Facades\Storage;
 use PDO;
 
 class Product extends Model
@@ -137,6 +139,7 @@ class Product extends Model
         $root = $_SERVER['DOCUMENT_ROOT'] . Product::PATH_TO_IMAGES_OF_PRODUCTS;
         $images = [];
         foreach ($imageFiles as $image) {
+            $file= $image->extension();
             if (empty($image))
                 continue;
             $imageName = $image->getClientOriginalName();

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use Illuminate\Http\Request;
 use App\Product;
 use App\Afisha;
@@ -26,6 +27,10 @@ class HomeController extends Controller
      */
     public function index(Product $productModel)
     {
+        $categories = Category::all();
+        if($categories->isEmpty()){
+            return view('welcome');
+        }
         $latestProducts = $productModel->getLatestProducts();
         $recommendedProducts = $productModel->getRecommendedProducts();
         $images = Afisha::getImages();

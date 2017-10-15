@@ -16,12 +16,9 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot(Category $category)
+    public function boot()
     {
-        $categories = $category->getCategories();
-        $header = Header::find(1);
-        view()->share('categories', $categories);
-        view()->share('header', $header);
+        //
     }
     /**
      * Register any application services.
