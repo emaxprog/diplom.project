@@ -195,15 +195,6 @@ class ProductController extends Controller
         return 'OK';
     }
 
-    public function upload($startFrom)
-    {
-        $products = $this->product->getUploadProducts($startFrom);
-        $data = [
-            'products' => $products
-        ];
-        return view('product.upload', $data);
-    }
-
     public function uploadAmount($id)
     {
         return Product::find($id)->amount;
