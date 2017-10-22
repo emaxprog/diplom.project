@@ -10,11 +10,14 @@ class Category extends Model
 
     protected $table = 'categories';
 
-    protected $fillable = [
-        'name', 'alias', 'parent_id', 'sort', 'visibility',
-    ];
+    protected $guarded = [];
 
     public $timestamps = false;
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 
     public function getCategories()
     {

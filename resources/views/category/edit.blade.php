@@ -2,7 +2,7 @@
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            <form action="{{route('category.update',['id'=>$category->id])}}" method="post"
+            <form action="{{route('category.update',[$category])}}" method="post"
                   class="form form-horizontal">
                 {{csrf_field()}}
                 <h2 class="text-center">Редактировать категорию "{!! $category->name !!}"</h2>
@@ -20,13 +20,13 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="alias" class="control-label col-md-2">Алиас</label>
+                    <label for="slug" class="control-label col-md-2">Slug</label>
                     <div class="col-md-10">
-                        <input type="text" name="alias" id="alias" placeholder="Введите алиас"
-                               value="{{$category->alias}}" class="form-control">
-                        @if($errors->has('alias'))
+                        <input type="text" name="slug" id="slug" placeholder="Введите слаг"
+                               value="{{$category->slug}}" class="form-control">
+                        @if($errors->has('slug'))
                             <div class="alert alert-danger">
-                                <strong>{{ $errors->first('alias') }}</strong>
+                                <strong>{{ $errors->first('slug') }}</strong>
                             </div>
                         @endif
                     </div>

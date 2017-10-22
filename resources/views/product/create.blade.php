@@ -9,8 +9,21 @@
                 <div class="form-group">
                     <label class="control-label col-md-2">Превью-изображение товара</label>
                     <div class="col-md-10">
-                        <input type="file" name="image_preview" class="image-field" id="product-image-preview" accept="image/*">
+                        <input type="file" name="image_preview" class="image-field" id="product-image-preview"
+                               accept="image/*">
                         @if ($errors->has('preview_image'))
+                            <div class="alert alert-danger">
+                                <strong>{{ $errors->first('images') }}</strong>
+                            </div>
+                        @endif
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">Изображения товара</label>
+                    <div class="col-md-10">
+                        <input type="file" name="images[]" class="image-field" id="product-images" accept="image/*"
+                               multiple>
+                        @if ($errors->has('images'))
                             <div class="alert alert-danger">
                                 <strong>{{ $errors->first('images') }}</strong>
                             </div>
@@ -30,13 +43,13 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-md-2">Алиас</label>
+                    <label class="control-label col-md-2">Slug</label>
                     <div class="col-md-10">
-                        <input type="text" name="alias" placeholder="Введите алиас" value="{{old('alias')}}"
+                        <input type="text" name="slug" placeholder="Введите slug" value="{{old('slug')}}"
                                class="form-control">
-                        @if($errors->has('alias'))
+                        @if($errors->has('slug'))
                             <div class="alert alert-danger">
-                                <strong>{{ $errors->first('alias') }}</strong>
+                                <strong>{{ $errors->first('slug') }}</strong>
                             </div>
                         @endif
                     </div>
@@ -157,11 +170,15 @@
                 </div>
                 <div class="form-group">
                     <div class="col-md-10">
-                        <button type="submit" formaction="{{route('product.store',['edit'=>true])}}" formmethod="post" class="btn btn-primary center-block">Сохранить и перейти к добавлению изображений</button>
+                        <button type="submit" formaction="{{route('product.store',['edit'=>true])}}" formmethod="post"
+                                class="btn btn-primary center-block">Сохранить и перейти к добавлению изображений
+                        </button>
                     </div>
                 </div>
                 <div class="row">
-                    <button type="submit" formaction="{{route('product.store')}}" formmethod="post" class="btn btn-primary center-block">Сохранить</button>
+                    <button type="submit" formaction="{{route('product.store')}}" formmethod="post"
+                            class="btn btn-primary center-block">Сохранить
+                    </button>
                 </div>
             </form>
         </div>
@@ -307,8 +324,6 @@
     </div>
     <script>
         $(document).ready(function () {
-            var url1 = 'http://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/FullMoon2010.jpg/631px-FullMoon2010.jpg',
-                url2 = 'http://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Earth_Eastern_Hemisphere.jpg/600px-Earth_Eastern_Hemisphere.jpg';
             $("#product-image-preview").fileinput({
                 previewFileType: "image",
                 browseLabel: "Pick Image",

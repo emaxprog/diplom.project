@@ -27,9 +27,9 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Category $categoryModel)
+    public function create(Category $category)
     {
-        $parents = $categoryModel->getParents();
+        $parents = $category->getParents();
         $data = [
             'parents' => $parents
         ];
@@ -61,10 +61,9 @@ class CategoryController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id, Category $categoryModel)
+    public function edit(Category $category)
     {
-        $category = Category::find($id);
-        $parents = $categoryModel->getParents();
+        $parents = $category->getParents();
         $data = [
             'parents' => $parents,
             'category' => $category
@@ -80,14 +79,13 @@ class CategoryController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Category $category)
     {
         $this->validate($request, [
             'name' => 'required',
             'sort' => 'required|integer'
         ]);
 
-        $category = Category::find($id);
         $category->name = $request->name;
         $category->parent_id = $request->parent_id;
         $category->sort = $request->sort;
@@ -103,10 +101,9 @@ class CategoryController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Category $category)
     {
-        Category::destroy($id);
-
+        $category->delete();
         return "OK";
     }
 }

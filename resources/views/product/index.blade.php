@@ -23,7 +23,7 @@
                         <td>{!! $product->code !!}</td>
                         <td>{!! $product->name !!}</td>
                         <td>{!! $product->price !!} руб.</td>
-                        <td><a href="{{route('product.edit',['id'=>$product->id])}}" class="btn btn-info"
+                        <td><a href="{{route('product.edit',[$product])}}" class="btn btn-info"
                                title="Редактировать"><i
                                         class="fa fa-edit fa-lg"></i></a></td>
                         <td>

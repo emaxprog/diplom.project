@@ -18,13 +18,6 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
-    public function __construct(Product $product, Category $category)
-    {
-        $this->product = $product;
-        $this->category = $category;
-    }
-
     public function index()
     {
         $products = Product::paginate(15);
@@ -62,7 +55,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, Product::$rules);
+        $this->validate($request, Product::rules());
 
         $product = new Product($request->all());
         if ($request->hasFile('image_preview')) {
@@ -73,14 +66,14 @@ class ProductController extends Controller
         $attrValue = isset($request->parameters) ? array_combine($request->parameters, $request->values) : null;
         if (empty($attrValue)) {
             if ($request->has('edit')) {
-                return redirect()->route('product.edit', ['id' => $product->id]);
+                return redirect()->route('product.edit', [$product]);
             }
             return redirect()->route('product.index', ['message' => 'Товар сохранен!']);
         }
         $product->savePAV($attrValue);
 
         if ($request->has('edit')) {
-            return redirect()->route('product.edit', ['id' => $product->id]);
+            return redirect()->route('product.edit', [$product]);
         }
 
         return redirect()->route('product.index', ['message' => 'Товар сохранен!']);
@@ -92,11 +85,10 @@ class ProductController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Product $product)
     {
-        $product = Product::find($id);
         $images = $product->images;
-        $params = $this->product->getParams($id);
+        $params = $product->getParams($product->id);
         $data = [
             'product' => $product,
             'params' => $params,
@@ -111,12 +103,11 @@ class ProductController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Product $product)
     {
-        $product = Product::find($id);
         $manufacturers = Manufacturer::all();
         $subcategories = Category::getSubcategoriesAll();
-        $params = Product::getParams($id);
+        $params = Product::getParams($product->id);
         $productAttributes = ProductAttribute::all();
         $countries = Country::all();
         $imagePreviewInitialPreviewData = $product->getImagePreviewInitialPreviewData();
@@ -141,17 +132,16 @@ class ProductController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id, ProductAttributeValue $pavModel)
+    public function update(Request $request, Product $product, ProductAttributeValue $pavModel)
     {
-        $this->validate($request, Product::$rules);
+        $this->validate($request, Product::rules($product->id));
 
-        $product = Product::find($id);
         if ($request->hasFile('image_preview')) {
             $product->saveImagePreview($request->file('image_preview'));
         }
         $product->update($request->all());
         $attrValue = isset($request->parameters) ? array_combine($request->parameters, $request->values) : null;
-        $pavModel->deleteAttributes($id);
+        $pavModel->deleteAttributes($product->id);
         if ($attrValue == null)
             return redirect()->route('product.index', ['message' => 'Товар сохранен!']);
         $product->savePAV($attrValue);
@@ -164,9 +154,9 @@ class ProductController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Product $product)
     {
-        Product::destroy($id);
+        $product->delete();
         return response()->json();
     }
 
@@ -179,9 +169,8 @@ class ProductController extends Controller
         return response()->json(['error' => 'Отсутствует ID изображения']);
     }
 
-    public function uploadImages(Request $request, $id)
+    public function uploadImages(Request $request, Product $product)
     {
-        $product = Product::find($id);
         if ($request->hasFile('images')) {
             $product->saveImages($request->file('images'));
         }
@@ -195,9 +184,9 @@ class ProductController extends Controller
         return Product::find($id)->amount;
     }
 
-    public function search(Request $request)
+    public function search(Request $request, Product $product)
     {
-        $products = $this->product->getProductsSearch($request->val);
+        $products = $product->getProductsSearch($request->val);
         $data = [
             'products' => $products
         ];

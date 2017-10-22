@@ -18,13 +18,13 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="alias" class="control-label col-md-2">Алиас</label>
+                    <label for="slug" class="control-label col-md-2">Slug</label>
                     <div class="col-md-10">
-                        <input type="text" name="alias" id="alias" placeholder="Введите алиас"
-                               value="{{old('alias')}}" class="form-control">
-                        @if($errors->has('alias'))
+                        <input type="text" name="slug" id="slug" placeholder="Введите алиас"
+                               value="{{old('slug')}}" class="form-control">
+                        @if($errors->has('slug'))
                             <div class="alert alert-danger">
-                                <strong>{{ $errors->first('alias') }}</strong>
+                                <strong>{{ $errors->first('slug') }}</strong>
                             </div>
                         @endif
                     </div>

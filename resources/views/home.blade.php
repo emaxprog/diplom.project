@@ -3,7 +3,7 @@
 @section('content')
     <div class="row">
         <div class="col-md-3">
-            @include('include/left')
+            @include('include/left',['categories'=>$categories])
         </div>
         <div class="col-md-9">
             <div class="row">
@@ -21,7 +21,8 @@
                                     <img src="/template/images/site/new.png" class="new img-responsive">
                                 @endif
                                 <a href="{{route('product.show',['id'=>$product->id])}}">
-                                    <img src="{{\App\Product::getPreview($product->images)}}" alt="Apple MacBook"
+                                    <img src="{{isset($product->imagePreview)?$product->imagePreview->path:''}}"
+                                         alt="Apple MacBook"
                                          title="Apple MacBook" id="img-{{$product->id}}"
                                          class="img-rounded img-responsive"
                                          height="150px">
@@ -54,7 +55,7 @@
                                     <img src="/template/images/site/new.png" class="new img-responsive">
                                 @endif
                                 <a href="{{route('product.show',['id'=>$product->id])}}">
-                                    <img src="{{\App\Product::getPreview($product->images)}}" alt="Apple MacBook"
+                                    <img src="{{isset($product->imagePreview)?$product->imagePreview->path:''}}" alt="Apple MacBook"
                                          title="Apple MacBook" id="img-{{$product->id}}"
                                          class="img-rounded img-responsive"
                                          height="150px">

@@ -21,9 +21,9 @@ class ProductAttributeValue extends Model
         return $this->belongsTo(ProductAttribute::class);
     }
 
-    public function deleteAttributes($id)
+    public function deleteAttributes($productId)
     {
-        return $this->where('product_id', $id)->delete();
+        return $this->where('product_id', $productId)->delete();
     }
 
     public function deleteAttribute($productId, $attributeId)

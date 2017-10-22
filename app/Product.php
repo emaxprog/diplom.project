@@ -6,22 +6,41 @@ use Illuminate\Database\Eloquent\Model;
 use DB;
 use Illuminate\Http\File;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 use PDO;
 
 class Product extends Model
 {
 
-    protected $guarded = ['edit', 'image_preview','parameters','values'];
+    protected $guarded = ['edit', 'image_preview', 'images', 'parameters', 'values'];
 
     public $timestamps = false;
 
-    public static $rules = [
-        'name' => 'required',
-        'alias' => 'required',
-        'code' => 'required|integer',
-        'price' => 'required|integer',
-        'amount' => 'required|integer'
-    ];
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
+    public static function rules($id = null)
+    {
+        return $id ? [
+            'name' => 'required',
+            'slug' => [
+                'required',
+                'string',
+                Rule::unique('products')->ignore($id),
+            ],
+            'code' => 'required|integer',
+            'price' => 'required|integer',
+            'amount' => 'required|integer'
+        ] : [
+            'name' => 'required',
+            'slug' => 'required|string|unique:products',
+            'code' => 'required|integer',
+            'price' => 'required|integer',
+            'amount' => 'required|integer'
+        ];
+    }
 
     const PATH_TO_IMAGES_OF_PRODUCTS = '/template/images/content/products/';
     const PATH_TO_NO_IMAGE = '/template/images/site/noImage.jpg';
@@ -244,7 +263,7 @@ class Product extends Model
 
     public function scopePreview($query)
     {
-        $query->select('id', 'name', 'price', 'is_new', 'is_recommended', 'images');
+        $query->select('id', 'name', 'price', 'is_new', 'is_recommended');
     }
 
     public function scopePublished($query)

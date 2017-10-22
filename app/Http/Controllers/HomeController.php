@@ -28,16 +28,16 @@ class HomeController extends Controller
     public function index(Product $productModel)
     {
         $categories = Category::all();
-        if($categories->isEmpty()){
+        if ($categories->isEmpty()) {
             return view('welcome');
         }
         $latestProducts = $productModel->getLatestProducts();
         $recommendedProducts = $productModel->getRecommendedProducts();
         $images = Afisha::getImages();
         $data = [
+            'categories' => $categories,
             'latestProducts' => $latestProducts,
             'recommendedProducts' => $recommendedProducts,
-            'images' => $images,
         ];
         return view('home', $data);
     }
