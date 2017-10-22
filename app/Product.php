@@ -11,26 +11,9 @@ use PDO;
 class Product extends Model
 {
 
-    protected $fillable = [
-        'name',
-        'alias',
-        'category_id',
-        'manufacturer_id',
-        'description',
-        'price',
-        'code',
-        'availability',
-        'is_new',
-        'is_recommended',
-        'visibility',
-        'amount',
-    ];
+    protected $guarded = ['edit', 'image_preview','parameters','values'];
 
     public $timestamps = false;
-
-    protected $casts = [
-        'images' => 'array'
-    ];
 
     public static $rules = [
         'name' => 'required',
@@ -46,6 +29,16 @@ class Product extends Model
     public function orders()
     {
         return $this->belongsToMany(Order::class)->withPivot('amount');
+    }
+
+    public function imagePreview()
+    {
+        return $this->belongsTo(Image::class);
+    }
+
+    public function images()
+    {
+        return $this->belongsToMany(Image::class);
     }
 
     public function attribute_values()
@@ -83,16 +76,6 @@ class Product extends Model
     public function getRecommendedProducts()
     {
         return $this->latest('id')->preview()->recommended()->available()->published()->take(3)->get();
-    }
-
-    public static function getPreview($images)
-    {
-        return $images != null ? $images[0] : self::PATH_TO_NO_IMAGE;
-    }
-
-    public static function getImage($imagePath)
-    {
-        return $imagePath != null ? $imagePath : self::PATH_TO_NO_IMAGE;
     }
 
     public function paginateProducts($num)
@@ -134,43 +117,104 @@ class Product extends Model
         return $params;
     }
 
-    public static function saveImages($imageFiles, &$product = null)
+    public function saveImages($uploadedImages)
     {
-        $root = $_SERVER['DOCUMENT_ROOT'] . Product::PATH_TO_IMAGES_OF_PRODUCTS;
-        $images = [];
-        foreach ($imageFiles as $image) {
-            $file= $image->extension();
-            if (empty($image))
-                continue;
-            $imageName = $image->getClientOriginalName();
-            $images[] = Product::PATH_TO_IMAGES_OF_PRODUCTS . $imageName;
-            $image->move($root, $imageName);
+        foreach ($uploadedImages as $uploadedImage) {
+            $image = $this->saveImage($uploadedImage);
+
+            $this->images()->attach($image->id);
         }
-        if ($product) {
-            if ($product->images != null) {
-                $product->images = array_merge($product->images, $images);
-            } else {
-                $product->images = $images;
-            }
-        }
-        return $images;
+        return true;
     }
 
-    public static function deleteImages($imageSrc, $id)
+    private function saveImage($uploadedImage)
     {
-        $root = $_SERVER['DOCUMENT_ROOT'];
-        $product = self::find($id);
-        $images = $product->images;
-        if (($key = array_search($imageSrc, $images)) >= 0) {
-            unset($images[$key]);
-            if (file_exists($root . $imageSrc))
-                unlink($root . $imageSrc);
+        $path = $uploadedImage->store('images/products/' . $this->id, 'public');
+
+        $image = new Image();
+        $image->original_name = $uploadedImage->getClientOriginalName();
+        $image->extension = $uploadedImage->getClientOriginalExtension();
+        $image->size = $uploadedImage->getClientSize();
+        $image->mime_type = $uploadedImage->getClientMimeType();
+        $image->path = Storage::url($path);
+        $image->save();
+
+        return $image;
+    }
+
+    public function saveImagePreview($uploadedImage)
+    {
+        try {
+            $image = $this->saveImage($uploadedImage);
+            if ($image && $this->imagePreview) {
+                $this->imagePreview->delete();
+            }
+            $this->image_preview_id = $image->id;
+            return true;
+        } catch (\Exception $exception) {
+            return false;
         }
-        $product->images = null;
-        if (!empty($images)) {
-            $product->images = $images;
+    }
+
+    public function getImagePreviewInitialPreviewData()
+    {
+        if (!$this->imagePreview) {
+            return $this->asJson([]);
         }
-        $product->save();
+
+        $previewConfig = [];
+        $previewUrls = [];
+
+        $previewConfig[] = [
+            'caption' => $this->imagePreview->original_name,
+            'downloadUrl' => $this->imagePreview->path,
+            'size' => $this->imagePreview->size,
+            'key' => $this->imagePreview->id
+        ];
+
+        $previewUrls[] = $this->imagePreview->path;
+
+        $previewData = [
+            'initialPreviewConfig' => $previewConfig,
+            'initialPreview' => $previewUrls
+        ];
+        return $this->asJson($previewData);
+    }
+
+    public function getImagesInitialPreviewData()
+    {
+        if (!$this->images) {
+            return $this->asJson([]);
+        }
+        $previewConfig = [];
+        $previewUrls = [];
+
+        foreach ($this->images as $image) {
+            $previewConfig[] = [
+                'caption' => $image->original_name,
+                'downloadUrl' => $image->path,
+                'size' => $image->size,
+                'key' => $image->id
+            ];
+            $previewUrls[] = $image->path;
+        }
+
+        $previewData = [
+            'initialPreviewConfig' => $previewConfig,
+            'initialPreview' => $previewUrls
+        ];
+        return $this->asJson($previewData);
+    }
+
+    public function savePAV($attrValue)
+    {
+        foreach ($attrValue as $attr => $value) {
+            $productAttrValue = new ProductAttributeValue();
+            $productAttrValue->product_id = $this->id;
+            $productAttrValue->attribute_id = $attr;
+            $productAttrValue->value = $value;
+            $productAttrValue->save();
+        }
     }
 
     public function scopeAvailable($query)

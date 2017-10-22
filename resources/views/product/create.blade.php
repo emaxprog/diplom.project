@@ -2,10 +2,21 @@
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            <form action="{{route('product.store')}}" method="post" enctype="multipart/form-data"
+            <form enctype="multipart/form-data"
                   class="form form-horizontal">
                 {{csrf_field()}}
                 <h2 class="text-center">Добавить новый товар</h2>
+                <div class="form-group">
+                    <label class="control-label col-md-2">Превью-изображение товара</label>
+                    <div class="col-md-10">
+                        <input type="file" name="image_preview" class="image-field" id="product-image-preview" accept="image/*">
+                        @if ($errors->has('preview_image'))
+                            <div class="alert alert-danger">
+                                <strong>{{ $errors->first('images') }}</strong>
+                            </div>
+                        @endif
+                    </div>
+                </div>
                 <div class="form-group">
                     <label class="control-label col-md-2">Название товара</label>
                     <div class="col-md-10">
@@ -86,25 +97,6 @@
                         </select>
                     </div>
                 </div>
-
-                <div class="form-group">
-                    <label class="control-label col-md-2">Изображение товара</label>
-                    <div class="col-md-10">
-                        <input type="file" name="images[]" accept="image/*">
-                        @if ($errors->has('images'))
-                            <div class="alert alert-danger">
-                                <strong>{{ $errors->first('images') }}</strong>
-                            </div>
-                        @endif
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-md-2">Дополнительные изображения</label>
-                    <div class="col-md-10">
-                        <button type="button" class="add-images-products btn btn-default"><i class="fa fa-plus"></i>
-                        </button>
-                    </div>
-                </div>
                 <div class="form-group">
                     <label class="control-label col-md-2">Краткое описание</label>
                     <div class="col-md-10">
@@ -163,8 +155,13 @@
                         </div>
                     </div>
                 </div>
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <button type="submit" formaction="{{route('product.store',['edit'=>true])}}" formmethod="post" class="btn btn-primary center-block">Сохранить и перейти к добавлению изображений</button>
+                    </div>
+                </div>
                 <div class="row">
-                    <button type="submit" class="btn btn-primary center-block">Сохранить</button>
+                    <button type="submit" formaction="{{route('product.store')}}" formmethod="post" class="btn btn-primary center-block">Сохранить</button>
                 </div>
             </form>
         </div>
@@ -308,4 +305,22 @@
             </div>
         </div>
     </div>
+    <script>
+        $(document).ready(function () {
+            var url1 = 'http://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/FullMoon2010.jpg/631px-FullMoon2010.jpg',
+                url2 = 'http://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Earth_Eastern_Hemisphere.jpg/600px-Earth_Eastern_Hemisphere.jpg';
+            $("#product-image-preview").fileinput({
+                previewFileType: "image",
+                browseLabel: "Pick Image",
+                browseIcon: "<i class=\"glyphicon glyphicon-picture\"></i> ",
+                removeClass: "btn btn-danger",
+                removeLabel: "Delete",
+                removeIcon: "<i class=\"glyphicon glyphicon-trash\"></i> ",
+                allowedFileTypes: ["image"],
+                maxFileSize: 100,
+                showUpload: false,
+                showCancel: false,
+            });
+        })
+    </script>
 @endsection

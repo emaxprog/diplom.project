@@ -324,10 +324,10 @@ $(document).ready(function () {
 
     $('.add-images-products').click(function () {
         var imgs = $('img');
-        var images = $('input[name="images[]"]');
+        var images = $('.image-field');
         if (imgs.length + images.length == 11)
             return;
-        var image = $('input[name="images[]"]:first').clone();
+        var image = $('.image-field:first').clone().attr('name', 'images[]');
         $(this).after(image);
         $(this).after('<br>');
     });
@@ -405,6 +405,7 @@ $(document).ready(function () {
     $('#region').select2();
     $('#city').select2();
     $('#manufacturer').select2();
+
 
     function total_cost() {
         var order = JSON.parse($.cookie('basket'));

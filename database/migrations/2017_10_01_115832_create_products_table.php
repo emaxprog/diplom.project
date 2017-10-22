@@ -19,6 +19,7 @@ class CreateProductsTable extends Migration
             $table->string('alias');
             $table->integer('category_id')->unsigned();
             $table->integer('manufacturer_id')->unsigned();
+            $table->integer('image_preview_id')->unsigned()->nullable();
             $table->text('description')->nullable();
             $table->integer('price')->unsigned();
             $table->integer('code')->unsigned();
@@ -26,6 +27,10 @@ class CreateProductsTable extends Migration
             $table->boolean('is_recommended')->default(false);
             $table->boolean('visibility')->default(true);
             $table->mediumInteger('amount')->unsigned();
+
+            $table->foreign('image_preview_id')->references('id')->on('images')
+                ->onUpdate('cascade')
+                ->onDelete('set null');
 
             $table->foreign('category_id')->references('id')->on('categories')
                 ->onDelete('cascade')

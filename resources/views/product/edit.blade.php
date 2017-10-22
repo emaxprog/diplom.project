@@ -2,12 +2,38 @@
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            <form class="form form-horizontal" action="{{route('product.update',['id'=>$product->id])}}"
+            <form class="form form-horizontal product-form" action="{{route('product.update',['id'=>$product->id])}}"
                   method="post"
-                  enctype="multipart/form-data">
+                  enctype="multipart/form-data"
+                  data-upload-images-url="{{route('product.upload.images',['id'=>$product->id])}}"
+                  data-destroy-image-url="{{route('product.destroy.image',['id'=>$product->id])}}">
                 <input type="hidden" name="_method" value="PUT">
                 {{csrf_field()}}
                 <h2 class="text-center">Редактировать товар</h2>
+                <div class="form-group">
+                    <label class="control-label col-md-2">Превью-изображение товара</label>
+                    <div class="col-md-10">
+                        <input type="file" name="image_preview" class="image-field" id="product-image-preview"
+                               accept="image/*">
+                        @if ($errors->has('preview_image'))
+                            <div class="alert alert-danger">
+                                <strong>{{ $errors->first('preview_image') }}</strong>
+                            </div>
+                        @endif
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">Изображения товара</label>
+                    <div class="col-md-10">
+                        <input type="file" name="images[]" class="image-field" id="product-images" accept="image/*"
+                               multiple>
+                        @if ($errors->has('images'))
+                            <div class="alert alert-danger">
+                                <strong>{{ $errors->first('images') }}</strong>
+                            </div>
+                        @endif
+                    </div>
+                </div>
                 <div class="form-group">
                     <label class="control-label col-md-2">Название товара</label>
                     <div class="col-md-10">
@@ -91,55 +117,9 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-md-2">Изображение товара</label>
-                    <div class="col-md-10">
-                        <input type="file" name="images[]" accept="image/*">
-                        @if ($errors->has('images'))
-                            <div class="alert alert-danger">
-                                <strong>{{ $errors->first('images') }}</strong>
-                            </div>
-                        @endif
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-12">
-                        @if(!empty($images))
-                            @foreach($images as $image)
-                                <div class="col-md-2">
-                                    <div class="thumbnail image-product">
-                                        <img src="{{$image}}" class="img-rounded"
-                                             data-id="{{$product->id}}">
-                                        <div class="caption">
-                                            <button type="button" class="btn btn-danger btn-block delete-image"><i
-                                                        class="fa fa-trash fa-lg"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-                        @endif
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-md-2">Дополнительные изображения</label>
-                    <div class="col-md-10">
-                        <button type="button" class="btn btn-default add-images-products"><i class="fa fa-plus"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="form-group">
                     <label class="control-label col-md-2">Краткое описание</label>
                     <div class="col-md-10">
                         <textarea name="description" class="form-control">{!! $product->description !!}</textarea>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-md-2">Наличие на складе</label>
-                    <div class="col-md-10">
-                        <select name="availability" class="form-control">
-                            <option value="1" @if($product->availability==1) selected @endif>Да</option>
-                            <option value="0" @if($product->availability==0) selected @endif>Нет</option>
-                        </select>
                     </div>
                 </div>
                 <div class="form-group">
@@ -369,4 +349,45 @@
             </div>
         </div>
     </div>
+    <script>
+        $(document).ready(function () {
+            var $imagePreviewInitialPreviewData = JSON.parse('{!! $imagePreviewInitialPreviewData !!}');
+
+            $("#product-image-preview").fileinput({
+                initialPreview: $imagePreviewInitialPreviewData.initialPreview,
+                initialPreviewAsData: true,
+                initialPreviewConfig: $imagePreviewInitialPreviewData.initialPreviewConfig,
+                previewFileType: "image",
+                browseClass: "btn btn-success",
+                browseLabel: "Pick Image",
+                browseIcon: "<i class=\"glyphicon glyphicon-picture\"></i> ",
+                removeClass: "btn btn-danger",
+                removeLabel: "Delete",
+                removeIcon: "<i class=\"glyphicon glyphicon-trash\"></i> ",
+                uploadClass: "btn btn-info",
+                uploadLabel: "Upload",
+                uploadIcon: "<i class=\"glyphicon glyphicon-upload\"></i> ",
+                showUpload: false,
+                showCancel: false,
+                showRemove: false,
+                deleteUrl: $('.product-form').attr('data-destroy-image-url')
+            });
+
+            var $imagesInitialPreviewData = JSON.parse('{!! $imagesInitialPreviewData !!}');
+
+            $("#product-images").fileinput({
+                initialPreview: $imagesInitialPreviewData.initialPreview,
+                initialPreviewAsData: true,
+                initialPreviewConfig: $imagesInitialPreviewData.initialPreviewConfig,
+                deleteUrl: $('.product-form').attr('data-destroy-image-url'),
+                overwriteInitial: false,
+                uploadUrl: $('.product-form').attr('data-upload-images-url'),
+                showCancel: false,
+                showRemove: false,
+                fileActionSettings:{
+                    showRemove: false
+                }
+            });
+        })
+    </script>
 @endsection

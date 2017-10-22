@@ -11,7 +11,7 @@ class Category extends Model
     protected $table = 'categories';
 
     protected $fillable = [
-        'name','alias', 'parent_id', 'sort', 'visibility',
+        'name', 'alias', 'parent_id', 'sort', 'visibility',
     ];
 
     public $timestamps = false;
@@ -51,14 +51,14 @@ class Category extends Model
         return 'Не отображается';
     }
 
+    public static function getSubcategoriesAll()
+    {
+        return self::where('parent_id', 0)->get();
+    }
+
     public function getSubcategories($parentId)
     {
         return $this->where('parent_id', $parentId)->published()->get();
-    }
-
-    public function getSubcategoriesAll()
-    {
-        return $this->subcategories()->get();
     }
 
     public function scopeParents($query)
@@ -74,11 +74,6 @@ class Category extends Model
     public function scopeMain($query)
     {
         $query->where('parent_id', 0);
-    }
-
-    public function scopeSubcategories($query)
-    {
-        $query->where('parent_id', '<>', 0);
     }
 
 }

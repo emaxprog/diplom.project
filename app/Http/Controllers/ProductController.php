@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Country;
+use App\Image;
 use App\Product;
 use App\ProductAttribute;
 use App\ProductAttributeValue;
@@ -40,7 +41,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $subcategories = $this->category->getSubcategoriesAll();
+        $subcategories = Category::getSubcategoriesAll();
         $manufacturers = Manufacturer::all();
         $productAttributes = ProductAttribute::all();
         $countries = Country::all();
@@ -62,22 +63,26 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, Product::$rules);
-        $images = Product::saveImages($request->file('images'));
 
         $product = new Product($request->all());
-        $product->images = $images;
+        if ($request->hasFile('image_preview')) {
+            $product->saveImagePreview($request->file('image_preview'));
+        }
         $product->save();
 
         $attrValue = isset($request->parameters) ? array_combine($request->parameters, $request->values) : null;
-        if (empty($attrValue))
+        if (empty($attrValue)) {
+            if ($request->has('edit')) {
+                return redirect()->route('product.edit', ['id' => $product->id]);
+            }
             return redirect()->route('product.index', ['message' => 'Товар сохранен!']);
-        foreach ($attrValue as $attr => $value) {
-            $productAttrValue = new ProductAttributeValue();
-            $productAttrValue->product_id = $product->id;
-            $productAttrValue->attribute_id = $attr;
-            $productAttrValue->value = $value;
-            $productAttrValue->save();
         }
+        $product->savePAV($attrValue);
+
+        if ($request->has('edit')) {
+            return redirect()->route('product.edit', ['id' => $product->id]);
+        }
+
         return redirect()->route('product.index', ['message' => 'Товар сохранен!']);
     }
 
@@ -109,20 +114,22 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = Product::find($id);
-        $images = $product->images != null ? $product->images : [];
         $manufacturers = Manufacturer::all();
-        $subcategories = $this->category->getSubcategoriesAll();
+        $subcategories = Category::getSubcategoriesAll();
         $params = Product::getParams($id);
         $productAttributes = ProductAttribute::all();
         $countries = Country::all();
+        $imagePreviewInitialPreviewData = $product->getImagePreviewInitialPreviewData();
+        $imagesInitialPreviewData = $product->getImagesInitialPreviewData();
         $data = [
             'product' => $product,
-            'images' => $images,
             'manufacturers' => $manufacturers,
             'subcategories' => $subcategories,
             'params' => $params,
             'productAttributes' => $productAttributes,
-            'countries' => $countries
+            'countries' => $countries,
+            'imagePreviewInitialPreviewData' => $imagePreviewInitialPreviewData,
+            'imagesInitialPreviewData' => $imagesInitialPreviewData,
         ];
         return view('product.edit', $data);
     }
@@ -139,32 +146,15 @@ class ProductController extends Controller
         $this->validate($request, Product::$rules);
 
         $product = Product::find($id);
-        $product->alias = $request->alias;
-        $product->name = $request->name;
-        $product->category_id = $request->category_id;
-        $product->manufacturer_id = $request->manufacturer_id;
-        $product->description = $request->description;
-        $product->price = $request->price;
-        $product->code = $request->code;
-        $product->is_new = $request->is_new;
-        $product->is_recommended = $request->is_recommended;
-        $product->visibility = $request->visibility;
-        $product->amount = $request->amount;
-        if ($request->hasFile('images')) {
-            Product::saveImages($request->file('images'), $product);
+        if ($request->hasFile('image_preview')) {
+            $product->saveImagePreview($request->file('image_preview'));
         }
-        $product->save();
+        $product->update($request->all());
         $attrValue = isset($request->parameters) ? array_combine($request->parameters, $request->values) : null;
         $pavModel->deleteAttributes($id);
         if ($attrValue == null)
             return redirect()->route('product.index', ['message' => 'Товар сохранен!']);
-        foreach ($attrValue as $attr => $value) {
-            $productAttrValue = new ProductAttributeValue();
-            $productAttrValue->product_id = $product->id;
-            $productAttrValue->attribute_id = $attr;
-            $productAttrValue->value = $value;
-            $productAttrValue->save();
-        }
+        $product->savePAV($attrValue);
         return redirect()->route('product.index', ['message' => 'Товар сохранен!']);
     }
 
@@ -176,24 +166,29 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        $images = Product::find($id)->images;
-        if (!$images) {
-            Product::destroy($id);
-            return "Продукт успешно удален!";
-        }
-        $root = $_SERVER['DOCUMENT_ROOT'];
         Product::destroy($id);
-        foreach ($images as $image) {
-            unlink($root . $image);
-        }
-        return "Продукт успешно удален!";
+        return response()->json();
     }
 
-    public function image_destroy($id, Request $request)
+    public function destroyImage(Request $request)
     {
-        Product::deleteImages($request->src, $id);
-        return 'OK';
+        if ($request->has('key')) {
+            Image::destroy($request->key);
+            return response()->json();
+        }
+        return response()->json(['error' => 'Отсутствует ID изображения']);
     }
+
+    public function uploadImages(Request $request, $id)
+    {
+        $product = Product::find($id);
+        if ($request->hasFile('images')) {
+            $product->saveImages($request->file('images'));
+        }
+
+        return response()->json();
+    }
+
 
     public function uploadAmount($id)
     {

@@ -34,6 +34,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'check.role'], function () {
     Route::post('product/manufacturer', 'ManufacturerController@store');
     Route::resource('product_attributes', 'ProductAttributeController');
     Route::resource('product', 'ProductController', ['except' => 'show']);
+    Route::post('product/{id}/upload/images', ['as'=>'product.upload.images','uses'=>'ProductController@uploadImages']);
+    Route::post('product/{id}/destroy/image', ['as'=>'product.destroy.image','uses'=>'ProductController@destroyImage']);
     Route::get('/', ['as' => 'admin', 'uses' => 'AdminController@index']);
 });
 
