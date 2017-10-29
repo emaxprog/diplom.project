@@ -2,14 +2,15 @@
     <ul class="nav">
         @foreach ($categories as $category)
             <li>
-                <a href="" onclick="return false" class="menu-products-anchor"
-                   data-category="{{$category['id']}}">{{$category['name']}}</a>
-                @if (isset($category['subcategories']))
+                <a href="{{route('category',[$category])}}"
+                   class="menu-products-anchor"
+                   data-category="{{$category->id}}">{{$category->name}}</a>
+                @if (isset($category->subcategories))
                     <ul class="sub-menu nav">
-                        @foreach ($category['subcategories'] as $subcategory)
+                        @foreach ($category->subcategories as $subcategory)
                             <li>
-                                <a href="{{route('category',['id'=>$subcategory])}}"
-                                   data-category="{{$subcategory['id']}}">{{$subcategory['name']}}</a>
+                                <a href="{{route('category',[$subcategory])}}"
+                                   data-category="{{$subcategory->id}}">{{$subcategory->name}}</a>
                             </li>
                         @endforeach
                     </ul>

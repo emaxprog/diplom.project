@@ -34,7 +34,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $subcategories = Category::getSubcategoriesAll();
+        $subcategories = Category::getCategories();
         $manufacturers = Manufacturer::all();
         $productAttributes = ProductAttribute::all();
         $countries = Country::all();
@@ -106,7 +106,7 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         $manufacturers = Manufacturer::all();
-        $subcategories = Category::getSubcategoriesAll();
+        $subcategories = Category::getCategories();
         $params = Product::getParams($product->id);
         $productAttributes = ProductAttribute::all();
         $countries = Country::all();

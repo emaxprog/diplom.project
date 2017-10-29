@@ -25,14 +25,14 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Product $productModel)
+    public function index(Product $product, Category $category)
     {
-        $categories = Category::all();
+        $categories = $category->getCategories();
         if ($categories->isEmpty()) {
             return view('welcome');
         }
-        $latestProducts = $productModel->getLatestProducts();
-        $recommendedProducts = $productModel->getRecommendedProducts();
+        $latestProducts = $product->getLatestProducts();
+        $recommendedProducts = $product->getRecommendedProducts();
         $images = Afisha::getImages();
         $data = [
             'categories' => $categories,

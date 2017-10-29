@@ -19,11 +19,6 @@ Route::get('product/{product}/amount', 'ProductController@uploadAmount');
 Route::post('feedback', 'HomeController@feedback');
 Route::group(['prefix' => 'admin', 'middleware' => 'check.role'], function () {
     Route::resource('user', 'UserController');
-    Route::put('header', ['as' => 'header.update', 'uses' => 'HeaderController@update']);
-    Route::get('header', ['as' => 'header.edit', 'uses' => 'HeaderController@edit']);
-    Route::delete('afisha', 'AfishaController@destroy');
-    Route::get('afisha/edit', ['as' => 'afisha.edit', 'uses' => 'AfishaController@edit']);
-    Route::put('afisha', ['as' => 'afisha.update', 'uses' => 'AfishaController@update']);
     Route::resource('order', 'OrderController', ['except' => ['create', 'store']]);
     Route::resource('category', 'CategoryController');
     Route::delete('product/{product}/pav', 'ProductAttributeValueController@destroy');

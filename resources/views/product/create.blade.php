@@ -19,18 +19,6 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-md-2">Изображения товара</label>
-                    <div class="col-md-10">
-                        <input type="file" name="images[]" class="image-field" id="product-images" accept="image/*"
-                               multiple>
-                        @if ($errors->has('images'))
-                            <div class="alert alert-danger">
-                                <strong>{{ $errors->first('images') }}</strong>
-                            </div>
-                        @endif
-                    </div>
-                </div>
-                <div class="form-group">
                     <label class="control-label col-md-2">Название товара</label>
                     <div class="col-md-10">
                         <input type="text" name="name" placeholder="Введите название" value="{{old('name')}}"

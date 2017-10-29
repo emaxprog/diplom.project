@@ -19,12 +19,12 @@ class Category extends Model
         return 'slug';
     }
 
-    public function getCategories()
+    public static function getCategories()
     {
-        $categories = $this->main()->published()->get();
+        $categories = Category::main()->published()->get();
         foreach ($categories as $category) {
-            if (!empty($subcategories = self::getSubcategories($category['id']))) {
-                $category['subcategories'] = $subcategories;
+            if (!empty($subcategories = $category->subcategories($category->id)->get())) {
+                $category->subcategories = $subcategories;
             }
         }
         return $categories;
@@ -54,14 +54,9 @@ class Category extends Model
         return 'Не отображается';
     }
 
-    public static function getSubcategoriesAll()
+    public function scopeSubcategories($query, $parentId = 0)
     {
-        return self::where('parent_id', 0)->get();
-    }
-
-    public function getSubcategories($parentId)
-    {
-        return $this->where('parent_id', $parentId)->published()->get();
+        return $query->where('parent_id', $parentId)->published();
     }
 
     public function scopeParents($query)

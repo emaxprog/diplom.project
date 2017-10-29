@@ -38,7 +38,11 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('user.create');
+        $countries = Country::all();
+        $data = [
+            'countries' => $countries
+        ];
+        return view('user.create', $data);
     }
 
     /**
