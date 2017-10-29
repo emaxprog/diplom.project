@@ -5,43 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{csrf_token()}}">
     <title>Интернет-магазин</title>
-    <link rel="stylesheet" type="text/css" href="/template/styles/font-awesome-4.6.3/css/font-awesome.min.css">
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    {{--<link rel="stylesheet" type="text/css" href="/template/styles/css/styles.css">--}}
-    {{--<script rel="script" type="text/javascript" src="/template/js/jQuery/jquery-3.1.1.min.js"></script>--}}
+    {{--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>--}}
     <script rel="script" type="text/javascript" src="/template/js/jQuery/jquery.cookie.js"></script>
-    <link href="/template/js/select2/dist/css/select2.min.css" rel="stylesheet" />
-    <script src="/template/js/select2/dist/js/select2.min.js"></script>
-    <script rel="script" type="text/javascript" src="/template/js/dependent-dropdown/js/dependent-dropdown.js"></script>
-    <link href="/template/js/dependent-dropdown/css/dependent-dropdown.min.css" media="all" rel="stylesheet" type="text/css" />
-
-    <link rel="stylesheet" type="text/css" href="/template/js/jquery-ui-1.12.0.custom/jquery-ui.css">
-    <script rel="script" type="text/javascript" src="/template/js/jquery-ui-1.12.0.custom/jquery-ui.min.js"></script>
-    {{--<script rel="script" type="text/javascript" src="/template/js/fixed_menu.min.js"></script>--}}
-    {{--<script rel="script" type="text/javascript" src="/template/js/fixed_hover.min.js"></script>--}}
-    <script rel="script" type="text/javascript" src="/template/js/menu-select.min.js"></script>
-    <script rel="script" type="text/javascript" src="/template/js/feedback.js"></script>
-    <script rel="script" type="text/javascript" src="/template/js/functions.js"></script>
-
-    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
-    <script rel="script" type="text/javascript" src="/assets/js/bootstrap.min.js"></script>
-
-
-    <link rel="stylesheet" type="text/css" href="/styles/css/styles.css">
-
-    <div></div>
-    @if(isset($params))
-        <script rel="script" type="text/javascript"
-                src="/template/js/image-gallery-slider/js/jssor.slider-21.1.5.mini.js"></script>
-        <script rel="script" type="text/javascript"
-                src="/template/js/image-gallery-slider/image_gallery_slider.js"></script>
-        <link rel="stylesheet" type="text/css" href="/template/js/image-gallery-slider/image_gallery_slider.css">
-        {{--<link rel="stylesheet" type="text/css" href="/template/styles/css/product/styles.css">--}}
-    @else
-        <script rel="script" type="text/javascript" src="/template/js/slider/js/jssor.slider-21.1.5.mini.js"></script>
-        <script rel="script" type="text/javascript" src="/template/js/slider/slider.js"></script>
-        <link rel="stylesheet" type="text/css" href="/template/js/slider/slider.css">
-    @endif
+    <link rel="stylesheet" type="text/css" href="css/main.min.css">
 </head>
 <body>
 <header>
@@ -200,5 +166,7 @@
         </div>
     </div>
 </div>
+<script rel="script" type="text/javascript" src="js/scripts.min.js"></script>
+
 </body>
 </html>
