@@ -20,7 +20,7 @@ class RedirectIfAdmin
             return $next($request);
         }
 
-        if (Auth::user()->hasRole('Moderator') || Auth::user()->hasRole('Admin')) {
+        if (Auth::user()->hasRole('moderator') || Auth::user()->hasRole('admin')) {
             return redirect('/admin');
         }
 

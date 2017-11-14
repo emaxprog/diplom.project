@@ -10,6 +10,7 @@ use App\ProductAttributeValue;
 use Illuminate\Http\Request;
 use App\Category;
 use App\Manufacturer;
+use Illuminate\Support\Facades\Gate;
 
 class ProductController extends Controller
 {
@@ -34,6 +35,10 @@ class ProductController extends Controller
      */
     public function create()
     {
+        $this->authorize('create',Product::class);
+//        if(Gate::denies('create')){
+//            abort(403,'Недостаточно прав');
+//        }
         $subcategories = Category::getCategories();
         $manufacturers = Manufacturer::all();
         $productAttributes = ProductAttribute::all();

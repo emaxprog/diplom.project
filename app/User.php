@@ -62,27 +62,48 @@ class User extends Authenticatable
         return $this->hasMany(Order::class);
     }
 
-    public function hasAnyRole($roles)
+    public function hasRole($roleName, $require = false)
     {
-        if (is_array($roles)) {
-            foreach ($roles as $role) {
-                if ($this->hasRole($role)) {
+        if (is_array($roleName)) {
+            foreach ($roleName as $name) {
+                $hasRole = $this->hasRole($name);
+
+                if ($hasRole && !$require) {
+                    return true;
+                } elseif (!$hasRole && $require) {
+                    return false;
+                }
+            }
+            return $require;
+        } else {
+            foreach ($this->roles as $role) {
+                if (str_is($role->name, $roleName)) {
                     return true;
                 }
             }
-        } else {
-            if ($this->hasRole($roles)) {
-                return true;
-            }
         }
-        return false;
     }
 
-    public function hasRole($role)
+    public function hasPermission($permissionName, $require = false)
     {
-        if ($this->roles()->where('name', $role)->first()) {
-            return true;
+        if (is_array($permissionName)) {
+            foreach ($permissionName as $permName) {
+                $hasPermission = $this->hasPermission($permName);
+                if ($hasPermission && !$require) {
+                    return true;
+                } elseif (!$hasPermission && $require) {
+                    return false;
+                }
+            }
+            return $require;
+        } else {
+            foreach ($this->roles as $role) {
+                foreach ($role->permissions as $permission) {
+                    if (str_is($permission->name, $permissionName)) {
+                        return true;
+                    }
+                }
+            }
         }
-        return false;
     }
 }

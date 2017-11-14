@@ -85,7 +85,7 @@ class RegisterController extends Controller
         ]);
 
         $user->profile()->save($userProfile);
-        $user->roles()->attach(Role::where('name', 'User')->first());
+        $user->roles()->attach(Role::where('name', 'user')->first());
 
         return $user;
     }

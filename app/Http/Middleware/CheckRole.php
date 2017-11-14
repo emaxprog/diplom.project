@@ -17,13 +17,13 @@ class CheckRole
     public function handle($request, Closure $next)
     {
         if (!Auth::check()) {
-            return response('Недостаточно прав', 401);
+            return abort(403,'Недостаточно прав');
         }
 
-        if (Auth::user()->hasRole('Moderator') || Auth::user()->hasRole('Admin')) {
+        if (Auth::user()->hasRole('moderator') || Auth::user()->hasRole('admin')) {
             return $next($request);
         }
 
-        return response('Недостаточно прав', 401);
+        return abort(403,'Недостаточно прав');
     }
 }

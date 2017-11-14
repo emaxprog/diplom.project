@@ -14,7 +14,7 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        $roleAdmin = Role::where('name', 'Admin')->first();
+        $roleAdmin = Role::where('name', 'admin')->first();
         foreach (Permission::all() as $perm) {
             $roleAdmin->permissions()->attach($perm);
         }
