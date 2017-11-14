@@ -2,12 +2,11 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-use DB;
-use Illuminate\Http\File;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Validation\Rule;
 use PDO;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
+
 
 class Product extends Model
 {
@@ -19,27 +18,6 @@ class Product extends Model
     public function getRouteKeyName()
     {
         return 'slug';
-    }
-
-    public static function rules($id = null)
-    {
-        return $id ? [
-            'name' => 'required',
-            'slug' => [
-                'required',
-                'string',
-                Rule::unique('products')->ignore($id),
-            ],
-            'code' => 'required|integer',
-            'price' => 'required|integer',
-            'amount' => 'required|integer'
-        ] : [
-            'name' => 'required',
-            'slug' => 'required|string|unique:products',
-            'code' => 'required|integer',
-            'price' => 'required|integer',
-            'amount' => 'required|integer'
-        ];
     }
 
     const PATH_TO_IMAGES_OF_PRODUCTS = '/template/images/content/products/';

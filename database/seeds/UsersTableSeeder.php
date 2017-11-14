@@ -15,8 +15,10 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         $roleAdmin = Role::where('name', 'admin')->first();
+        $roleModerator = Role::where('name', 'moderator')->first();
         foreach (Permission::all() as $perm) {
             $roleAdmin->permissions()->attach($perm);
+            $roleModerator->permissions()->attach($perm);
         }
         $admin = new User();
         $admin->username = 'Admin';
@@ -24,5 +26,13 @@ class UsersTableSeeder extends Seeder
         $admin->password = bcrypt('ghjuhfvvbcn96');
         $admin->save();
         $admin->roles()->attach($roleAdmin);
+
+        $moderator = new User();
+        $moderator->username = 'Moderator';
+        $moderator->email = 'moderator@web.ru';
+        $moderator->password = bcrypt('ghjuhfvvbcn96');
+        $moderator->save();
+        $moderator->roles()->attach($roleModerator);
+
     }
 }

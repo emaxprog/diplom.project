@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Country;
+use App\Http\Requests\StoreProduct;
+use App\Http\Requests\UpdateProduct;
 use App\Image;
 use App\Product;
 use App\ProductAttribute;
@@ -35,10 +37,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $this->authorize('create',Product::class);
-//        if(Gate::denies('create')){
-//            abort(403,'Недостаточно прав');
-//        }
+        $this->authorize('create', Product::class);
+
         $subcategories = Category::getCategories();
         $manufacturers = Manufacturer::all();
         $productAttributes = ProductAttribute::all();
@@ -58,10 +58,8 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreProduct $request)
     {
-        $this->validate($request, Product::rules());
-
         $product = new Product($request->all());
         if ($request->hasFile('image_preview')) {
             $product->saveImagePreview($request->file('image_preview'));
@@ -110,6 +108,8 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
+        $this->authorize('update', $product);
+
         $manufacturers = Manufacturer::all();
         $subcategories = Category::getCategories();
         $params = Product::getParams($product->id);
@@ -137,10 +137,8 @@ class ProductController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product, ProductAttributeValue $pavModel)
+    public function update(UpdateProduct $request, Product $product, ProductAttributeValue $pavModel)
     {
-        $this->validate($request, Product::rules($product->id));
-
         if ($request->hasFile('image_preview')) {
             $product->saveImagePreview($request->file('image_preview'));
         }
@@ -161,6 +159,8 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
+        $this->authorize('delete', $product);
+
         $product->delete();
         return response()->json();
     }

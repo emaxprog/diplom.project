@@ -19,7 +19,7 @@ class ProductPolicy
      */
     public function view(User $user, Product $product)
     {
-        //
+        return $user->hasPermission('view-product');
     }
 
     /**
@@ -42,7 +42,7 @@ class ProductPolicy
      */
     public function update(User $user, Product $product)
     {
-        //
+        return $user->hasPermission('update-product');
     }
 
     /**
@@ -54,6 +54,6 @@ class ProductPolicy
      */
     public function delete(User $user, Product $product)
     {
-        //
+        return $user->hasPermission('delete-product');
     }
 }
