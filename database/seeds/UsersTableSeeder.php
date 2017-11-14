@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use App\Role;
 use App\User;
+use App\Permission;
 
 class UsersTableSeeder extends Seeder
 {
@@ -14,6 +15,9 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         $roleAdmin = Role::where('name', 'Admin')->first();
+        foreach (Permission::all() as $perm) {
+            $roleAdmin->permissions()->attach($perm);
+        }
         $admin = new User();
         $admin->username = 'Admin';
         $admin->email = 'admin@web.ru';

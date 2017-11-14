@@ -5,71 +5,71 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{csrf_token()}}">
     <title>Интернет-магазин</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
     {{--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>--}}
-    <script rel="script" type="text/javascript" src="/template/js/jQuery/jquery.cookie.js"></script>
+    <script rel="script" type="text/javascript" src="/js/scripts.min.js"></script>
+
     <link rel="stylesheet" type="text/css" href="css/main.min.css">
 </head>
 <body>
-<header>
-    <!-- Fixed navbar -->
-    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="{{route('home')}}">EmStorm</a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="#">О компании</a>
-                    </li>
-                    <li>
-                        <a href="#" onclick="return false" data-toggle="modal" data-target="#popup">Обратная связь</a>
-                    </li>
-                    <li>
-                        <a href="#">Гарантия</a>
-                    </li>
-                </ul>
-                {{--<p class="navbar-text"><i class="fa fa-phone fa-lg"></i> {!! $header->phone1 !!}</p>--}}
-                {{--<p class="navbar-text"><i class="fa fa-phone fa-lg"></i> {!! $header->phone2 !!}</p>--}}
-                <ul class="nav navbar-nav navbar-right">
-                    @if(Auth::guest())
-                        <li>
-                            <a href="{{url('/login')}}"><i class="fa fa-lock fa-lg"></i> Войти</a>
-                        </li>
-                        <li>
-                            <a href="{{url('/register')}}"><i class="fa fa-key fa-lg"></i> Регистрация</a>
-                        </li>
-                    @else
-                        <li>
-                            <a href="{{route('user.index')}}"><i class="fa fa-user fa-lg"></i> Личный кабинет</a>
-                        </li>
-                        <li>
-                            <a href="{{ route('logout') }}"
-                               onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                <i class="fa fa-unlock fa-lg"></i> Выйти
-                            </a>
-
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                {{ csrf_field() }}
-                            </form>
-                        </li>
-                    @endif
-                    <li>
-                        <a href="{{route('basket')}}"><i class="fa fa-shopping-cart fa-lg"></i> Корзина <span
-                                    class="baskets-counter badge"></span></a>
-                    </li>
-                </ul>
-            </div><!--/.nav-collapse -->
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{{route('home')}}">EmStorm</a>
         </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="#">О компании</a>
+                </li>
+                <li>
+                    <a href="#" onclick="return false" data-toggle="modal" data-target="#popup">Обратная связь</a>
+                </li>
+                <li>
+                    <a href="#">Гарантия</a>
+                </li>
+            </ul>
+            {{--<p class="navbar-text"><i class="fa fa-phone fa-lg"></i> {!! $header->phone1 !!}</p>--}}
+            {{--<p class="navbar-text"><i class="fa fa-phone fa-lg"></i> {!! $header->phone2 !!}</p>--}}
+            <ul class="nav navbar-nav navbar-right">
+                @if(Auth::guest())
+                    <li>
+                        <a href="{{url('/login')}}"><i class="fa fa-lock fa-lg"></i> Войти</a>
+                    </li>
+                    <li>
+                        <a href="{{url('/register')}}"><i class="fa fa-key fa-lg"></i> Регистрация</a>
+                    </li>
+                @else
+                    <li>
+                        <a href="{{route('user.index')}}"><i class="fa fa-user fa-lg"></i> Личный кабинет</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('logout') }}"
+                           onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                            <i class="fa fa-unlock fa-lg"></i> Выйти
+                        </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
+                    </li>
+                @endif
+                <li>
+                    <a href="{{route('basket')}}"><i class="fa fa-shopping-cart fa-lg"></i> Корзина <span
+                                class="baskets-counter badge"></span></a>
+                </li>
+            </ul>
+        </div><!--/.nav-collapse -->
     </div>
-</header>
+</div>
 <div class="content">
     <div class="container">
         @yield('content')

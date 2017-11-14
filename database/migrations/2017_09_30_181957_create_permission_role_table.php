@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateImageProductTable extends Migration
+class CreatePermissionRoleTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,19 +13,18 @@ class CreateImageProductTable extends Migration
      */
     public function up()
     {
-        Schema::create('image_product', function (Blueprint $table) {
-            $table->integer('image_id')->unsigned();
-            $table->integer('product_id')->unsigned();
-            $table->primary(['image_id', 'product_id']);
-
-            $table->foreign('image_id')
+        Schema::create('permission_role', function (Blueprint $table) {
+            $table->integer('permission_id')->unsigned();
+            $table->integer('role_id')->unsigned();
+            $table->primary(['permission_id','role_id']);
+            $table->foreign('permission_id')
                 ->references('id')
-                ->on('images')
+                ->on('permissions')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->foreign('product_id')
+            $table->foreign('role_id')
                 ->references('id')
-                ->on('products')
+                ->on('roles')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
         });
@@ -38,6 +37,6 @@ class CreateImageProductTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('image_product');
+        Schema::dropIfExists('permission_role');
     }
 }

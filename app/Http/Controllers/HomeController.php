@@ -33,7 +33,7 @@ class HomeController extends Controller
         }
         $latestProducts = $product->getLatestProducts();
         $recommendedProducts = $product->getRecommendedProducts();
-        $images = Afisha::getImages();
+//        $images = Afisha::getImages();
         $data = [
             'categories' => $categories,
             'latestProducts' => $latestProducts,
