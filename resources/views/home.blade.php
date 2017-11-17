@@ -1,82 +1,23 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="row">
-        <div class="col-md-3">
-            @include('include/left',['categories'=>$categories])
-        </div>
-        <div class="col-md-9">
-            <div class="row">
-                <div class="col-md-12">
-                    @include('include/slider')
-                </div>
-            </div>
-            <div class="row list-products">
-                <h2>Последние добавленные</h2>
-                @if(isset($latestProducts))
-                    @foreach ($latestProducts as $product)
-                        <div class="col-md-4 product-block">
-                            <div class="thumbnail">
-                                @if ($product->is_new)
-                                    <img src="/template/images/site/new.png" class="new img-responsive">
-                                @endif
-                                <a href="{{route('product.show',['id'=>$product->id])}}">
-                                    <img src="{{isset($product->imagePreview)?$product->imagePreview->path:''}}"
-                                         alt="Apple MacBook"
-                                         title="Apple MacBook" id="img-{{$product->id}}"
-                                         class="img-rounded img-responsive"
-                                         height="150px">
-                                    <p class="text-center">{{$product->name}}</p>
-                                    <p class="text-center product-price">{{$product->price}} руб.</p>
-                                </a>
-                                <div class="caption">
-                                    <button type="button" class="btn btn-primary btn-block buy-btn"
-                                            onclick="return false"
-                                            data-id="{{$product->id}}"
-                                            data-name="{{$product->name}}"
-                                            data-price="{{$product->price}}"><i class="fa fa-cart-plus fa-2x"></i>
-                                        Добавить
-                                        в
-                                        корзину
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                @endif
-            </div>
-            <div class="row list-products">
-                <h2>Рекомендованные товары</h2>
-                @if(isset($recommendedProducts))
-                    @foreach ($recommendedProducts as $product)
-                        <div class="col-md-4 product-block">
-                            <div class="thumbnail">
-                                @if ($product->is_new)
-                                    <img src="/template/images/site/new.png" class="new img-responsive">
-                                @endif
-                                <a href="{{route('product.show',['id'=>$product->id])}}">
-                                    <img src="{{isset($product->imagePreview)?$product->imagePreview->path:''}}" alt="Apple MacBook"
-                                         title="Apple MacBook" id="img-{{$product->id}}"
-                                         class="img-rounded img-responsive"
-                                         height="150px">
-                                    <p class="text-center">{{$product->name}}</p>
-                                    <p class="text-center product-price">{{$product->price}} руб.</p>
-                                </a>
-                                <div class="caption">
-                                    <button type="button" class="btn btn-primary btn-block buy-btn"
-                                            onclick="return false"
-                                            data-id="{{$product->id}}"
-                                            data-name="{{$product->name}}"
-                                            data-price="{{$product->price}}">
-                                        <i class="fa fa-cart-plus fa-2x"></i>
-                                        Добавить в корзину
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                @endif
-            </div>
-        </div>
-    </div>
+    @include('include/sections/slider')
+    @include('include/sections/collection')
+    @include('include/sections/new_products')
+    @include('include/sections/testimonials')
+    @include('include/sections/new_products2')
+    @include('include/sections/blog')
+    @include('include/sections/quick_view')
+    @include('include/sections/brand')
+    @include('include/sections/service')
 @endsection
+
+
+{{--<button type="button" class="btn btn-primary btn-block buy-btn"--}}
+        {{--onclick="return false"--}}
+        {{--data-id="{{$product->id}}"--}}
+        {{--data-name="{{$product->name}}"--}}
+        {{--data-price="{{$product->price}}">--}}
+    {{--<i class="fa fa-cart-plus fa-2x"></i>--}}
+    {{--Добавить в корзину--}}
+{{--</button>--}}
