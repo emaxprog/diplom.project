@@ -107,11 +107,13 @@
                     <label class="control-label col-md-2">Категория</label>
                     <div class="col-md-10">
                         <select name="category_id" class="form-control">
-                            @foreach ($subcategories as $subcategory)
-                                <option value="{{$subcategory->id}}"
-                                        @if($subcategory->id==$product->category_id) selected @endif>
-                                    {!! $subcategory->name !!}
-                                </option>
+                            @foreach ($categories as $category)
+                                @foreach($category->subcategories as $subcategory)
+                                    <option value="{{$subcategory->id}}"
+                                            @if($subcategory->id==$product->category_id) selected @endif>
+                                        {!! $subcategory->name !!}
+                                    </option>
+                                @endforeach
                             @endforeach
                         </select>
                     </div>

@@ -10,6 +10,7 @@ use Auth;
 use App\Delivery;
 use App\Payment;
 use App\Events\OrderIsConfirmed;
+use App\Country;
 
 class OrderController extends Controller
 {
@@ -40,9 +41,11 @@ class OrderController extends Controller
             return redirect()->route('home');
         }
 
+        $countries = Country::all();
         $deliveries = Delivery::all();
         $payments = Payment::all();
         $data = [
+            'countries' => $countries,
             'deliveries' => $deliveries,
             'payments' => $payments,
         ];

@@ -60,10 +60,10 @@ class Product extends Model
             $maxPrice = 9999999999;
         }
         if ($manufacturersIds == null)
-            return $selectedProducts = $this->preview()->category($id)
-                ->rangePrice($minPrice, $maxPrice)
+            return $selectedProducts = $this->rangePrice($minPrice, $maxPrice)
+                ->category($id)
                 ->paginate($num);
-        return $selectedProducts = $this->preview()->category($id)
+        return $selectedProducts = $this->category($id)
             ->manufacturers($manufacturersIds)
             ->rangePrice($minPrice, $maxPrice)
             ->paginate($num);

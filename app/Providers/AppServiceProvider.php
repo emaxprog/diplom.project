@@ -12,6 +12,7 @@ use App\Product;
 use App\Region;
 use App\Header;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,6 +25,8 @@ class AppServiceProvider extends ServiceProvider
     {
         Image::observe(ImageObserver::class);
         Product::observe(ProductObserver::class);
+
+        View::share('categories', Category::getCategories());
     }
 
     /**

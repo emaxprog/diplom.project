@@ -41,6 +41,6 @@ Route::post('location/cities', ['as' => 'location.cities', 'uses' => 'LocationCo
 
 Route::get('basket', ['as' => 'basket', 'uses' => 'BasketController@index']);
 Route::group(['prefix' => 'catalog'], function () {
-    Route::get('category/{category}', ['as' => 'category', 'uses' => 'CatalogController@index']);
+    Route::get('{category}', ['as' => 'category', 'uses' => 'CatalogController@index']);
 });
 Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index', 'middleware' => 'admin']);

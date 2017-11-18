@@ -39,12 +39,10 @@ class ProductController extends Controller
     {
         $this->authorize('create', Product::class);
 
-        $subcategories = Category::getCategories();
         $manufacturers = Manufacturer::all();
         $productAttributes = ProductAttribute::all();
         $countries = Country::all();
         $data = [
-            'subcategories' => $subcategories,
             'manufacturers' => $manufacturers,
             'productAttributes' => $productAttributes,
             'countries' => $countries
@@ -111,7 +109,6 @@ class ProductController extends Controller
         $this->authorize('update', $product);
 
         $manufacturers = Manufacturer::all();
-        $subcategories = Category::getCategories();
         $params = Product::getParams($product->id);
         $productAttributes = ProductAttribute::all();
         $countries = Country::all();
@@ -120,7 +117,6 @@ class ProductController extends Controller
         $data = [
             'product' => $product,
             'manufacturers' => $manufacturers,
-            'subcategories' => $subcategories,
             'params' => $params,
             'productAttributes' => $productAttributes,
             'countries' => $countries,
