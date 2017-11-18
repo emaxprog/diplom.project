@@ -76,8 +76,8 @@
                                             </ul>
                                         </div>
                                     </li>
-                                    <li><a href="shop.html">Lookbook</a></li>
-                                    <li><a href="blog.html">Blog</a></li>
+                                    {{--<li><a href="shop.html">Lookbook</a></li>--}}
+                                    {{--<li><a href="blog.html">Blog</a></li>--}}
                                     <li><a href="#">Pages</a>
                                         <ul>
                                             <li><a href="about-us.html">About</a></li>
@@ -94,8 +94,8 @@
                                             <li><a href="wishlist.html">Wishlist</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="about-us.html">About</a></li>
-                                    <li><a href="contact.html">Contact</a></li>
+                                    {{--<li><a href="about-us.html">About</a></li>--}}
+                                    {{--<li><a href="contact.html">Contact</a></li>--}}
 
 
 

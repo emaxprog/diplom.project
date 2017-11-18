@@ -11,16 +11,6 @@ use Illuminate\Contracts\Queue\Queue;
 class HomeController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
-    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -32,7 +22,7 @@ class HomeController extends Controller
             return view('welcome');
         }
         $latestProducts = $product->getLatestProducts();
-        $recommendedProducts = $product->getRecommendedProducts();
+        $recommendedProducts = $product->getRecommendedProductsGroupByCategory();
 //        $images = Afisha::getImages();
         $data = [
             'categories' => $categories,

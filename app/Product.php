@@ -28,6 +28,11 @@ class Product extends Model
         return $this->belongsToMany(Order::class)->withPivot('amount');
     }
 
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
     public function imagePreview()
     {
         return $this->belongsTo(Image::class);
@@ -66,13 +71,26 @@ class Product extends Model
 
     public function getLatestProducts()
     {
-        return $this->latest('id')->preview()->available()->published()->take(6)->get();
+        return $this->latest('id')->available()->published()->take(16)->get();
 
     }
 
     public function getRecommendedProducts()
     {
-        return $this->latest('id')->preview()->recommended()->available()->published()->take(3)->get();
+        return $this->latest('id')->preview()->recommended()->available()->published()->take(16)->get();
+    }
+
+    public function getRecommendedProductsGroupByCategory()
+    {
+        $result = [];
+        $categories = Category::with('products')->get();
+
+        foreach ($categories as $category) {
+            $result[$category->id] = $category;
+            $result[$category->id]->products = $category->products()->latest('id')->recommended()->available()->published()->take(16)->get();
+        }
+
+        return $result;
     }
 
     public function paginateProducts($num)

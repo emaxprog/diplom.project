@@ -26,4 +26,4 @@
 <!-- main js -->
 <script src="/themes/Tasnm/js/main.js"></script>
 
-<script rel="script" type="text/javascript" src="js/scripts.min.js"></script>
+<script rel="script" type="text/javascript" src="/js/scripts.min.js"></script>

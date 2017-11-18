@@ -6,11 +6,9 @@
 <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]-->
 @include('include/header')
-<div class="content">
-    <div class="container">
-        @yield('content')
-    </div>
-</div>
+@yield('content')
+@include('include/sections/brand')
+@include('include/sections/service')
 @include('include/footer')
 @include('include/scripts')
 </body>

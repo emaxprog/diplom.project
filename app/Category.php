@@ -19,6 +19,11 @@ class Category extends Model
         return 'slug';
     }
 
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+
     public static function getCategories()
     {
         $categories = Category::main()->published()->get();
