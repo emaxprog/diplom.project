@@ -53,17 +53,17 @@ class Product extends Model
         return $this->belongsTo(Manufacturer::class);
     }
 
-    public function getSelectedProducts($id, $num, $minPrice, $maxPrice, $manufacturersIds)
+    public function getSelectedProducts($id, $num, $sort, &$minPrice, &$maxPrice, $manufacturersIds)
     {
         if ($minPrice == null && $maxPrice == null) {
             $minPrice = 0;
-            $maxPrice = 9999999999;
+            $maxPrice = 499999;
         }
         if ($manufacturersIds == null)
             return $selectedProducts = $this->rangePrice($minPrice, $maxPrice)
-                ->category($id)
+                ->byCategory($id)
                 ->paginate($num);
-        return $selectedProducts = $this->category($id)
+        return $selectedProducts = $this->byCategory($id)
             ->manufacturers($manufacturersIds)
             ->rangePrice($minPrice, $maxPrice)
             ->paginate($num);
@@ -77,7 +77,12 @@ class Product extends Model
 
     public function getRecommendedProducts()
     {
-        return $this->latest('id')->preview()->recommended()->available()->published()->take(16)->get();
+        return $this->latest('id')->recommended()->available()->published()->take(3)->get();
+    }
+
+    public function getPopularProducts()
+    {
+        return $this->latest('id')->popular()->available()->published()->take(16)->get();
     }
 
     public function getRecommendedProductsGroupByCategory()
@@ -252,7 +257,7 @@ class Product extends Model
         $query->whereIn('manufacturer_id', $manufacturersIds);
     }
 
-    public function scopeCategory($query, $id)
+    public function scopeByCategory($query, $id)
     {
         $query->where('category_id', $id);
     }
@@ -270,5 +275,15 @@ class Product extends Model
     public function scopeRecommended($query)
     {
         $query->where('is_recommended', 1);
+    }
+
+    public function scopePopular($query)
+    {
+        $query->where('is_popular', 1);
+    }
+
+    public function scopeSale($query)
+    {
+        $query->whereNotNull('sale_price');
     }
 }

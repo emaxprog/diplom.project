@@ -104,6 +104,18 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label class="control-label col-md-2">Стоимость со скидкой, руб.</label>
+                    <div class="col-md-10">
+                        <input type="text" name="sale_price" class="form-control" placeholder="Введите стоимость товара со скидкой"
+                               value="{{$product->sale_price}}">
+                        @if ($errors->has('sale_price'))
+                            <div class="alert alert-danger">
+                                <strong>{{ $errors->first('sale_price') }}</strong>
+                            </div>
+                        @endif
+                    </div>
+                </div>
+                <div class="form-group">
                     <label class="control-label col-md-2">Категория</label>
                     <div class="col-md-10">
                         <select name="category_id" class="form-control">
@@ -134,11 +146,20 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-md-2">Рекомендуемые</label>
+                    <label class="control-label col-md-2">Рекомендуемый</label>
                     <div class="col-md-10">
                         <select name="is_recommended" class="form-control">
                             <option value="1" @if($product->is_recommended==1) selected @endif>Да</option>
                             <option value="0" @if($product->is_recommended==0) selected @endif>Нет</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">Популярный</label>
+                    <div class="col-md-10">
+                        <select name="is_popular" class="form-control">
+                            <option value="1" @if($product->is_popular==1) selected @endif>Да</option>
+                            <option value="0" @if($product->is_popular==0) selected @endif>Нет</option>
                         </select>
                     </div>
                 </div>

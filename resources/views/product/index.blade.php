@@ -13,6 +13,7 @@
                     <th>Артикул</th>
                     <th>Название товара</th>
                     <th>Цена</th>
+                    <th>Цена со скидкой</th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -23,6 +24,7 @@
                         <td>{!! $product->code !!}</td>
                         <td>{!! $product->name !!}</td>
                         <td>{!! $product->price !!} руб.</td>
+                        <td>{!! $product->sale_price !!} руб.</td>
                         <td><a href="{{route('product.edit',[$product])}}" class="btn btn-info"
                                title="Редактировать"><i
                                         class="fa fa-edit fa-lg"></i></a></td>

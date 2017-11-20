@@ -203,23 +203,25 @@ $(".pro-img-tab-slider").owlCarousel({
     });
  /*---------------------
     price slider
---------------------- */  
-	
+--------------------- */
+
     $( "#slider-range" ).slider({
         range: true,
-        min: 40,
-        max: 600,
-        values: [ 20, 1560 ],
+        min: 0,
+        max: 499999,
+        values: [ 0, 499999 ],
         slide: function( event, ui ) {
-        $( "#amount" ).val( "$" + ui.values[ 0 ] + " - "+ "$" + ui.values[ 1 ] );
-        $('input[name="first_price"]').val( "$" + ui.values[0]);
-        $('input[name="last_price"]').val( "$" + ui.values[1]);
+        $( "#amount" ).val(ui.values[ 0 ] + " - "+ ui.values[ 1 ]);
+        $('input[name="first_price"]').val(ui.values[0]);
+        $('input[name="last_price"]').val(ui.values[1]);
     },
     });
-    $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
-    " - "+"$" + $( "#slider-range" ).slider( "values", 1 ) );
-    $('input[name="first_price"]').val( "$" + $( "#slider-range" ).slider( "values", 0 ));
-    $('input[name="last_price"]').val( "$" + $( "#slider-range" ).slider( "values", 1 ));
+    $('#slider-range').slider({values:[$('.first_price').val(),$('.last_price').val()]});
+
+    $( "#amount" ).val($( "#slider-range" ).slider( "values", 0 ) +
+    " - " + $( "#slider-range" ).slider( "values", 1 ) );
+    $('input[name="first_price"]').val($('.first_price').val());
+    $('input[name="last_price"]').val($('.last_price').val());
 /*--------------------------
  scrollUp
 ---------------------------- */	

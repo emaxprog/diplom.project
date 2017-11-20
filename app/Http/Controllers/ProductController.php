@@ -90,10 +90,12 @@ class ProductController extends Controller
     {
         $images = $product->images;
         $params = $product->getParams($product->id);
+        $popularProducts = $product->getPopularProducts();
         $data = [
             'product' => $product,
             'params' => $params,
-            'images' => $images
+            'images' => $images,
+            'popularProducts' => $popularProducts
         ];
         return view('product.show', $data);
     }

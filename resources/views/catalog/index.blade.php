@@ -19,148 +19,129 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4 col-lg-3 col-sm-12">
-                    <div class="all-shop-sidebar">
-                        <div class="top-shop-sidebar">
-                            <h3 class="wg-title">SHOP BY</h3>
-                        </div>
-                        <div class="shop-one">
-                            <h3 class="wg-title2">Our Brand</h3>
-                            <ul class="product-categories">
-                                @foreach ($manufacturers as $manufacturer)
-                                    <li class="cat-item">
-                                        <label>
-                                            <input type="checkbox" class="checkbox" name="manufacturers[]"
-                                                   id="manufacturer-{{$manufacturer->id}}"
-                                                   value="{{$manufacturer->id}}"
-                                            @if(isset($selectedManufacturersIds))
-                                                @if(in_array($manufacturer->id,$selectedManufacturersIds)){{' checked'}}
-                                                        @endif
-                                                    @endif>
-                                            {{$manufacturer->name}}
-                                        </label>
+                    <form name="form-range-price" id="form-selection" method="get" class="form" role="form">
+                        <div class="all-shop-sidebar">
+                            <div class="top-shop-sidebar">
+                                <h3 class="wg-title">SHOP BY</h3>
+                            </div>
+                            <div class="shop-one">
+                                <h3 class="wg-title2">Our Brand</h3>
+                                <ul class="product-categories">
+                                    @foreach ($manufacturers as $manufacturer)
+                                        <li class="cat-item">
+                                            <label>
+                                                <input type="checkbox" class="checkbox" name="manufacturers[]"
+                                                       id="manufacturer-{{$manufacturer->id}}"
+                                                       value="{{$manufacturer->id}}"
+                                                @if(isset($selectedManufacturersIds))
+                                                    @if(in_array($manufacturer->id,$selectedManufacturersIds)){{' checked'}}
+                                                            @endif
+                                                        @endif>
+                                                {{$manufacturer->name}}
+                                            </label>
+                                            <span class="count">(1)</span>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            <div class="shop-one re-shop-one">
+                                <h3 class="wg-title2">Choose Price</h3>
+                                <div class="widget shop-filter">
+                                    <div class="info_widget">
+                                        <div class="price_filter">
+                                            <div id="slider-range"></div>
+                                            <div id="amount">
+                                                <input type="text" name="first_price" class="first_price"
+                                                       value="{{$firstPrice}}" readonly/>
+                                                <input type="text" name="last_price" class="last_price"
+                                                       value="{{$lastPrice}}" readonly/>
+                                                <button class="button-shop" type="submit" id="btn-selection"><i
+                                                            class="fa fa-search search-icon"
+                                                            formaction="{{\Illuminate\Support\Facades\Request::fullUrl()}}"></i></button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="shop-one re-shop-one">
+                                <h3 class="wg-title2">Choose Color</h3>
+                                <ul class="product-categories">
+                                    <li class="cat-item cat-item-11">
+                                        <a href="#">Black</a>
                                         <span class="count">(1)</span>
                                     </li>
-                                @endforeach
-                            </ul>
-                        </div>
-                        <div class="shop-one re-shop-one">
-                            <h3 class="wg-title2">Choose Price</h3>
-                            <div class="widget shop-filter">
-                                <div class="info_widget">
-                                    <div class="price_filter">
-                                        <div id="slider-range"></div>
-                                        <div id="amount">
-                                            <input type="text" name="first_price" class="first_price"/>
-                                            <input type="text" name="last_price" class="last_price"/>
-                                            <button class="button-shop" type="submit"><i
-                                                        class="fa fa-search search-icon"></i></button>
-                                        </div>
-
+                                    <li class="cat-item cat-item-8">
+                                        <a href="#">Orange</a>
+                                        <span class="count">(1)</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="top-shop-sidebar sim">
+                                <h3 class="wg-title">Compare Products</h3>
+                                <ul class="products-list">
+                                    <li class="cat-item cat-item-11">No products to compare</li>
+                                </ul>
+                                <a class="clear-all" href="#">Clear all</a>
+                                <a class="blog8" href="#">Compare</a>
+                            </div>
+                            <div class="top-shop-sidebar sim2">
+                                <h3 class="wg-title">Community Pool</h3>
+                            </div>
+                            <div class="shop-one">
+                                <ul class="product-categories">
+                                    <li class="cat-item cat-item-11">
+                                        <a href="#">Black</a>
+                                        <span class="count">(1)</span>
+                                    </li>
+                                    <li class="cat-item cat-item-8">
+                                        <a href="#">Orange</a>
+                                        <span class="count">(1)</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            @if(!empty($popularProducts))
+                                <div class="top-shop-sidebar an-shop">
+                                    <h3 class="wg-title">BEST SELLER</h3>
+                                    <ul>
+                                        @foreach($popularProducts as $popularProduct)
+                                            <li class="b-none">
+                                                <div class="tb-recent-thumbb">
+                                                    <a href="{{route('product.show',$popularProduct)}}">
+                                                        <img class="attachment"
+                                                             src="{{$popularProduct->imagePreview->path}}"
+                                                             alt="{{$popularProduct->name}}">
+                                                    </a>
+                                                </div>
+                                                <div class="tb-recentb">
+                                                    <div class="tb-beg">
+                                                        <a href="{{route('product.show',$popularProduct)}}">{{$popularProduct->name}}</a>
+                                                    </div>
+                                                    <div class="tb-product-price font-noraure-3">
+                                                        <span class="amount">{{$popularProduct->price}}</span>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                            <div class="ro-info-box-wrap tpl3 st">
+                                <div class="tb-image">
+                                    <img src="img/products/4.jpg" alt="">
+                                </div>
+                                <div class="tb-content">
+                                    <div class="tb-content-inner an-inner">
+                                        <h5>WOMEN'S FASHION</h5>
+                                        <h3>MID SEASON SALE</h3>
+                                        <h6>
+                                            <a href="#">SHOP NOW</a>
+                                        </h6>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="shop-one re-shop-one">
-                            <h3 class="wg-title2">Choose Color</h3>
-                            <ul class="product-categories">
-                                <li class="cat-item cat-item-11">
-                                    <a href="#">Black</a>
-                                    <span class="count">(1)</span>
-                                </li>
-                                <li class="cat-item cat-item-8">
-                                    <a href="#">Orange</a>
-                                    <span class="count">(1)</span>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="top-shop-sidebar sim">
-                            <h3 class="wg-title">Compare Products</h3>
-                            <ul class="products-list">
-                                <li class="cat-item cat-item-11">No products to compare</li>
-                            </ul>
-                            <a class="clear-all" href="#">Clear all</a>
-                            <a class="blog8" href="#">Compare</a>
-                        </div>
-                        <div class="top-shop-sidebar sim2">
-                            <h3 class="wg-title">Community Pool</h3>
-                        </div>
-                        <div class="shop-one">
-                            <ul class="product-categories">
-                                <li class="cat-item cat-item-11">
-                                    <a href="#">Black</a>
-                                    <span class="count">(1)</span>
-                                </li>
-                                <li class="cat-item cat-item-8">
-                                    <a href="#">Orange</a>
-                                    <span class="count">(1)</span>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="top-shop-sidebar an-shop">
-                            <h3 class="wg-title">BEST SELLER</h3>
-                            <ul>
-                                <li class="b-none">
-                                    <div class="tb-recent-thumbb">
-                                        <a href="">
-                                            <img class="attachment" src="img/products/1.jpg" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="tb-recentb">
-                                        <div class="tb-beg">
-                                            <a href="#">Lambskin Shoe</a>
-                                        </div>
-                                        <div class="tb-product-price font-noraure-3">
-                                            <span class="amount">$180.00</span>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="b-none">
-                                    <div class="tb-recent-thumbb">
-                                        <a href="">
-                                            <img class="attachment" src="img/products/2.jpg" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="tb-recentb">
-                                        <div class="tb-beg">
-                                            <a href="#">Luxury Leather Bag</a>
-                                        </div>
-                                        <div class="tb-product-price font-noraure-3">
-                                            <span class="amount2 ana">$170.00</span>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="b-none agn">
-                                    <div class="tb-recent-thumbb">
-                                        <a href="">
-                                            <img class="attachment" src="img/products/3.jpg" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="tb-recentb">
-                                        <div class="tb-beg">
-                                            <a href="#">Vintage Glasses</a>
-                                        </div>
-                                        <div class="tb-product-price font-noraure-3">
-                                            <span class="amount2 ana">$170.00</span>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="ro-info-box-wrap tpl3 st">
-                            <div class="tb-image">
-                                <img src="img/products/4.jpg" alt="">
-                            </div>
-                            <div class="tb-content">
-                                <div class="tb-content-inner an-inner">
-                                    <h5>WOMEN'S FASHION</h5>
-                                    <h3>MID SEASON SALE</h3>
-                                    <h6>
-                                        <a href="#">SHOP NOW</a>
-                                    </h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    </form>
                 </div>
                 <div class="col-md-8 col-lg-9 col-sm-12">
                     <div class="row">
@@ -180,26 +161,29 @@
                                         </ul>
                                     </div>
                                     <div class="re-shop">
-                                        <div class="sort-by">
-                                            <div class="shop6">
-                                                <label>Sort By :</label>
-                                                <select>
-                                                    <option value="">Default sorting</option>
-                                                    <option value="">Sort by popularity</option>
-                                                    <option value="">Sort by average rating</option>
-                                                    <option value="">Sort by newness</option>
-                                                    <option value="">Sort by price: low to high</option>
+                                        <form action="{{\Illuminate\Support\Facades\Request::fullUrl()}}"
+                                              name="form-range-price" id="form-sort" method="get">
+                                            <div class="sort-by">
+                                                <div class="shop6">
+                                                    <label>Sort By :</label>
+                                                    <select name="sort_by">
+                                                        <option value="">Default sorting</option>
+                                                        <option value="">Sort by popularity</option>
+                                                        <option value="">Sort by average rating</option>
+                                                        <option value="">Sort by newness</option>
+                                                        <option value="">Sort by price: low to high</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="shop5">
+                                                <label>Show :</label>
+                                                <select name="show_by">
+                                                    <option value="12">12</option>
+                                                    <option value="24">24</option>
+                                                    <option value="36">36</option>
                                                 </select>
                                             </div>
-                                        </div>
-                                        <div class="shop5">
-                                            <label>Show :</label>
-                                            <select>
-                                                <option value="">12</option>
-                                                <option value="">24</option>
-                                                <option value="">36</option>
-                                            </select>
-                                        </div>
+                                        </form>
                                     </div>
                                 </div>
                                 <!-- Tab panes -->
@@ -340,7 +324,7 @@
                             <div class="shop-all-tab-cr shop-bottom">
                                 <div class="two-part">
                                     <div class="shop5 page">
-                                        {!! $products->appends(['minPrice'=>$minPrice,'maxPrice'=>$maxPrice,'manufacturers'=>$selectedManufacturersIds])->render() !!}
+                                        {!! $products->appends(['first_price'=>$firstPrice,'last_price'=>$lastPrice,'manufacturers'=>$selectedManufacturersIds])->render() !!}
                                     </div>
                                 </div>
                             </div>

@@ -11,23 +11,32 @@ class CatalogController extends Controller
 {
     public function index(Request $request, Category $category, Product $productModel)
     {
-        $minPrice = $maxPrice = $selectedManufacturersIds = null;
+        $firstPrice = $lastPrice = $selectedManufacturersIds = $sortBy = null;
+        $showBy = 6;
         $manufacturers = Manufacturer::all();
-        if ($request->has('minPrice') || $request->has('maxPrice')) {
-            $minPrice = $request->minPrice;
-            $maxPrice = $request->maxPrice;
+        if ($request->has('first_price') || $request->has('last_price')) {
+            $firstPrice = trim($request->first_price);
+            $lastPrice = trim($request->last_price);
         }
         if ($request->has('manufacturers')) {
             $selectedManufacturersIds = $request->manufacturers;
         }
-        $products = $productModel->getSelectedProducts($category->id, 6, $minPrice, $maxPrice, $selectedManufacturersIds);
+        if ($request->has('show_by')) {
+            $showBy = $request->show_by;
+        }
+        if ($request->has('sort_by')) {
+            $sortBy = $request->sort_by;
+        }
+        $products = $productModel->getSelectedProducts($category->id, $showBy, $sortBy, $firstPrice, $lastPrice, $selectedManufacturersIds);
+        $popularProducts = $productModel->getPopularProducts();
         $data = [
-            'id' => $category->id,
+            'category' => $category,
             'products' => $products,
             'manufacturers' => $manufacturers,
             'selectedManufacturersIds' => $selectedManufacturersIds,
-            'minPrice' => $minPrice,
-            'maxPrice' => $maxPrice,
+            'firstPrice' => $firstPrice,
+            'lastPrice' => $lastPrice,
+            'popularProducts' => $popularProducts
         ];
         return view('catalog.index', $data);
     }

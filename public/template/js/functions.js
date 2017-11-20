@@ -7,7 +7,7 @@ $(document).ready(function () {
         var productId = parseInt($(this).attr('data-id'));
         var name = $(this).attr('data-name');
         var price = parseInt($(this).attr('data-price'));
-        var img = $('#img-' + productId).attr('src');
+        var img = $('#product-img-' + productId).attr('src');
         if (img == undefined)
             img = $('img[data-u="image"]:first').attr('src');
 
@@ -64,7 +64,7 @@ $(document).ready(function () {
         insert_total_cost();
     });
 
-    $('.input-total-price').bind('change keyup', function () {
+    $('.input-total-price').bind('change keyup mouseup', function () {
         var inputTotalPrice = $(this);
         var productId = $(this).attr('data-id');
 
@@ -75,12 +75,12 @@ $(document).ready(function () {
                 var uploadAmount = parseInt(data);
                 if (uploadAmount <= inputTotalPrice.val()) {
                     inputTotalPrice.val(parseInt(uploadAmount));
-                    inputTotalPrice.tooltip({
-                        title: "Максимально доступное количество товара! К сожалению данный товар доступен в текущем количестве"
-                    }).tooltip('show');
+                    // inputTotalPrice.tooltip({
+                    //     title: "Максимально доступное количество товара! К сожалению данный товар доступен в текущем количестве"
+                    // }).tooltip('show');
                 }
                 else {
-                    inputTotalPrice.tooltip('destroy');
+                    // inputTotalPrice.tooltip('destroy');
                 }
             },
             error: function (msg) {
@@ -93,26 +93,12 @@ $(document).ready(function () {
                 amount = 1;
             }
             var price = inputTotalPrice.attr('data-price');
-            var tdTotalPrice = $('tr[data-id="' + productId + '"]').children('.total-price');
+            var tdTotalPrice = $('tr[data-id="' + productId + '"]').find('.total-price');
             tdTotalPrice.html(amount * price + " руб.");
             set_cookie_basket(productId, amount);
             insert_total_cost();
         });
     });
-
-    $('.btn-plus').click(function () {
-        var productId = $(this).attr('data-id');
-        var inputTotalPrice = $('input[data-id="' + productId + '"]');
-        inputTotalPrice.val(parseInt(inputTotalPrice.val()) + 1).change();
-    });
-
-
-    $('.btn-minus').click(function () {
-        var productId = $(this).attr('data-id');
-        var inputTotalPrice = $('input[data-id="' + productId + '"]');
-        inputTotalPrice.val(parseInt(inputTotalPrice.val()) - 1).change();
-    });
-
     /*Управление пользователями*/
     $(document).on('click', '.delete-user', function () {
         var userId = $(this).attr('data-id');
@@ -401,6 +387,10 @@ $(document).ready(function () {
         });
     });
 
+    $('#form-sort select').change(function () {
+        $('#form-sort').submit();
+    });
+
     $('#country').select2();
     $('#region').select2();
     $('#city').select2();
@@ -417,7 +407,7 @@ $(document).ready(function () {
     }
 
     function insert_total_cost() {
-        $('.total-cost').html('<span>Общая стоимость: ' + total_cost() + ' руб.</span>');
+        $('.total-cost').html(total_cost() + ' руб.');
     }
 
     function set_cookie_basket(productId, amount) {

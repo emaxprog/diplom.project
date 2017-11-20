@@ -87,6 +87,18 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label class="control-label col-md-2">Стоимость со скидкой, руб.</label>
+                    <div class="col-md-10">
+                        <input type="text" name="price" placeholder="Введите стоимость товара со скидкой" value="{{old('sale_price')}}"
+                               class="form-control">
+                        @if ($errors->has('sale_price'))
+                            <div class="alert alert-danger">
+                                <strong>{{ $errors->first('sale_price') }}</strong>
+                            </div>
+                        @endif
+                    </div>
+                </div>
+                <div class="form-group">
                     <label class="control-label col-md-2">Категория</label>
                     <div class="col-md-10">
                         <select name="category_id" class="form-control">
@@ -120,6 +132,15 @@
                     <label class="control-label col-md-2">Рекомендуемый</label>
                     <div class="col-md-10">
                         <select name="is_recommended" class="form-control">
+                            <option value="1" selected>Да</option>
+                            <option value="0">Нет</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">Популярный</label>
+                    <div class="col-md-10">
+                        <select name="is_popular" class="form-control">
                             <option value="1" selected>Да</option>
                             <option value="0">Нет</option>
                         </select>

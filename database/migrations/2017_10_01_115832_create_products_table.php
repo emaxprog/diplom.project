@@ -22,9 +22,11 @@ class CreateProductsTable extends Migration
             $table->integer('image_preview_id')->unsigned()->nullable();
             $table->text('description')->nullable();
             $table->integer('price')->unsigned();
+            $table->integer('sale_price')->unsigned()->nullable();
             $table->integer('code')->unsigned();
             $table->boolean('is_new')->default(true);
             $table->boolean('is_recommended')->default(false);
+            $table->boolean('is_popular')->default(false);
             $table->boolean('visibility')->default(true);
             $table->mediumInteger('amount')->unsigned();
 

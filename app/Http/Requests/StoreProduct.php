@@ -29,6 +29,7 @@ class StoreProduct extends FormRequest
             'slug' => 'required|string|unique:products',
             'code' => 'required|integer',
             'price' => 'required|integer',
+            'sale_price' => 'integer',
             'amount' => 'required|integer'
         ];
     }
