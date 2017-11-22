@@ -12,15 +12,15 @@
                     <label for="username" class="control-label col-md-2">Роль пользователя</label>
                     <div class="col-md-3">
                         <label><input type="radio"
-                                      name="role" value="User" {{$user->hasRole('User')?'checked':''}}>Пользователь</label>
+                                      name="role" value="User" {{$user->hasRole('user')?'checked':''}}>Пользователь</label>
                     </div>
                     <div class="col-md-3">
                         <label><input type="radio"
-                                      name="role" value="Moderator" {{$user->hasRole('Moderator')?'checked':''}}>Модератор</label>
+                                      name="role" value="Moderator" {{$user->hasRole('moderator')?'checked':''}}>Модератор</label>
                     </div>
                     <div class="col-md-3">
                         <label><input type="radio"
-                                      name="role" value="Admin" {{$user->hasRole('Admin')?'checked':''}}>Администратор</label>
+                                      name="role" value="Admin" {{$user->hasRole('admin')?'checked':''}}>Администратор</label>
                     </div>
                 </div>
                 <div class="form-group">

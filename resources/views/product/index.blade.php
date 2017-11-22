@@ -29,7 +29,7 @@
                                title="Редактировать"><i
                                         class="fa fa-edit fa-lg"></i></a></td>
                         <td>
-                            <button type="button" data-id="{{$product->id}}"
+                            <button type="button" data-id="{{$product->slug}}"
                                     class="delete delete-product btn btn-danger"><i
                                         class="fa fa-trash-o fa-lg"></i></button>
                         </td>

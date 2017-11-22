@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Country;
-use App\Region;
+use App\Models\Country;
+use App\Models\Region;
 use Illuminate\Http\Request;
 
 class LocationController extends Controller

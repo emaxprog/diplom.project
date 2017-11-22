@@ -9,7 +9,7 @@
 namespace App\Observers;
 
 
-use App\Product;
+use App\Models\Backend\Product;
 
 class ProductObserver
 {

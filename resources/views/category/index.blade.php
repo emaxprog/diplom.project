@@ -23,13 +23,13 @@
                 @foreach ($categories as $category)
                     <tr data-id="{{$category->id}}">
                         <td>{!! $category->name !!}</td>
-                        <td>{!! \App\Category::getParentCategory($category->parent_id) !!}</td>
+                        <td>{!! \App\Models\Category::getParentCategory($category->parent_id) !!}</td>
                         <td>{!! $category->weight !!}</td>
-                        <td>{!! \App\Category::getVisivilityText($category->visibility) !!}</td>
+                        <td>{!! \App\Models\Category::getVisivilityText($category->visibility) !!}</td>
                         <td><a href="{{route('category.edit',[$category])}}"
                                title="Редактировать" class="btn btn-info"><i class="fa fa-edit fa-lg"></i></a></td>
                         <td>
-                            <button type="button" class="btn btn-danger delete-category" data-id="{{$category->id}}"><i
+                            <button type="button" class="btn btn-danger delete-category" data-id="{{$category->slug}}"><i
                                         class="fa fa-trash-o fa-lg"></i></button>
                         </td>
                     </tr>
