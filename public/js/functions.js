@@ -107,7 +107,7 @@ $(document).ready(function () {
             $.ajax({
                 url: '/admin/user/' + userId,
                 type: 'DELETE',
-                data: {userd: product_id},
+                data: {userId: userId},
                 success: function () {
                     tr.remove();
                 },
@@ -166,9 +166,9 @@ $(document).ready(function () {
             $.ajax({
                 url: '/admin/product/' + product_id,
                 type: 'DELETE',
-                data: {product_id: product_id},
                 success: function () {
                     tr.remove();
+                    console.log(tr);
                 },
                 error: function (msg) {
                     console.log(msg);
