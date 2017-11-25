@@ -25,7 +25,7 @@
                         <td>{!! $category->name !!}</td>
                         <td>{!! \App\Models\Category::getParentCategory($category->parent_id) !!}</td>
                         <td>{!! $category->weight !!}</td>
-                        <td>{!! \App\Models\Category::getVisivilityText($category->visibility) !!}</td>
+                        <td>{!! \App\Models\Category::getVisibilityText($category->visibility) !!}</td>
                         <td><a href="{{route('category.edit',[$category])}}"
                                title="Редактировать" class="btn btn-info"><i class="fa fa-edit fa-lg"></i></a></td>
                         <td>

@@ -12,7 +12,7 @@ class Image extends \App\Models\Image
             $image = self::find($id);
             $url = $image->path;
             $image->delete();
-            Storage::delete($url);
+//            Storage::delete($url);
             return true;
         } catch (\Exception $exception) {
             return false;

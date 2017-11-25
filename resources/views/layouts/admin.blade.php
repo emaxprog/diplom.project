@@ -32,6 +32,7 @@
                 <li><a href="{{route('product.index')}}"><i class="fa fa-gamepad fa-lg"></i>Товары</a></li>
                 <li><a href="{{route('category.index')}}"><i class="fa fa-gamepad fa-lg"></i>Категории</a></li>
                 <li><a href="{{route('order.index')}}"><i class="fa fa-gamepad fa-lg"></i>Заказы</a></li>
+                <li><a href="{{route('afisha.index')}}"><i class="fa fa-gamepad fa-lg"></i>Афишы</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li>

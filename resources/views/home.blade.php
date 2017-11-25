@@ -1,17 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="content">
-        <div class="container">
-            @include('include/sections/slider')
-            @include('include/sections/collection')
-            @include('include/sections/new_products',['recommendedProducts' => $recommendedProducts])
-            @include('include/sections/testimonials')
-            @include('include/sections/new_products2')
-            @include('include/sections/blog')
-            @include('include/sections/quick_view')
-        </div>
-    </div>
+    @if(!empty($afisha))
+        @include('include/sections/slider',['afisha'=>$afisha])
+    @endif
+    @include('include/sections/collection')
+    @include('include/sections/new_products',['recommendedProducts' => $recommendedProducts])
+    @include('include/sections/testimonials')
+    @include('include/sections/new_products2')
+    @include('include/sections/blog')
+    @include('include/sections/quick_view')
 @endsection
 
 

@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Delivery;
+use App\Models\Delivery;
 
 class DeliveriesTableSeeder extends Seeder
 {

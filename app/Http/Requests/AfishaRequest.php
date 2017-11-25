@@ -2,10 +2,9 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Backend\Product;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreProduct extends FormRequest
+class AfishaRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,7 +13,7 @@ class StoreProduct extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->can('create', Product::class);
+        return true;
     }
 
     /**
@@ -25,11 +24,7 @@ class StoreProduct extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
-            'slug' => 'required|string|unique:products',
-            'code' => 'required|integer',
-            'price' => 'required|integer',
-            'amount' => 'required|integer'
+            //
         ];
     }
 }

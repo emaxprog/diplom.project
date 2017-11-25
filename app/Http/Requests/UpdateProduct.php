@@ -34,7 +34,6 @@ class UpdateProduct extends FormRequest
             ],
             'code' => 'required|integer',
             'price' => 'required|integer',
-            'sale_price' => 'integer',
             'amount' => 'required|integer'
         ];
     }

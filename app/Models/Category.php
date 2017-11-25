@@ -52,7 +52,7 @@ class Category extends Model
         return $this->parents()->get();
     }
 
-    public static function getVisivilityText($val)
+    public static function getVisibilityText($val)
     {
         if ($val)
             return 'Отображается';

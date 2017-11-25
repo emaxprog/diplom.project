@@ -28,8 +28,14 @@ Route::group(['prefix' => 'admin', 'middleware' => 'check.role'], function () {
     Route::post('product/manufacturer', 'Backend\ManufacturerController@store');
     Route::resource('product_attributes', 'Backend\ProductAttributeController');
     Route::resource('product', 'Backend\ProductController', ['except' => 'show']);
-    Route::post('product/{product}/upload/images', ['as'=>'product.upload.images','uses'=>'Backend\ProductController@uploadImages']);
-    Route::post('product/{product}/destroy/image', ['as'=>'product.destroy.image','uses'=>'Backend\ProductController@destroyImage']);
+    Route::post('product/{product}/upload/images', ['as' => 'product.upload.images', 'uses' => 'Backend\ProductController@uploadImages']);
+    Route::post('product/{product}/destroy/image', ['as' => 'product.destroy.image', 'uses' => 'Backend\ProductController@destroyImage']);
+
+    Route::resource('afisha', 'Backend\AfishaController', ['except' => ['create', 'show', 'destroy']]);
+    Route::post('afisha/{afisha}/upload/images', ['as' => 'afisha.upload.images', 'uses' => 'Backend\AfishaController@uploadImages']);
+    Route::post('afisha/{afisha}/destroy/image', ['as' => 'afisha.destroy.image', 'uses' => 'Backend\AfishaController@destroyImage']);
+
+
     Route::get('/', ['as' => 'admin', 'uses' => 'Backend\AdminController@index']);
 });
 
@@ -40,6 +46,9 @@ Route::post('location/cities', ['as' => 'location.cities', 'uses' => 'LocationCo
 
 Route::get('basket', ['as' => 'basket', 'uses' => 'Frontend\BasketController@index']);
 Route::group(['prefix' => 'catalog'], function () {
+    Route::get('/', ['as' => 'catalog', 'uses' => function () {
+        return redirect()->route('category', ['category' => \App\Models\Category::find(1)]);
+    }]);
     Route::get('{category}', ['as' => 'category', 'uses' => 'Frontend\CatalogController@index']);
 });
 Route::get('/', ['as' => 'home', 'uses' => 'Frontend\HomeController@index', 'middleware' => 'admin']);

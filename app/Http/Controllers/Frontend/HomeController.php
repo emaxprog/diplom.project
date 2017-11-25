@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Models\Frontend\Afisha;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Frontend\Product;
@@ -23,11 +24,12 @@ class HomeController extends Controller
         }
         $latestProducts = $product->getLatestProducts();
         $recommendedProducts = $product->getRecommendedProductsGroupByCategory();
-//        $images = Afisha::getImages();
+        $afisha = Afisha::getAfishaForHomePage();
         $data = [
             'categories' => $categories,
             'latestProducts' => $latestProducts,
             'recommendedProducts' => $recommendedProducts,
+            'afisha' => $afisha,
         ];
         return view('home', $data);
     }
