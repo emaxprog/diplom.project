@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Profile extends Model
 {
     protected $fillable = [
-        'name', 'surname', 'phone', 'address', 'postcode', 'city_id'
+        'name', 'surname', 'phone'
     ];
 
     public static function rules()
@@ -16,8 +16,6 @@ class Profile extends Model
             'name' => 'required|max:30',
             'surname' => 'required|max:30',
             'phone' => 'required|integer',
-            'address' => 'required|max:150',
-            'postcode' => 'required|integer',
         ];
     }
 
@@ -26,8 +24,8 @@ class Profile extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function city()
+    public function addresses()
     {
-        return $this->belongsTo(City::class);
+        return $this->hasMany(Address::class, 'user_id', 'user_id');
     }
 }

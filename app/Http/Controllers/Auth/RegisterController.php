@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\Address;
 use App\Models\Role;
 use App\Models\User;
 use App\Http\Controllers\Controller;
@@ -79,12 +80,16 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'surname' => $data['surname'],
             'phone' => $data['phone'],
+        ]);
+
+        $address = new Address([
             'address' => $data['address'],
             'postcode' => $data['postcode'],
             'city_id' => $data['city']
         ]);
 
         $user->profile()->save($userProfile);
+        $user->profile->addresses()->save($address);
         $user->roles()->attach(Role::where('name', 'user')->first());
 
         return $user;

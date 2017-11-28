@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Auth;
 
 use App\Models\Country;
+use App\Models\Address;
 
 class UserController extends \App\Http\Controllers\Controller
 {
@@ -61,12 +62,16 @@ class UserController extends \App\Http\Controllers\Controller
             'name' => $request->name,
             'surname' => $request->surname,
             'phone' => $request->phone,
+        ]);
+
+        $address = new Address([
             'address' => $request->address,
             'postcode' => $request->postcode,
             'city_id' => $request->city
         ]);
 
         $user->profile()->save($userProfile);
+        $user->profile->addresses()->save($address);
         $user->roles()->attach(Role::where('name', 'User')->first());
 
         return redirect()->route('user.index');

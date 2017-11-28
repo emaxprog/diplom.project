@@ -18,18 +18,12 @@ class CreateProfilesTable extends Migration
             $table->string('name', 64);
             $table->string('surname', 64);
             $table->string('phone', 16);
-            $table->string('address');
-            $table->integer('postcode')->unsigned();
-            $table->integer('city_id')->unsigned()->nullable();
             $table->integer('avatar_id')->unsigned()->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->foreign('city_id')->references('id')->on('cities')
-                ->onUpdate('cascade')
-                ->onDelete('set null');
             $table->foreign('avatar_id')->references('id')->on('cities')
                 ->onUpdate('cascade')
                 ->onDelete('set null');
