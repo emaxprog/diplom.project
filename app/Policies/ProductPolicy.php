@@ -3,7 +3,7 @@
 namespace App\Policies;
 
 use App\Models\User;
-use App\Models\Backend\Product;
+use App\Repositories\Backend\Product;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class ProductPolicy
@@ -13,8 +13,8 @@ class ProductPolicy
     /**
      * Determine whether the user can view the product.
      *
-     * @param  \App\Models\Backend\User $user
-     * @param  \App\Models\Backend\Product $product
+     * @param  \App\Repositories\Backend\User $user
+     * @param  \App\Repositories\Backend\Product $product
      * @return mixed
      */
     public function view(User $user, Product $product)
@@ -25,7 +25,7 @@ class ProductPolicy
     /**
      * Determine whether the user can create products.
      *
-     * @param  \App\Models\Backend\User $user
+     * @param  \App\Repositories\Backend\User $user
      * @return mixed
      */
     public function create(User $user)
@@ -36,8 +36,8 @@ class ProductPolicy
     /**
      * Determine whether the user can update the product.
      *
-     * @param  \App\Models\Backend\User $user
-     * @param  \App\Models\Backend\Product $product
+     * @param  \App\Repositories\Backend\User $user
+     * @param  \App\Repositories\Backend\Product $product
      * @return mixed
      */
     public function update(User $user, Product $product)
@@ -48,8 +48,8 @@ class ProductPolicy
     /**
      * Determine whether the user can delete the product.
      *
-     * @param  \App\Models\Backend\User $user
-     * @param  \App\Models\Backend\Product $product
+     * @param  \App\Repositories\Backend\User $user
+     * @param  \App\Repositories\Backend\Product $product
      * @return mixed
      */
     public function delete(User $user, Product $product)

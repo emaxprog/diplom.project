@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Models\Frontend\Afisha;
+use App\Repositories\Frontend\Afisha;
 use App\Models\Category;
 use Illuminate\Http\Request;
-use App\Models\Frontend\Product;
+use App\Repositories\Frontend\Product;
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Queue\Queue;
 

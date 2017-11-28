@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Backend;
+namespace App\Repositories\Backend;
 
 
 class ProductAttributeValue extends \App\Models\ProductAttributeValue

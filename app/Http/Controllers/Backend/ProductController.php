@@ -5,10 +5,10 @@ namespace App\Http\Controllers\Backend;
 use App\Models\Country;
 use App\Http\Requests\StoreProduct;
 use App\Http\Requests\UpdateProduct;
-use App\Models\Backend\Image;
-use App\Models\Backend\Product;
+use App\Repositories\Backend\Image;
+use App\Repositories\Backend\Product;
 use App\Models\ProductAttribute;
-use App\Models\Backend\ProductAttributeValue;
+use App\Repositories\Backend\ProductAttributeValue;
 use Illuminate\Http\Request;
 use App\Models\Manufacturer;
 

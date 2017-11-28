@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Repositories\Frontend\Afisha;
 
 class BasketController extends Controller
 {
@@ -17,8 +18,10 @@ class BasketController extends Controller
         if (isset($_COOKIE['basket'])) {
             $order = json_decode($_COOKIE['basket']);
         }
+        $afisha = Afisha::getAfishaForCartPage();
         $data = [
-            'orderProducts' => $order
+            'orderProducts' => $order,
+            'afisha' => $afisha
         ];
         return view('basket.index', $data);
     }

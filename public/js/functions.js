@@ -41,6 +41,7 @@ $(document).ready(function () {
         }
         $.cookie('basket', JSON.stringify(order), {path: '/'});
         count_products();
+        insert_total_cost();
     });
 
 

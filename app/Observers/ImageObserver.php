@@ -8,7 +8,7 @@
 
 namespace App\Observers;
 
-use App\Models\Backend\Image;
+use App\Repositories\Backend\Image;
 use Illuminate\Support\Facades\Storage;
 
 

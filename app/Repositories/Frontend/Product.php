@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Frontend;
+namespace App\Repositories\Frontend;
 
 use PDO;
 use App\Models\Category;
@@ -44,7 +44,7 @@ class Product extends \App\Models\Product
     public function getRecommendedProductsGroupByCategory()
     {
         $result = [];
-        $categories = Category::with('products')->get();
+        $categories = Category::with('products')->where('parent_id', '!=', 0)->get();
 
         foreach ($categories as $category) {
             $result[$category->id] = $category;

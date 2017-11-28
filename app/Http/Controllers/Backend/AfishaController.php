@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Models\Backend\Afisha;
-use App\Models\Backend\Image;
+use App\Repositories\Backend\Afisha;
+use App\Repositories\Backend\Image;
 use Illuminate\Http\Request;
 
 class AfishaController extends \App\Http\Controllers\Controller

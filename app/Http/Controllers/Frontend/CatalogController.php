@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 
-use App\Models\Frontend\Product;
+use App\Repositories\Frontend\Product;
 use App\Models\Category;
 use App\Models\Manufacturer;
 use Illuminate\Http\Request;

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Models\Order;
 use App\Models\OrderStatus;
-use App\Models\Backend\Product;
+use App\Repositories\Backend\Product;
 use Illuminate\Http\Request;
 use Auth;
 use App\Models\Delivery;

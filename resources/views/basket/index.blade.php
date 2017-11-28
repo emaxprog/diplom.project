@@ -1,13 +1,13 @@
 @extends('layouts.app')
 @section('content')
     <!-- pages-title-start -->
-    <section class="contact-img-area">
+    <section class="contact-img-area" @if($afisha) style="background-image: url({{$afisha->path}});" @endif>
         <div class="container">
             <div class="row">
                 <div class="col-md-12 text-center">
                     <div class="con-text">
                         <h2 class="page-title">Shopping Cart</h2>
-                        <p><a href="#">Home</a> | Shopping Cart</p>
+                        <p><a href="{{route('home')}}">Home</a> | Shopping Cart</p>
                     </div>
                 </div>
             </div>

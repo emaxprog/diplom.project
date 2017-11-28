@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Backend;
+namespace App\Repositories\Backend;
 
 use PDO;
 use Illuminate\Support\Facades\DB;
