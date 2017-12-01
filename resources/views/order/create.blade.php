@@ -74,23 +74,23 @@
                     </div>
                 </div>
             @else
-                {{--<div class="row">--}}
-                {{--<div class="col-md-12">--}}
-                {{--<div class="coupon-accordion res">--}}
-                {{--<h3>Have a coupon? <span id="showcoupon">Click here to enter your code</span></h3>--}}
-                {{--<div id="checkout_coupon" class="coupon-checkout-content tnm">--}}
-                {{--<div class="coupon-info">--}}
-                {{--<form action="#">--}}
-                {{--<p class="checkout-coupon res">--}}
-                {{--<input type="text" placeholder="Coupon code"/>--}}
-                {{--<input type="submit" value="Apply Coupon"/>--}}
-                {{--</p>--}}
-                {{--</form>--}}
-                {{--</div>--}}
-                {{--</div>--}}
-                {{--</div>--}}
-                {{--</div>--}}
-                {{--</div>--}}
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="coupon-accordion res">
+                            <h3>Have a coupon? <span id="showcoupon">Click here to enter your code</span></h3>
+                            <div id="checkout_coupon" class="coupon-checkout-content tnm">
+                                <div class="coupon-info">
+                                    <form action="#">
+                                        <p class="checkout-coupon res">
+                                            <input type="text" placeholder="Coupon code"/>
+                                            <input type="submit" value="Apply Coupon"/>
+                                        </p>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-md-7 col-sm-12">
                         <div class="text">
@@ -98,15 +98,15 @@
                             <ul class="nav nav-tabs" role="tablist">
                                 <li role="presentation" class="active ano complete">
                                     <a href="#home" aria-controls="home" role="tab" data-toggle="tab" id="home-tab"></a>
-                                    <span>Старт</span>
+                                    <span>Address</span>
                                 </li>
-                                <li role="presentation" class="ano">
-                                    <a href="#profile"></a>
-                                    <span>Оплата</span>
+                                <li role="presentation" class="ano ">
+                                    <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab" id="payment-tab"></a>
+                                    <span>Payment</span>
                                 </li>
                                 <li role="presentation" class="ano la">
-                                    <a href="#message"></a>
-                                    <span>Финиш</span>
+                                    <a href="#message" aria-controls="message" role="tab" data-toggle="tab" id="complete-tab"></a>
+                                    <span>Complete</span>
                                 </li>
                             </ul>
                             <form action="{{route('order.store')}}" method="post">
@@ -114,6 +114,7 @@
                             <!-- Tab panes -->
                                 <div class="tab-content">
                                     <div role="tabpanel" class="tab-pane active" id="home">
+
                                         <div class="row">
                                             <div class="checkbox-form">
                                                 <div class="col-md-12">
@@ -122,7 +123,7 @@
                                                 <div class="col-md-6">
                                                     <div class="di-na bs">
                                                         <label class="l-contact">
-                                                            Имя
+                                                            First Name
                                                             <em>*</em>
                                                         </label>
                                                         <input class="form-control" type="text" required="" name="name"
@@ -132,7 +133,7 @@
                                                 <div class="col-md-6">
                                                     <div class="di-na bs">
                                                         <label class="l-contact">
-                                                            Фамилия
+                                                            Last Name
                                                             <em>*</em>
                                                         </label>
                                                         <input class="form-control" type="text" required="" name="name"
@@ -142,7 +143,7 @@
                                                 <div class="col-md-6">
                                                     <div class="di-na bs">
                                                         <label class="l-contact">
-                                                            Email
+                                                            Email Address
                                                             <em>*</em>
                                                         </label>
                                                         <input class="form-control" type="email" required="" name="name"
@@ -152,7 +153,7 @@
                                                 <div class="col-md-6">
                                                     <div class="di-na bs">
                                                         <label class="l-contact">
-                                                            Телефон
+                                                            Phone
                                                             <em>*</em>
                                                         </label>
                                                         <input class="form-control" type="tel" required="" name="name"
@@ -162,25 +163,21 @@
 
                                             </div>
                                         </div>
-                                        <?php $i = 1;?>
                                         @foreach($user->profile->addresses as $address)
+                                            <?php $i=0;?>
                                             <div class="row">
-                                                <div class="col-md-12">
-                                                    <h3 class="checkbox9">Адреса клиента</h3>
-                                                </div>
                                                 <div class="checkbox-form">
                                                     <div id="showcoupon2" class="col-md-1">
                                                         <input id="address-{{$address->id}}" class="input-checkbox"
-                                                               type="radio" name="address_id" value="{{$address->id}}"
-                                                               @if($i==1) checked @endif>
+                                                               type="radio" name="address_id" value="{{$address->id}}" @if($i==0) checked @endif>
                                                     </div>
                                                     <div class="col-md-11">
-                                                        <label for="address-{{$address->id}}"><h3>Адрес №{{$i}}</h3></label>
+                                                        <label for="address-{{$address->id}}"><h3>Адрес</h3></label>
                                                     </div>
                                                     <div class="col-md-12">
                                                         <div class="country-select">
                                                             <label class="l-contact">
-                                                                Страна
+                                                                Country
                                                                 <em>*</em>
                                                             </label>
                                                             <select class="email s-email s-wid" disabled>
@@ -190,7 +187,7 @@
                                                     </div>
                                                     <div class="col-md-12">
                                                         <label class="l-contact">
-                                                            Адрес
+                                                            Address
                                                             <em>*</em>
                                                         </label>
                                                         <div class="di-na bs">
@@ -202,7 +199,7 @@
                                                     <div class="col-md-12">
                                                         <div class="country-select">
                                                             <label class="l-contact">
-                                                                Область, край
+                                                                District
                                                                 <em>*</em>
                                                             </label>
                                                             <select class="email s-email s-wid" disabled>
@@ -212,7 +209,7 @@
                                                     </div>
                                                     <div class="col-md-6">
                                                         <label class="l-contact">
-                                                            Город
+                                                            Town / City
                                                             <em>*</em>
                                                         </label>
                                                         <div class="di-na bs">
@@ -224,7 +221,7 @@
                                                     <div class="col-md-6">
                                                         <div class="di-na bs">
                                                             <label class="l-contact">
-                                                                Почтовый индекс
+                                                                Postcode / ZIP
                                                                 <em>*</em>
                                                             </label>
                                                             <input class="form-control" type="text" required=""
@@ -250,11 +247,10 @@
                                                     <div class="col-md-12">
                                                         <div class="country-select">
                                                             <label class="l-contact">
-                                                                Страна
+                                                                Country
                                                                 <em>*</em>
                                                             </label>
-                                                            <select name="country" class="email s-email s-wid"
-                                                                    id="country">
+                                                            <select name="country" class="email s-email s-wid" id="country">
                                                                 <option value="0">Выбрать...</option>
                                                                 @foreach($countries as $country)
                                                                     <option value="{{$country->id}}">{!! $country->name !!}</option>
@@ -264,7 +260,7 @@
                                                     </div>
                                                     <div class="col-md-12">
                                                         <label class="l-contact">
-                                                            Адрес
+                                                            Address
                                                             <em>*</em>
                                                         </label>
                                                         <div class="di-na bs">
@@ -281,11 +277,10 @@
                                                     </div>
                                                     <div class="col-md-12">
                                                         <label class="l-contact">
-                                                            Город
+                                                            Town / City
                                                             <em>*</em>
                                                         </label>
-                                                        <select name="city" class="email s-email s-wid depdrop"
-                                                                id="city"
+                                                        <select name="city" class="email s-email s-wid depdrop" id="city"
                                                                 data-depends="[&quot;country&quot;,&quot;region&quot;]"
                                                                 data-url="{{route('location.cities')}}"
                                                                 data-placeholder="Выбрать...">
@@ -294,7 +289,7 @@
                                                     <div class="col-md-6">
                                                         <div class="country-select">
                                                             <label class="l-contact">
-                                                                Область, край
+                                                                District
                                                                 <em>*</em>
                                                             </label>
                                                             <select name="region" class="email s-email s-wid depdrop"
@@ -308,11 +303,10 @@
                                                     <div class="col-md-6">
                                                         <div class="di-na bs">
                                                             <label class="l-contact">
-                                                                Почтовый индекс
+                                                                Postcode / ZIP
                                                                 <em>*</em>
                                                             </label>
-                                                            <input type="text" name="postcode"
-                                                                   placeholder="Пример:346422"
+                                                            <input type="text" name="postcode" placeholder="Пример:346422"
                                                                    class="form-control"
                                                                    value="{{old('postcode')}}" id="postcode">
                                                             @if ($errors->has('postcode'))
@@ -342,6 +336,15 @@
                                                               name="comment"></textarea>
                                                 </div>
                                             </div>
+                                            <div class="col-md-12 text-center">
+                                                <p class="checkout-coupon">
+                                                    <input type="submit" value="CONTINUE" onclick="return false;">
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane" id="profile">
+                                        <div class="row">
                                             <div class="col-md-12">
                                                 <div class="top-check-text">
                                                     <div class="check-down">
@@ -387,6 +390,11 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div role="tabpanel" class="tab-pane" id="message">
+                                        <div class="last-check">
+                                            <h3 class="checkbox9">complete</h3>
+                                        </div>
+                                    </div>
                                 </div>
                             </form>
                         </div>
@@ -395,7 +403,7 @@
                     <div class="col-md-5 col-sm-12">
                         <div class="ro-checkout-summary">
                             <div class="ro-title">
-                                <h3 class="checkbox9">Информация о заказе</h3>
+                                <h3 class="checkbox9">ORDER SUMMARY</h3>
                             </div>
                             <div class="ro-body">
                                 @foreach ($orderProducts as $product)
@@ -428,7 +436,7 @@
                             <div class="ro-footer">
                                 <div>
                                     <p>
-                                        Стоимость товаров
+                                        Subtotal
                                         <span>
                                             <span class="amount total-cost">{{$product->price*$product->amount}}
                                                 руб.</span>
@@ -448,7 +456,7 @@
                                 </div>
                                 <div class="order-total">
                                     <p>
-                                        Общая стоимость
+                                        Total
                                         <span>
                                             <strong>
                                                 <span class="amount total-cost">{{$product->price*$product->amount}}

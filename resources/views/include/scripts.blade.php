@@ -28,8 +28,6 @@
 
 <script rel="script" type="text/javascript" src="/js/scripts.min.js"></script>
 
-<script src="/card-master/dist/card.js"></script>
-
 <script rel="script" type="text/javascript" src="/js/functions.js"></script>
 
 

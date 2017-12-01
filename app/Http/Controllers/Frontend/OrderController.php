@@ -90,8 +90,6 @@ class OrderController extends \App\Http\Controllers\Controller
             $product->save();
         }
         $totalCost += Delivery::find($request->delivery)->price;
-        $countries = Country::all();
-        $deliveries = Delivery::all();
         $payments = Payment::all();
         $data = [
             'address'=>$order->address,
