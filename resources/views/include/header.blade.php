@@ -15,7 +15,8 @@
                 <div class="col-md-6 col-sm-8">
                     <div class="right-header">
                         <ul>
-                            <li><a href="{{route('basket')}}"><i class="fa fa-shopping-cart"></i>Моя корзина</a></li>
+                            <li><a href="{{route('cart.index')}}"><i class="fa fa-shopping-basket"></i>Моя корзина</a>
+                            </li>
                             <li><a href="wishlist.html"><i class="fa fa-heart"></i>My wishlist</a></li>
                             @if(Auth::guest())
                                 <li>
@@ -79,7 +80,9 @@
                                                         <span>{{$category->name}}</span>
                                                         <ul>
                                                             @foreach($category->subcategories as $subcategory)
-                                                                <li><a href="{{route('category',$subcategory)}}">{{$subcategory->name}}</a></li>
+                                                                <li>
+                                                                    <a href="{{route('category',$subcategory)}}">{{$subcategory->name}}</a>
+                                                                </li>
                                                             @endforeach
                                                         </ul>
                                                     </li>
@@ -119,7 +122,7 @@
                                         <button type="submit"><i class="pe-7s-search"></i></button>
                                     </form>
                                 </li>
-                                <li><a href="{{route('basket')}}"><i class="fa fa-shopping-cart fa-lg"></i><span
+                                <li><a href="{{route('cart.index')}}"><i class="fa fa-shopping-basket fa-lg"></i><span
                                                 class="color1 baskets-counter"></span></a>
                                     <ul class="drop-cart">
                                         <li class="total-amount clearfix">
@@ -128,7 +131,13 @@
                                         </li>
                                         <li>
                                             <div class="goto text-center">
-                                                <a href="{{route('basket')}}"><strong>Перейти в корзину &nbsp;<i
+                                                <span data-url="{{route('cart.destroy')}}" id="clear-cart"><strong>Очистить корзину &nbsp;<i
+                                                                class="fa fa-trash"></i></strong></span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="goto text-center">
+                                                <a href="{{route('cart.index')}}"><strong>Перейти в корзину &nbsp;<i
                                                                 class="pe-7s-angle-right"></i></strong></a>
                                             </div>
                                         </li>

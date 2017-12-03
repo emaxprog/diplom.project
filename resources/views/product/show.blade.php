@@ -74,8 +74,9 @@
                                 </div>
                             </div>
                             <div class="pro-img-tab-slider indicator-style2">
-                                <div class="item"><a href="#image-1" data-toggle="tab"><img src="{{$product->imagePreview->path}}"
-                                                                                            alt=""/></a></div>
+                                <div class="item"><a href="#image-1" data-toggle="tab"><img
+                                                src="{{$product->imagePreview->path}}"
+                                                alt=""/></a></div>
                                 <div class="item"><a href="#image-2" data-toggle="tab"><img src="img/products/13.jpg"
                                                                                             alt=""/></a></div>
                                 <div class="item"><a href="#image-3" data-toggle="tab"><img src="img/products/14.jpg"
@@ -120,8 +121,10 @@
                                                 <label>Quantity:</label>
                                                 <div class="quantity">
                                                     <div class="cart-plus-minus">
-                                                        <input type="text" value="0" name="qtybutton"
-                                                               class="cart-plus-minus-box">
+                                                        <input type="text" value="1" name="qtybutton"
+                                                               class="cart-plus-minus-box input-qty"
+                                                               data-id="{{$product->id}}"
+                                                               data-url="{{route('cart.qty',$product->id)}}">
                                                     </div>
                                                 </div>
                                             </div>

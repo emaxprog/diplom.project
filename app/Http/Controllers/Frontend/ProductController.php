@@ -26,9 +26,4 @@ class ProductController extends Controller
         ];
         return view('product.show', $data);
     }
-
-    public function uploadAmount($id)
-    {
-        return Product::find($id)->amount;
-    }
 }

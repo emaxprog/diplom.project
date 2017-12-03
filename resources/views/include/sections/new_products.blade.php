@@ -37,7 +37,8 @@
                                                 <span>sale</span>
                                             </div>
                                             <a href="{{route('product.show',$product)}}">
-                                                <img src="{{$product->imagePreview->path}}" alt="Product Title" id="img-{{$product->id}}"/>
+                                                <img src="{{$product->imagePreview->path}}" alt="Product Title"
+                                                     id="img-{{$product->id}}"/>
                                                 <img class="secondary-image" alt="Product Title"
                                                      src="img/products/2.jpg">
                                             </a>
@@ -66,15 +67,17 @@
                                             <a title="" data-placement="top" data-toggle="tooltip" href="#"
                                                data-original-title="Compare"><i class="fa fa-retweet"></i></a>
                                             {{--<a href="#" data-toggle="tooltip" data-placement="top"--}}
-                                               {{--title="Add To Cart"><i--}}
-                                                        {{--class="fa fa-shopping-cart"></i></a>--}}
+                                            {{--title="Add To Cart"><i--}}
+                                            {{--class="fa fa-shopping-cart"></i></a>--}}
                                             <a class="buy-btn" onclick="return false"
                                                title="Add To Cart"
                                                data-toggle="tooltip"
                                                data-placement="top"
                                                data-id="{{$product->id}}"
                                                data-name="{{$product->name}}"
-                                               data-price="{{$product->price}}"><i class="fa fa-shopping-cart"></i>
+                                               data-price="{{$product->price}}"
+                                               data-url="{{route('product.show',$product)}}">
+                                                <i class="fa fa-shopping-cart"></i>
                                             </a>
                                         </div>
                                     </div>
@@ -82,7 +85,8 @@
                                         <div class="single-product margin-top">
                                             <div class="product-img">
                                                 <a href="#">
-                                                    <img src="{{$product->imagePreview->path}}" alt="Product Title" id="img-{{$product->id}}"/>
+                                                    <img src="{{$product->imagePreview->path}}" alt="Product Title"
+                                                         id="img-{{$product->id}}"/>
                                                     <img class="secondary-image" alt="Product Title"
                                                          src="img/products/8.jpg">
                                                 </a>
@@ -110,15 +114,17 @@
                                                 <a title="" data-placement="top" data-toggle="tooltip" href="#"
                                                    data-original-title="Compare"><i class="fa fa-retweet"></i></a>
                                                 {{--<a href="#" data-toggle="tooltip" data-placement="top"--}}
-                                                   {{--title="Add To Cart"><i--}}
-                                                            {{--class="fa fa-shopping-cart"></i></a>--}}
+                                                {{--title="Add To Cart"><i--}}
+                                                {{--class="fa fa-shopping-cart"></i></a>--}}
                                                 <a class="buy-btn" onclick="return false"
                                                    title="Add To Cart"
                                                    data-toggle="tooltip"
                                                    data-placement="top"
                                                    data-id="{{$product->id}}"
                                                    data-name="{{$product->name}}"
-                                                   data-price="{{$product->price}}"><i class="fa fa-shopping-cart"></i>
+                                                   data-price="{{$product->price}}"
+                                                   data-url="{{route('product.show',$product)}}">
+                                                    <i class="fa fa-shopping-cart"></i>
                                                 </a>
                                             </div>
                                         </div>
@@ -148,7 +154,8 @@
                                             <span>sale</span>
                                         </div>
                                         <a href="#">
-                                            <img src="{{$product->imagePreview->path}}" alt="Product Title" id="product-img-{{$product->id}}"/>
+                                            <img src="{{$product->imagePreview->path}}" alt="Product Title"
+                                                 id="product-img-{{$product->id}}"/>
                                             <img class="secondary-image" alt="Product Title"
                                                  src="img/products/2.jpg">
                                         </a>
@@ -176,15 +183,17 @@
                                         <a title="" data-placement="top" data-toggle="tooltip" href="#"
                                            data-original-title="Compare"><i class="fa fa-retweet"></i></a>
                                         {{--<a href="#" data-toggle="tooltip" data-placement="top"--}}
-                                           {{--title="Add To Cart"><i--}}
-                                                    {{--class="fa fa-shopping-cart"></i></a>--}}
+                                        {{--title="Add To Cart"><i--}}
+                                        {{--class="fa fa-shopping-cart"></i></a>--}}
                                         <a class="buy-btn" onclick="return false"
                                            title="Add To Cart"
                                            data-toggle="tooltip"
                                            data-placement="top"
                                            data-id="{{$product->id}}"
                                            data-name="{{$product->name}}"
-                                           data-price="{{$product->price}}"><i class="fa fa-shopping-cart"></i>
+                                           data-price="{{$product->price}}"
+                                           data-url="{{route('product.show',$product)}}">
+                                            <i class="fa fa-shopping-cart"></i>
                                         </a>
                                     </div>
                                 </div>
@@ -193,7 +202,8 @@
                                     <div class="single-product margin-top">
                                         <div class="product-img">
                                             <a href="#">
-                                                <img src="{{$product->imagePreview->path}}" alt="Product Title" id="img-{{$product->id}}"/>
+                                                <img src="{{$product->imagePreview->path}}" alt="Product Title"
+                                                     id="img-{{$product->id}}"/>
                                                 <img class="secondary-image" alt="Product Title"
                                                      src="img/products/8.jpg">
                                             </a>
@@ -221,15 +231,17 @@
                                             <a title="" data-placement="top" data-toggle="tooltip" href="#"
                                                data-original-title="Compare"><i class="fa fa-retweet"></i></a>
                                             {{--<a href="#" data-toggle="tooltip" data-placement="top"--}}
-                                               {{--title="Add To Cart"><i--}}
-                                                        {{--class="fa fa-shopping-cart"></i></a>--}}
+                                            {{--title="Add To Cart"><i--}}
+                                            {{--class="fa fa-shopping-cart"></i></a>--}}
                                             <a class="buy-btn" onclick="return false"
                                                title="Add To Cart"
                                                data-toggle="tooltip"
                                                data-placement="top"
                                                data-id="{{$product->id}}"
                                                data-name="{{$product->name}}"
-                                               data-price="{{$product->price}}"><i class="fa fa-shopping-cart"></i>
+                                               data-price="{{$product->price}}"
+                                               data-url="{{route('product.show',$product)}}">
+                                                <i class="fa fa-shopping-cart"></i>
                                             </a>
                                         </div>
                                     </div>
