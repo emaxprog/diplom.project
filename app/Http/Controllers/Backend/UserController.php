@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Models\City;
 use App\Models\Profile;
+use App\Models\Region;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -101,14 +103,8 @@ class UserController extends \App\Http\Controllers\Controller
     public function edit($id)
     {
         $user = User::find($id);
-        $countries = Country::all();
-        $regions = $user->profile->city->region->country->regions;
-        $cities = $user->profile->city->region->cities;
         $data = [
             'user' => $user,
-            'countries' => $countries,
-            'regions' => $regions,
-            'cities' => $cities
         ];
 
         return view('user.edit', $data);
@@ -142,9 +138,6 @@ class UserController extends \App\Http\Controllers\Controller
             'name' => $request->name,
             'surname' => $request->surname,
             'phone' => $request->phone,
-            'city_id' => $request->city,
-            'postcode' => $request->postcode,
-            'address' => $request->address,
         ]);
 
         return redirect()->route('user.index');

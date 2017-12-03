@@ -28,31 +28,41 @@
                     <td>{{$user->profile->phone}}</td>
                 </tr>
                 <tr>
-                    <td>Страна</td>
-                    <td>{{$user->profile->city->region->country->name}}</td>
-                </tr>
-                <tr>
-                    <td>Регион</td>
-                    <td>{{$user->profile->city->region->name}}</td>
-                </tr>
-                <tr>
-                    <td>Город</td>
-                    <td>{{$user->profile->city->name}}</td>
-                </tr>
-                <tr>
-                    <td>Почтовый индекс</td>
-                    <td>{{$user->profile->postcode}}</td>
-                </tr>
-                <tr>
-                    <td>Адрес</td>
-                    <td>{{$user->profile->address}}</td>
-                </tr>
-                <tr>
                     <td>Зарегистрирован</td>
                     <td>{{$user->created_at}}</td>
                 </tr>
                 </tbody>
             </table>
+
+            <h3>Адреса</h3>
+            <?php $i = 0; ?>
+            @foreach($user->profile->addresses as $address)
+                <h4>Адрес № <?= ++$i; ?></h4>
+                <table class="table table-striped">
+                    <tbody>
+                    <tr>
+                        <td>Страна</td>
+                        <td>{{$address->city->region->country->name}}</td>
+                    </tr>
+                    <tr>
+                        <td>Регион</td>
+                        <td>{{$address->city->region->name}}</td>
+                    </tr>
+                    <tr>
+                        <td>Город</td>
+                        <td>{{$address->city->name}}</td>
+                    </tr>
+                    <tr>
+                        <td>Почтовый индекс</td>
+                        <td>{{$address->postcode}}</td>
+                    </tr>
+                    <tr>
+                        <td>Адрес</td>
+                        <td>{{$address->address}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            @endforeach
             <a href="{{route('user.index')}}" class="btn-back btn btn-primary"><i class="fa fa-arrow-left"></i>
                 Назад</a>
         </div>

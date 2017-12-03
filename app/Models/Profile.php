@@ -26,6 +26,6 @@ class Profile extends Model
 
     public function addresses()
     {
-        return $this->hasMany(Address::class, 'user_id', 'user_id');
+        return $this->hasMany(Address::class,'user_id','user_id');
     }
 }
