@@ -8,27 +8,31 @@
                 <tbody>
                 <tr>
                     <td>Имя клиента</td>
-                    <td>{!! $user->name !!}</td>
+                    <td>{!! $order->user->profile->name !!} {!! $order->user->profile->surname !!}</td>
                 </tr>
                 <tr>
                     <td>Телефон клиента</td>
-                    <td>{!! $user->phone !!}</td>
+                    <td>{!! $order->user->profile->phone !!}</td>
                 </tr>
                 <tr>
-                    <td>Страна клиента</td>
-                    <td>{!! $user->city->region->country->name !!}</td>
+                    <td>Страна доставки</td>
+                    <td>{!! $order->address->city->region->country->name !!}</td>
                 </tr>
                 <tr>
-                    <td>Регион клиента</td>
-                    <td>{!! $user->city->region->name !!}</td>
+                    <td>Регион доставки</td>
+                    <td>{!! $order->address->city->region->name !!}</td>
                 </tr>
                 <tr>
-                    <td>Город клиента</td>
-                    <td>{!! $user->city->name !!}</td>
+                    <td>Город доставки</td>
+                    <td>{!! $order->address->city->name !!}</td>
                 </tr>
                 <tr>
-                    <td>Адрес клиента</td>
-                    <td>{!! $user->address !!}</td>
+                    <td>Почтовый индекс</td>
+                    <td>{!! $order->address->postcode !!}</td>
+                </tr>
+                <tr>
+                    <td>Адрес доставки</td>
+                    <td>{!! $order->address->address !!}</td>
                 </tr>
                 </tbody>
             </table>
