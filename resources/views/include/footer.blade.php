@@ -121,7 +121,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 text-center">
-                    <p>&copy; 2016 Devitems. All Rights Reserved.</p>
+                    <p>&copy; 2017 Em Alexandr. All Rights Reserved.</p>
                 </div>
             </div>
         </div>

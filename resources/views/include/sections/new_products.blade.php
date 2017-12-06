@@ -44,7 +44,7 @@
                                             </a>
                                         </div>
                                         <div class="product-dsc">
-                                            <h3><a href="#">{{$product->name}}</a></h3>
+                                            <h3><a href="{{route('product.show',$product)}}">{{$product->name}}</a></h3>
                                             <div class="star-price">
                                                 <span class="price-left">{{$product->price}} руб.</span>
                                                 <span class="star-right">
@@ -57,10 +57,8 @@
                                             </div>
                                         </div>
                                         <div class="actions-btn">
-                                            <a href="{{route('product.show',$product)}}"
-                                               data-placement="top" data-target="#quick-view"
-                                               data-trigger="hover"
-                                               data-toggle="modal" data-original-title="Quick View"><i
+                                            <a href="{{route('product.show',$product)}}" data-placement="top"
+                                               data-trigger="hover"><i
                                                         class="fa fa-eye"></i></a>
                                             <a data-placement="top" data-toggle="tooltip" href="#"
                                                data-original-title="Add To Wishlist"><i class="fa fa-heart"></i></a>
@@ -84,7 +82,7 @@
                                     @else
                                         <div class="single-product margin-top">
                                             <div class="product-img">
-                                                <a href="#">
+                                                <a href="{{route('product.show',$product)}}">
                                                     <img src="{{$product->imagePreview->path}}" alt="Product Title"
                                                          id="img-{{$product->id}}"/>
                                                     <img class="secondary-image" alt="Product Title"
@@ -105,9 +103,8 @@
                                                 </div>
                                             </div>
                                             <div class="actions-btn">
-                                                <a href="#" data-placement="top" data-target="#quick-view"
-                                                   data-trigger="hover"
-                                                   data-toggle="modal" data-original-title="Quick View"><i
+                                                <a href="{{route('product.show',$product)}}" data-placement="top"
+                                                   data-trigger="hover"><i
                                                             class="fa fa-eye"></i></a>
                                                 <a data-placement="top" data-toggle="tooltip" href="#"
                                                    data-original-title="Add To Wishlist"><i class="fa fa-heart"></i></a>
@@ -174,9 +171,8 @@
                                         </div>
                                     </div>
                                     <div class="actions-btn">
-                                        <a href="#" data-placement="top" data-target="#quick-view"
-                                           data-trigger="hover"
-                                           data-toggle="modal" data-original-title="Quick View"><i
+                                        <a href="{{route('product.show',$product)}}" data-placement="top"
+                                           data-trigger="hover"><i
                                                     class="fa fa-eye"></i></a>
                                         <a data-placement="top" data-toggle="tooltip" href="#"
                                            data-original-title="Add To Wishlist"><i class="fa fa-heart"></i></a>
@@ -222,9 +218,8 @@
                                             </div>
                                         </div>
                                         <div class="actions-btn">
-                                            <a href="#" data-placement="top" data-target="#quick-view"
-                                               data-trigger="hover"
-                                               data-toggle="modal" data-original-title="Quick View"><i
+                                            <a href="{{route('product.show',$product)}}" data-placement="top"
+                                               data-trigger="hover"><i
                                                         class="fa fa-eye"></i></a>
                                             <a data-placement="top" data-toggle="tooltip" href="#"
                                                data-original-title="Add To Wishlist"><i class="fa fa-heart"></i></a>

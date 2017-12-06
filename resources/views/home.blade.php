@@ -9,7 +9,6 @@
     @include('include/sections/testimonials')
     @include('include/sections/new_products2')
     @include('include/sections/blog')
-    @include('include/sections/quick_view')
 @endsection
 
 

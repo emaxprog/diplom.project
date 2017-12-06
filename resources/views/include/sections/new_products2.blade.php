@@ -40,10 +40,8 @@
                                 </div>
                             </div>
                             <div class="actions-btn">
-                                <a href="{{route('product.show',$product)}}"
-                                   data-placement="top" data-target="#quick-view"
-                                   data-trigger="hover"
-                                   data-toggle="modal" data-original-title="Quick View"><i
+                                <a href="{{route('product.show',$product)}}" data-placement="top"
+                                   data-trigger="hover"><i
                                             class="fa fa-eye"></i></a>
                                 <a data-placement="top" data-toggle="tooltip" href="#"
                                    data-original-title="Add To Wishlist"><i class="fa fa-heart"></i></a>
