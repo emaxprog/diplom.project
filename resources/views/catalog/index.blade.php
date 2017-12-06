@@ -225,10 +225,8 @@
                                                                 </div>
                                                             </div>
                                                             <div class="actions-btn">
-                                                                <a href="#" data-placement="top"
-                                                                   data-target="#quick-view"
-                                                                   data-trigger="hover"
-                                                                   data-toggle="modal" data-original-title="Quick View"><i
+                                                                <a href="{{route('product.show',$product)}}" data-placement="top"
+                                                                   data-trigger="hover"><i
                                                                             class="fa fa-eye"></i></a>
                                                                 <a data-placement="top" data-toggle="tooltip" href="#"
                                                                    data-original-title="Add To Wishlist"><i
@@ -276,9 +274,8 @@
                                                                             id="product-img-{{$product->id}}"/></a>
                                                             </div>
                                                             <div class="actions-btn">
-                                                                <a data-original-title="Quick View" data-toggle="modal"
-                                                                   data-trigger="hover" data-target="#quick-view"
-                                                                   data-placement="top" href="">
+                                                                <a href="{{route('product.show',$product)}}" data-placement="top"
+                                                                   data-trigger="hover">
                                                                     <i class="fa fa-eye"></i>
                                                                 </a>
                                                             </div>
@@ -309,7 +306,7 @@
                                                                 </a>
                                                             </div>
                                                             <div class="tb-product-btn">
-                                                                <a href="#">
+                                                                <a href="{{route('product.show',$product)}}">
                                                                     <i class="fa fa-eye"></i>
                                                                 </a>
                                                                 <a href="#">
