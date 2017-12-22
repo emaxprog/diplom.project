@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Models\Address;
 use App\Models\Order;
 use App\Repositories\Frontend\Product;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Delivery;
@@ -22,14 +23,6 @@ class OrderController extends \App\Http\Controllers\Controller
      */
     public function create()
     {
-        if (!isset($_COOKIE['basket'])) {
-            return redirect()->route('home');
-        }
-
-        $order = [];
-        if (isset($_COOKIE['basket'])) {
-            $order = json_decode($_COOKIE['basket']);
-        }
         $afisha = Afisha::getAfishaForCartPage();
         $countries = Country::all();
         $deliveries = Delivery::all();
@@ -39,7 +32,7 @@ class OrderController extends \App\Http\Controllers\Controller
             'countries' => $countries,
             'deliveries' => $deliveries,
             'payments' => $payments,
-            'orderProducts' => $order,
+            'cart' => Cart::content(),
             'afisha' => $afisha,
             'user' => $user
         ];
@@ -56,7 +49,6 @@ class OrderController extends \App\Http\Controllers\Controller
     {
         if (!Auth::check())
             return redirect()->route('order.create');
-        $orderProducts = json_decode($_COOKIE['basket']);
         $user = Auth::user();
         $order = new Order();
         if ($request->address_id == 'new') {
@@ -82,11 +74,12 @@ class OrderController extends \App\Http\Controllers\Controller
         $order->payment_id = $request->payment;
         $user->orders()->save($order);
         $totalCost = 0;
-        foreach ($orderProducts as $orderProduct) {
-            $order->products()->attach($orderProduct->productId, ['amount' => $orderProduct->amount]);
-            $totalCost += $orderProduct->price * $orderProduct->amount;
-            $product = Product::find($orderProduct->productId);
-            $product->amount -= $orderProduct->amount;
+        $cart = Cart::content();
+        foreach ($cart as $orderProduct) {
+            $order->products()->attach($orderProduct->id, ['amount' => $orderProduct->qty]);
+            $totalCost += $orderProduct->total;
+            $product = Product::find($orderProduct->id);
+            $product->amount -= $orderProduct->qty;
             $product->save();
         }
         $totalCost += Delivery::find($request->delivery)->price;
@@ -96,10 +89,9 @@ class OrderController extends \App\Http\Controllers\Controller
             'payments'=>$payments,
             'order' => $order,
             'user' => $user,
-            'orderProducts' => $orderProducts,
+            'cart' => $cart,
             'totalCost' => $totalCost
         ];
-        setcookie('basket', '');
 
 //        event(new OrderIsConfirmed(Auth::user()));
 

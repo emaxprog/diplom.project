@@ -406,11 +406,11 @@
                                 <h3 class="checkbox9">ORDER SUMMARY</h3>
                             </div>
                             <div class="ro-body">
-                                @foreach ($orderProducts as $product)
+                                @foreach ($cart as $product)
                                     <div class="ro-item">
                                         <div class="ro-image">
                                             <a href="#">
-                                                <img src="{{$product->img}}" alt="">
+                                                <img src="{{$product->options->image}}" alt="">
                                             </a>
                                         </div>
                                         <div>
@@ -423,10 +423,10 @@
                                                 <span class="amount">{{$product->price}} руб.</span>
                                             </div>
                                             <div class="ro-quantity">
-                                                <strong class="product-quantity">× {{$product->amount}}</strong>
+                                                <strong class="product-quantity">× {{$product->qty}}</strong>
                                             </div>
                                             <div class="product-total">
-                                                <span class="amount total-price">{{$product->price*$product->amount}}
+                                                <span class="amount total-price">{{$product->total}}
                                                     руб.</span>
                                             </div>
                                         </div>
@@ -438,7 +438,7 @@
                                     <p>
                                         Subtotal
                                         <span>
-                                            <span class="amount total-cost">{{$product->price*$product->amount}}
+                                            <span class="amount total-cost">{{$product->total}}
                                                 руб.</span>
                                         </span>
                                     </p>
@@ -459,7 +459,7 @@
                                         Total
                                         <span>
                                             <strong>
-                                                <span class="amount total-cost">{{$product->price*$product->amount}}
+                                                <span class="amount total-cost">{{$product->total}}
                                                     руб.</span>
                                             </strong>
                                         </span>
@@ -470,7 +470,7 @@
                                         Payment Due
                                         <span>
                                             <strong>
-                                                <span class="amount total-cost">{{$product->price*$product->amount}}
+                                                <span class="amount total-cost">{{$product->total}}
                                                     руб.</span>
                                             </strong>
                                         </span>
