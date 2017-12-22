@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-    @if(!empty($afisha))
-        @include('include/sections/slider',['afisha'=>$afisha])
+    @if(!empty($afishaSlider))
+        @include('include/sections/slider',['afisha'=>$afishaSlider])
     @endif
     @include('include/sections/collection')
     @include('include/sections/new_products',['recommendedProducts' => $recommendedProducts])
-    @include('include/sections/testimonials')
+    @include('include/sections/testimonials',['afisha' => $afishaTestimonials])
     @include('include/sections/new_products2')
     @include('include/sections/blog')
 @endsection

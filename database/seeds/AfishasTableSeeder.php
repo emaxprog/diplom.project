@@ -19,6 +19,7 @@ class AfishasTableSeeder extends Seeder
             ['name' => 'Афиша на странице каталога', 'title' => null, 'description' => null, 'caption' => null, 'visibility' => true],
             ['name' => 'Афиша на странице товара', 'title' => null, 'description' => null, 'caption' => null, 'visibility' => true],
             ['name' => 'Афиша на странице корзины', 'title' => null, 'description' => null, 'caption' => null, 'visibility' => true],
+            ['name' => 'Афиша на странице аутентификации', 'title' => null, 'description' => null, 'caption' => null, 'visibility' => true],
             ['name' => 'Афиша в сайдбаре', 'title' => null, 'description' => null, 'caption' => null, 'visibility' => true],
         ]);
     }

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <!-- pages-title-start -->
-    <section class="contact-img-area">
+    <section class="contact-img-area" @if(isset($afisha)) style="background-image: url({{$afisha->path}});" @endif>
         <div class="container">
             <div class="row">
                 <div class="col-md-12 text-center">
@@ -127,20 +127,7 @@
                                     </ul>
                                 </div>
                             @endif
-                            <div class="ro-info-box-wrap tpl3 st">
-                                <div class="tb-image">
-                                    <img src="img/products/4.jpg" alt="">
-                                </div>
-                                <div class="tb-content">
-                                    <div class="tb-content-inner an-inner">
-                                        <h5>WOMEN'S FASHION</h5>
-                                        <h3>MID SEASON SALE</h3>
-                                        <h6>
-                                            <a href="#">SHOP NOW</a>
-                                        </h6>
-                                    </div>
-                                </div>
-                            </div>
+                            @include('include/sections/sidebar',['afisha' => $afishaSidebar])
                         </div>
                     </form>
                 </div>
@@ -214,8 +201,8 @@
                                                                     <span class="price-left">{{$product->price}}
                                                                         руб.</span>
                                                                     <span class="star-right">
-                                                                  i class="fa fa-star"></i>
-                                                                        <i class="fa fa-star"></i>phpdoc -d src/
+                                                                        <i class="fa fa-star"></i>
+                                                                        <i class="fa fa-star"></i>
                                                                         <i class="fa fa-star"></i>
                                                                         <i class="fa fa-star"></i>
                                                                         <i class="fa fa-star-half-o"></i>
@@ -321,14 +308,14 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>z
+                            </div>
                             <div class="shop-all-tab-cr shop-bottom">
                                 <div class="two-part">
                                     <div class="shop5 page">
                                         {!! $products->appends(['first_price'=>$firstPrice,'last_price'=>$lastPrice,'manufacturers'=>$selectedManufacturersIds])->render() !!}
                                     </div>
                                 </div>
-                            </div/,,,,,,,,,,,,,,,,,,,,
+                            </div>
                         </div>
                     </div>
                 </div>

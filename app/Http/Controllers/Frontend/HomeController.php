@@ -24,12 +24,14 @@ class HomeController extends Controller
         }
         $latestProducts = $product->getLatestProducts();
         $recommendedProducts = $product->getRecommendedProductsGroupByCategory();
-        $afisha = Afisha::getAfishaForHomePage();
+        $afishaSlider = Afisha::getAfishaForHomePage();
+        $afishaTestimonials = Afisha::getAfishaForTestimonials();
         $data = [
             'categories' => $categories,
             'latestProducts' => $latestProducts,
             'recommendedProducts' => $recommendedProducts,
-            'afisha' => $afisha,
+            'afishaSlider' => $afishaSlider,
+            'afishaTestimonials' => $afishaTestimonials,
         ];
         return view('home', $data);
     }

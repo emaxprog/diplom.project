@@ -1,5 +1,5 @@
 <!-- testimonials section start -->
-<section class="testimonials stripe-parallax-bg" data-parallax-speed="0.5">
+<section class="testimonials" data-parallax-speed="0.5" @if(isset($afisha)) style="background-image: url({{$afisha->path}}) !important;" @endif>
     <div class="re-testimonials">
         <div class="container">
             <div class="row">

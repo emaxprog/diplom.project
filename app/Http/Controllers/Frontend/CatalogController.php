@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 
+use App\Repositories\Frontend\Afisha;
 use App\Repositories\Frontend\Product;
 use App\Models\Category;
 use App\Models\Manufacturer;
@@ -32,6 +33,8 @@ class CatalogController extends Controller
         }
         $products = $productModel->getSelectedProducts($category->id, $showBy, $sortBy, $firstPrice, $lastPrice, $selectedManufacturersIds);
         $popularProducts = $productModel->getPopularProducts();
+        $afisha = Afisha::getAfishaForCatalogPage();
+        $afishaSidebar = Afisha::getAfishaForSidebar();
         $data = [
             'category' => $category,
             'products' => $products,
@@ -39,7 +42,9 @@ class CatalogController extends Controller
             'selectedManufacturersIds' => $selectedManufacturersIds,
             'firstPrice' => $firstPrice,
             'lastPrice' => $lastPrice,
-            'popularProducts' => $popularProducts
+            'popularProducts' => $popularProducts,
+            'afisha' => $afisha,
+            'afishaSidebar' => $afishaSidebar
         ];
         return view('catalog.index', $data);
     }
