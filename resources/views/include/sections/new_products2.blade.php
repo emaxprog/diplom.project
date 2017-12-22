@@ -22,12 +22,10 @@
                                 </div>
                                 <a href="{{route('product.show',$product)}}">
                                     <img src="{{$product->imagePreview->path}}" alt="Product Title"/>
-                                    <img class="secondary-image" alt="Product Title"
-                                         src="img/products/2.jpg">
                                 </a>
                             </div>
                             <div class="product-dsc">
-                                <h3><a href="#">{{$product->name}}</a></h3>
+                                <h3><a href="{{route('product.show',$product)}}">{{$product->name}}</a></h3>
                                 <div class="star-price">
                                     <span class="price-left">{{$product->price}} руб.</span>
                                     <span class="star-right">
@@ -40,16 +38,26 @@
                                 </div>
                             </div>
                             <div class="actions-btn">
-                                <a href="{{route('product.show',$product)}}" data-placement="top"
-                                   data-trigger="hover"><i
-                                            class="fa fa-eye"></i></a>
+                                <a href="{{route('product.show',$product)}}"
+                                   data-toggle="tooltip"
+                                   data-placement="top"
+                                   data-trigger="hover"
+                                   data-original-title="View"
+                                ><i class="fa fa-eye"></i></a>
                                 <a data-placement="top" data-toggle="tooltip" href="#"
                                    data-original-title="Add To Wishlist"><i class="fa fa-heart"></i></a>
                                 <a title="" data-placement="top" data-toggle="tooltip" href="#"
                                    data-original-title="Compare"><i class="fa fa-retweet"></i></a>
-                                <a href="#" data-toggle="tooltip" data-placement="top"
-                                   title="Add To Cart"><i
-                                            class="fa fa-shopping-cart"></i></a>
+                                <a class="buy-btn" onclick="return false"
+                                   title="Add To Cart"
+                                   data-toggle="tooltip"
+                                   data-placement="top"
+                                   data-id="{{$product->id}}"
+                                   data-name="{{$product->name}}"
+                                   data-price="{{$product->price}}"
+                                   data-url="{{route('product.show',$product)}}">
+                                    <i class="fa fa-shopping-cart"></i>
+                                </a>
                             </div>
                         </div>
                     </div>

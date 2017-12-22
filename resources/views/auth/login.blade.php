@@ -2,7 +2,7 @@
 
 @section('content')
     <!-- pages-title-start -->
-    <section class="contact-img-area" @if($afisha) style="background-image: url({{$afisha->path}});" @endif>
+    <section class="contact-img-area" @if(isset($afisha)) style="background-image: url({{$afisha->path}});" @endif>
         <div class="container">
             <div class="row">
                 <div class="col-md-12 text-center">

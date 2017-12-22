@@ -206,18 +206,16 @@
                                                                     <img src="{{$product->imagePreview->path}}"
                                                                          alt="Product Title"
                                                                          id="product-img-{{$product->id}}"/>
-                                                                    <img class="secondary-image" alt="Product Title"
-                                                                         src="img/products/2.jpg">
                                                                 </a>
                                                             </div>
                                                             <div class="product-dsc">
-                                                                <h3><a href="#">{{$product->name}}</a></h3>
+                                                                <h3><a href="{{route('product.show',$product)}}">{{$product->name}}</a></h3>
                                                                 <div class="star-price">
                                                                     <span class="price-left">{{$product->price}}
                                                                         руб.</span>
                                                                     <span class="star-right">
-                                                                        <i class="fa fa-star"></i>
-                                                                        <i class="fa fa-star"></i>
+                                                                  i class="fa fa-star"></i>
+                                                                        <i class="fa fa-star"></i>phpdoc -d src/
                                                                         <i class="fa fa-star"></i>
                                                                         <i class="fa fa-star"></i>
                                                                         <i class="fa fa-star-half-o"></i>
@@ -225,9 +223,12 @@
                                                                 </div>
                                                             </div>
                                                             <div class="actions-btn">
-                                                                <a href="{{route('product.show',$product)}}" data-placement="top"
-                                                                   data-trigger="hover"><i
-                                                                            class="fa fa-eye"></i></a>
+                                                                <a href="{{route('product.show',$product)}}"
+                                                                   data-toggle="tooltip"
+                                                                   data-placement="top"
+                                                                   data-trigger="hover"
+                                                                   data-original-title="View"
+                                                                ><i class="fa fa-eye"></i></a>
                                                                 <a data-placement="top" data-toggle="tooltip" href="#"
                                                                    data-original-title="Add To Wishlist"><i
                                                                             class="fa fa-heart"></i></a>
@@ -235,11 +236,8 @@
                                                                    href="#"
                                                                    data-original-title="Compare"><i
                                                                             class="fa fa-retweet"></i></a>
-                                                                {{--<a href="#" data-toggle="tooltip" data-placement="top"--}}
-                                                                {{--title="Add To Cart"><i--}}
-                                                                {{--class="fa fa-shopping-cart"></i></a>--}}
                                                                 <a class="buy-btn" onclick="return false"
-                                                                   title="Add To Cart"
+                                                                  title="Add To Cart"
                                                                    data-toggle="tooltip"
                                                                    data-placement="top"
                                                                    data-id="{{$product->id}}"
@@ -284,7 +282,7 @@
                                                     <div class="col-md-8 col-sm-8">
                                                         <div class="f-fix">
                                                             <div class="tb-beg">
-                                                                <a href="#">{{$product->name}}</a>
+                                                                <a href="{{route('product.show',$product)}}">{{$product->name}}</a>
                                                             </div>
                                                             <div class="tb-product-wrap-price-rating">
                                                                 <div class="tb-product-price font-noraure-3">
@@ -323,14 +321,14 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div>z
                             <div class="shop-all-tab-cr shop-bottom">
                                 <div class="two-part">
                                     <div class="shop5 page">
                                         {!! $products->appends(['first_price'=>$firstPrice,'last_price'=>$lastPrice,'manufacturers'=>$selectedManufacturersIds])->render() !!}
                                     </div>
                                 </div>
-                            </div>
+                            </div/,,,,,,,,,,,,,,,,,,,,
                         </div>
                     </div>
                 </div>
