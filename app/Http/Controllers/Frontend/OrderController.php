@@ -75,24 +75,10 @@ class OrderController extends \App\Http\Controllers\Controller
         $order->payment_id = $request->payment;
         $order->created_at = Carbon::now();
         $user->orders()->save($order);
-        $totalCost = 0;
-        $cart = Cart::content();
-        foreach ($cart as $orderProduct) {
-            $order->products()->attach($orderProduct->id, ['amount' => $orderProduct->qty]);
-            $totalCost += $orderProduct->total;
-            $product = Product::find($orderProduct->id);
-            $product->amount -= $orderProduct->qty;
-            $product->save();
-        }
-        $totalCost += Delivery::find($request->delivery)->price;
-        $payments = Payment::all();
+        Cart::destroy();
         $data = [
-            'address'=>$order->address,
-            'payments'=>$payments,
             'order' => $order,
             'user' => $user,
-            'cart' => $cart,
-            'totalCost' => $totalCost
         ];
 
 //        event(new OrderIsConfirmed(Auth::user()));
