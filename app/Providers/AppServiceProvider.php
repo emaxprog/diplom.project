@@ -27,6 +27,9 @@ class AppServiceProvider extends ServiceProvider
         Product::observe(ProductObserver::class);
 
         View::share('categories', Category::getCategories());
+        View::share('countries', Country::all());
+        View::share('regions', Region::all());
+        View::share('cities', City::all());
     }
 
     /**
