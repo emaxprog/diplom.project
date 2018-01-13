@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Models\Address;
 use App\Models\Order;
 use App\Repositories\Frontend\Product;
+use Carbon\Carbon;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -72,6 +73,7 @@ class OrderController extends \App\Http\Controllers\Controller
 
         $order->delivery_id = $request->delivery;
         $order->payment_id = $request->payment;
+        $order->created_at = Carbon::now();
         $user->orders()->save($order);
         $totalCost = 0;
         $cart = Cart::content();
