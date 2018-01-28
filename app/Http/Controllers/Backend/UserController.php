@@ -122,7 +122,7 @@ class UserController extends \App\Http\Controllers\Controller
         $this->validate($request, array_merge(User::rules($id), Profile::rules()));
 
         $user = User::find($id);
-        $user->username = $request->name;
+        $user->username = $request->username;
         $user->email = $request->email;
         if ($request->password) {
             $user->password = bcrypt($user->password);

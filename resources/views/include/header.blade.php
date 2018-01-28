@@ -27,7 +27,7 @@
                                 </li>
                             @else
                                 <li>
-                                    <a href="{{route('user.index')}}"><i class="fa fa-user fa-lg"></i> Личный
+                                    <a href="{{route('profile.edit',Auth::user())}}"><i class="fa fa-user fa-lg"></i> Личный
                                         кабинет</a>
                                 </li>
                                 <li>

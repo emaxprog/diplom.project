@@ -31,6 +31,12 @@
                                     </tr>
                                     @foreach ($cart as $product)
                                         <tr data-id="{{$product->id}}">
+                                            <td class="sop-icon1">
+                                                <a class="remove-product"
+                                                   data-url="{{route('cart.delete',$product->id)}}">
+                                                    <i class="fa fa-times"></i>
+                                                </a>
+                                            </td>
                                             <td class="sop-cart an-shop-cart">
                                                 <a href="#"><img class="primary-image" alt=""
                                                                  src="{{$product->options->image}}"></a>
@@ -48,10 +54,6 @@
                                                            data-url="{{route('cart.qty',$product->id)}}"
                                                            min="0" step="1">
                                                 </div>
-                                                <button type="button" class="btn remove remove-product"
-                                                        data-url="{{route('cart.delete',$product->id)}}">
-                                                    <i class="fa fa-trash-o fa-lg"></i>
-                                                </button>
                                             </td>
                                             <td class="sop-cart">
                                                 <div class="tb-product-price font-noraure-3">
