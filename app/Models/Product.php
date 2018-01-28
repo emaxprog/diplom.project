@@ -53,6 +53,11 @@ class Product extends Model
         return $this->belongsTo(Manufacturer::class);
     }
 
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
     public function scopeAvailable($query)
     {
         $query->where('amount', '>=', 1);

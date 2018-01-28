@@ -190,90 +190,67 @@
                                         </table>
                                     </div>
                                     <div role="tabpanel" class="tab-pane" id="profile">
-                                        <form class="form-horizontal">
-                                            <div id="review">
-                                                <table class="table table-striped table-bordered">
-                                                    <tr>
-                                                        <td style="width: 50%;">
-                                                            <strong>demo</strong>
-                                                        </td>
-                                                        <td class="text-right">25/01/2016</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td colspan="2">
-                                                            <p class="text an-text">Lorem ipsum dolor sit amet,
-                                                                consectetur adipiscing elit. Mauris sit amet sem varius,
-                                                                fringilla erat a, blandit arcu. Cras sit amet justo eu
-                                                                erat imperdiet dictum ac eget nulla. Aliquam erat
-                                                                volutpat.</p>
-                                                            <span class="fa fa-stack">
+                                        <form class="form-horizontal" action="{{route('product.review',$product)}}"
+                                              method="post">
+                                            {{csrf_field()}}
+                                            @foreach($product->comments as $comment)
+                                                <div id="review_{{$comment->id}}">
+                                                    <table class="table table-striped table-bordered">
+                                                        <tr>
+                                                            <td style="width: 50%;">
+                                                                <strong>{{$comment->user->profile->username}}</strong>
+                                                            </td>
+                                                            <td class="text-right">{{$comment->created_at}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="2">
+                                                                <p class="text an-text">{!! $comment->review !!}</p>
+                                                                @for($i=0;$i<$comment->rating;$i++)
+                                                                    <span class="fa fa-stack">
                                                                     <i class="fa fa-star fa-stack-2x"></i>
                                                                     <i class="fa fa-star-o fa-stack-2x"></i>
                                                                 </span>
-                                                            <span class="fa fa-stack">
-                                                                    <i class="fa fa-star fa-stack-2x"></i>
-                                                                    <i class="fa fa-star-o fa-stack-2x"></i>
-                                                                </span>
-                                                            <span class="fa fa-stack">
-                                                                    <i class="fa fa-star-o fa-stack-2x"></i>
-                                                                </span>
-                                                            <span class="fa fa-stack">
-                                                                    <i class="fa fa-star-o fa-stack-2x"></i>
-                                                                </span>
-                                                            <span class="fa fa-stack">
-                                                                    <i class="fa fa-star-o fa-stack-2x"></i>
-                                                                </span>
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                                <div class="text-right"></div>
-                                            </div>
-                                            <h2 class="write">Write a review</h2>
-                                            <div class="form-group required">
-                                                <div class="col-sm-12">
-                                                    <label class="control-label" for="input-name">Your Name</label>
-                                                    <input id="input-name" class="form-control" type="text" value=""
-                                                           name="name">
+                                                                @endfor
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                    <div class="text-right"></div>
                                                 </div>
-                                            </div>
-                                            <div class="form-group required">
-                                                <div class="col-sm-12">
-                                                    <label class="control-label" for="input-review">Your Review</label>
-                                                    <textarea id="input-review" class="form-control" rows="5"
-                                                              name="text"></textarea>
-                                                    <div class="help-block">
-                                                        <span class="text-danger">Note:</span>
-                                                        HTML is not translated!
+                                            @endforeach
+                                            @if($authCheck)
+                                                <h2 class="write">Write a review</h2>
+                                                <div class="form-group required">
+                                                    <div class="col-sm-12">
+                                                        <label class="control-label" for="input-review">Your
+                                                            Review</label>
+                                                        <textarea id="input-review" class="form-control" rows="5"
+                                                                  name="review"></textarea>
+                                                        <div class="help-block">
+                                                            <span class="text-danger">Note:</span>
+                                                            HTML is not translated!
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="form-group required">
-                                                <div class="col-sm-12">
-                                                    <label class="control-label">Rating</label>
-                                                    Bad
-                                                    <input type="radio" value="1" name="rating">
-                                                    <input type="radio" value="2" name="rating">
-                                                    <input type="radio" value="3" name="rating">
-                                                    <input type="radio" value="4" name="rating">
-                                                    <input type="radio" value="5" name="rating">
-                                                    Good
+                                                <div class="form-group required">
+                                                    <div class="col-sm-12">
+                                                        <label class="control-label">Rating</label>
+                                                        Bad
+                                                        <input type="radio" value="1" name="rating">
+                                                        <input type="radio" value="2" name="rating">
+                                                        <input type="radio" value="3" name="rating">
+                                                        <input type="radio" value="4" name="rating">
+                                                        <input type="radio" value="5" name="rating">
+                                                        Good
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="form-group required">
-                                                <div class="col-sm-12">
-                                                    <label class="control-label" for="input-captcha">Enter the code in
-                                                        the box below</label>
-                                                    <input id="input-captcha" class="form-control" type="text" value=""
-                                                           name="captcha">
+                                                <div class="buttons si-button">
+                                                    <div class="pull-right">
+                                                        <button id="button-review" class="btn btn-primary"
+                                                                data-loading-text="Loading..." type="submit">Continue
+                                                        </button>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="buttons si-button">
-                                                <div class="pull-right">
-                                                    <button id="button-review" class="btn btn-primary"
-                                                            data-loading-text="Loading..." type="button">Continue
-                                                    </button>
-                                                </div>
-                                            </div>
+                                            @endif
                                         </form>
                                     </div>
                                 </div>
@@ -309,7 +286,7 @@
                                 </ul>
                             </div>
                         @endif
-                            @include('include/sections/sidebar',['afisha' => $afishaSidebar])
+                        @include('include/sections/sidebar',['afisha' => $afishaSidebar])
                     </div>
                 </div>
             </div>

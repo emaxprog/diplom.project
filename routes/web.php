@@ -15,6 +15,7 @@ Auth::routes();
 
 //Route::get('/home', 'HomeController@index')->name('home');
 Route::get('product/{product}', 'Frontend\ProductController@show')->name('product.show');
+Route::post('product/{product}/review', 'Frontend\ProductController@review')->name('product.review');
 Route::get('cart/{product}/qty', 'Frontend\CartController@qty')->name('cart.qty');
 Route::post('feedback', 'Frontend\HomeController@feedback')->name('feedback');
 Route::group(['prefix' => 'admin', 'middleware' => 'check.role'], function () {

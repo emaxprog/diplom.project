@@ -62,6 +62,11 @@ class User extends Authenticatable
         return $this->hasMany(Order::class);
     }
 
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
     public function hasRole($roleName, $require = false)
     {
         if (is_array($roleName)) {
