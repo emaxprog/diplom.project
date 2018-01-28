@@ -95,11 +95,17 @@
                                     <h2>{{$product->name}}</h2>
                                 </div>
                                 <div class="pro-rating cendo-pro">
-                                    <div class="pro_one">
-                                        <img src="img/icon-img/stars-1.png" alt="">
-                                    </div>
+                                    @for($i=0;$i<5;$i++)
+                                        <div class="pro_one">
+                                            <span class="fa fa-stack"
+                                                  @if($i<$product->getRating()) style="color: #f4a137;" @endif>
+                                                <i class="fa fa-star fa-stack-2x"></i>
+                                                <i class="fa fa-star-o fa-stack-2x"></i>
+                                            </span>
+                                        </div>
+                                    @endfor
                                     <p class="rating-links">
-                                        <a href="#">1 Reviews</a>
+                                        <a href="#comments">{{count($product->comments)}} Reviews</a>
                                     </p>
                                 </div>
                                 <p class="availability in-stock">
@@ -170,8 +176,8 @@
                                             params</a>
                                     </li>
                                     <li role="presentation">
-                                        <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Reviews
-                                            (1)</a>
+                                        <a href="#comments" aria-controls="comments" role="tab" data-toggle="tab">Reviews
+                                            ({{count($product->comments)}})</a>
                                     </li>
                                 </ul>
                                 <!-- Tab panes -->
@@ -189,7 +195,7 @@
                                             @endforeach
                                         </table>
                                     </div>
-                                    <div role="tabpanel" class="tab-pane" id="profile">
+                                    <div role="tabpanel" class="tab-pane" id="comments">
                                         <form class="form-horizontal" action="{{route('product.review',$product)}}"
                                               method="post">
                                             {{csrf_field()}}
@@ -198,7 +204,7 @@
                                                     <table class="table table-striped table-bordered">
                                                         <tr>
                                                             <td style="width: 50%;">
-                                                                <strong>{{$comment->user->profile->username}}</strong>
+                                                                <strong>{{$comment->user->username}}</strong>
                                                             </td>
                                                             <td class="text-right">{{$comment->created_at}}</td>
                                                         </tr>

@@ -84,6 +84,11 @@ class Product extends \App\Models\Product
         return $params;
     }
 
+    public function getRating()
+    {
+        return round($this->comments()->avg('rating'));
+    }
+
     private static function getArrayObjects($result)
     {
         $params = [];
