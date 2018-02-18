@@ -4,17 +4,13 @@
         <div class="mid">
             <div class="center">
                 <div class="admin">
-                    <h4>Добрый день, администратор!</h4>
-                    <p>Вам доступны такие возможности:</p>
+                    <h2 class="admin-title">Добрый день, администратор!</h2>
                     <ul class="admin-menu">
-                        <li><a href="{{route('product.index')}}"><i class="fa fa-gamepad fa-lg"></i> Управление
-                                товарами</a>
-                        </li>
-                        <li><a href="{{route('category.index')}}"><i class="fa fa-gamepad fa-lg"></i> Управление
-                                категориями</a>
-                        </li>
-                        <li><a href="{{route('order.index')}}"><i class="fa fa-gamepad fa-lg"></i> Управление
-                                заказами</a></li>
+                        <li><a href="{{route('user.index')}}"><i class="far fa-5x fa-user fa-lg"></i><div class="caption">Пользователи</div></a></li>
+                        <li><a href="{{route('product.index')}}"><i class="far fa-5x fa-clipboard fa-lg"></i><div class="caption">Товары</div></a></li>
+                        <li><a href="{{route('category.index')}}"><i class="far fa-5x fa-folder-open fa-lg"></i><div class="caption">Категории</div></a></li>
+                        <li><a href="{{route('order.index')}}"><i class="far fa-5x fa-list-alt fa-lg"></i><div class="caption">Заказы</div></a></li>
+                        <li><a href="{{route('afisha.index')}}"><i class="far fa-5x fa-images fa-lg"></i><div class="caption">Афишы</div></a></li>
                     </ul>
                 </div>
             </div>

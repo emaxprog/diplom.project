@@ -4,6 +4,8 @@
         <div class="col-md-12">
             <form action="{{route('category.store')}}" method="post" class="form form-horizontal">
                 {{csrf_field()}}
+                <a href="{{route('user.index')}}" class="btn-back btn btn-default"><i class="fa fa-arrow-left"></i>
+                    Назад</a>
                 <h2 class="text-center">Добавить новую категорию</h2>
                 <div class="form-group">
                     <label for="name" class="control-label col-md-2">Название</label>
@@ -64,7 +66,15 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary center-block">Сохранить</button>
+                    <div class="col-md-6">
+                        <div class="btn-group">
+                            <a href="{{route('user.index')}}" class="btn-back btn btn-default"><i class="fa fa-arrow-left"></i>
+                                Назад</a>
+                            <button type="submit" formaction="{{route('product.store',['edit'=>true])}}" formmethod="post"
+                                    class="btn btn-primary center-block">Сохранить
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </form>
         </div>

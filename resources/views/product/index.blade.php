@@ -31,7 +31,7 @@
                         <td>
                             <button type="button" data-id="{{$product->slug}}"
                                     class="delete delete-product btn btn-danger"><i
-                                        class="fa fa-trash-o fa-lg"></i></button>
+                                        class="fa fa-trash-alt fa-lg"></i></button>
                         </td>
                     </tr>
                 @endforeach

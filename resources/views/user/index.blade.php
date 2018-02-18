@@ -31,7 +31,7 @@
                             <td>{{$user->email}}</td>
                             <td>{{$user->profile->name}}</td>
                             <td>{{$user->profile->surname}}</td>
-                            <td><a href="{{route('user.show',['id'=>$user->id])}}" class="btn btn-success"
+                            <td><a href="{{route('user.show',['id'=>$user->id])}}" class="btn btn-default"
                                    title="Смотреть"><i
                                             class="fa fa-eye fa-lg"></i></a></td>
                             <td><a href="{{route('user.edit',['id'=>$user->id])}}" class="btn btn-info"
@@ -40,7 +40,7 @@
                             <td>
                                 <button type="button" data-id="{{$user->id}}" class="delete delete-user btn btn-danger">
                                     <i
-                                            class="fa fa-trash-o fa-lg"></i></button>
+                                            class="fa fa-trash-alt fa-lg"></i></button>
                             </td>
                         </tr>
                     @endforeach

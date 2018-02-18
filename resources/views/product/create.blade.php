@@ -5,6 +5,8 @@
             <form enctype="multipart/form-data"
                   class="form form-horizontal">
                 {{csrf_field()}}
+                <a href="{{route('user.index')}}" class="btn-back btn btn-default"><i class="fa fa-arrow-left"></i>
+                    Назад</a>
                 <h2 class="text-center">Добавить новый товар</h2>
                 <div class="form-group">
                     <label class="control-label col-md-2">Превью-изображение товара</label>
@@ -44,6 +46,15 @@
                 </div>
                 <div class="form-group">
                     <label class="control-label col-md-2">Производитель</label>
+                    <div class="col-md-8">
+                        <select name="manufacturer_id" class="form-control ">
+                            @foreach($manufacturers as $manufacturer)
+                                <option value="{{$manufacturer->id}}">
+                                    {!! $manufacturer->name !!}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
                     <div class="col-md-1">
                         <button type="button" class="btn btn-default col-md-12" id="btn-manufacturer-minus"><i
                                     class="fa fa-minus"></i></button>
@@ -51,15 +62,6 @@
                     <div class="col-md-1">
                         <button type="button" class="btn btn-default col-md-12" id="btn-manufacturer-plus"><i
                                     class="fa fa-plus"></i></button>
-                    </div>
-                    <div class="col-md-8">
-                        <select name="manufacturer_id" class="form-control">
-                            @foreach($manufacturers as $manufacturer)
-                                <option value="{{$manufacturer->id}}">
-                                    {!! $manufacturer->name !!}
-                                </option>
-                            @endforeach
-                        </select>
                     </div>
                 </div>
                 <div class="form-group">
@@ -101,7 +103,7 @@
                 <div class="form-group">
                     <label class="control-label col-md-2">Категория</label>
                     <div class="col-md-10">
-                        <select name="category_id" class="form-control">
+                        <select name="category_id" class="form-control ">
                             @foreach ($categories as $category)
                                 @foreach($category->subcategories as $subcategory)
                                     <option value="{{$subcategory->id}}">
@@ -122,7 +124,7 @@
                 <div class="form-group">
                     <label class="control-label col-md-2">Новинка</label>
                     <div class="col-md-10">
-                        <select name="is_new" class="form-control">
+                        <select name="is_new" class="form-control ">
                             <option value="1" selected>Да</option>
                             <option value="0">Нет</option>
                         </select>
@@ -131,7 +133,7 @@
                 <div class="form-group">
                     <label class="control-label col-md-2">Рекомендуемый</label>
                     <div class="col-md-10">
-                        <select name="is_recommended" class="form-control">
+                        <select name="is_recommended" class="form-control ">
                             <option value="1" selected>Да</option>
                             <option value="0">Нет</option>
                         </select>
@@ -140,7 +142,7 @@
                 <div class="form-group">
                     <label class="control-label col-md-2">Популярный</label>
                     <div class="col-md-10">
-                        <select name="is_popular" class="form-control">
+                        <select name="is_popular" class="form-control ">
                             <option value="1" selected>Да</option>
                             <option value="0">Нет</option>
                         </select>
@@ -149,7 +151,7 @@
                 <div class="form-group">
                     <label class="control-label col-md-2">Статус</label>
                     <div class="col-md-10">
-                        <select name="visibility" class="form-control">
+                        <select name="visibility" class="form-control ">
                             <option value="1" selected>Отображается</option>
                             <option value="0">Скрыт</option>
                         </select>
@@ -180,16 +182,18 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-md-10">
-                        <button type="submit" formaction="{{route('product.store',['edit'=>true])}}" formmethod="post"
-                                class="btn btn-primary center-block">Сохранить и перейти к добавлению изображений
-                        </button>
+                    <div class="col-md-6">
+                        <div class="btn-group">
+                            <a href="{{route('user.index')}}" class="btn-back btn btn-default"><i class="fa fa-arrow-left"></i>
+                                Назад</a>
+                            <button type="submit" formaction="{{route('product.store',['edit'=>true])}}" formmethod="post"
+                                    class="btn btn-primary center-block">Сохранить
+                            </button>
+                            <button type="submit" formaction="{{route('product.store')}}" formmethod="post"
+                                    class="btn btn-inverse center-block">Сохранить и закрыть
+                            </button>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <button type="submit" formaction="{{route('product.store')}}" formmethod="post"
-                            class="btn btn-primary center-block">Сохранить
-                    </button>
                 </div>
             </form>
         </div>

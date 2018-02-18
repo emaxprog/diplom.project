@@ -2,6 +2,8 @@
 @section('content')
     <div class="center-admin">
         <div class="admin-view">
+            <a href="{{route('user.index')}}" class="btn-back btn btn-primary"><i class="fa fa-arrow-left"></i>
+                Назад</a>
             <h2 class="text-center">Пользователь #{!! $user->id !!}</h2>
 
             <h3>Информация о пользователе</h3>

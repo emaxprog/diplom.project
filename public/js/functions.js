@@ -393,10 +393,10 @@ $(document).ready(function () {
         $('#form-sort').submit();
     });
 
-    $('#country').select2();
-    $('#region').select2();
-    $('#city').select2();
-    $('#manufacturer').select2();
+    // $('#country').select2();
+    // $('#region').select2();
+    // $('#city').select2();
+    // $('#manufacturer').select2();
 
     function displayCartCount() {
         $.ajax({

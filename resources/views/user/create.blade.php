@@ -5,6 +5,8 @@
             <form action="{{route('user.store')}}" method="post" enctype="multipart/form-data"
                   class="form form-horizontal">
                 {{csrf_field()}}
+                <a href="{{route('user.index')}}" class="btn-back btn btn-default"><i class="fa fa-arrow-left"></i>
+                    Назад</a>
                 <h2 class="text-center">Добавить пользователя</h2>
                 <div class="form-group">
                     <label for="username" class="control-label col-md-2">Имя пользователя</label>
@@ -149,10 +151,14 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-md-offset-5 col-md-2">
-                        <button type="submit" class="btn btn-primary btn-block">
-                            <i class="fa fa-btn fa-user"></i> Сохранить
-                        </button>
+                    <div class="col-md-6">
+                        <div class="btn-group">
+                            <a href="{{route('user.index')}}" class="btn-back btn btn-default"><i class="fa fa-arrow-left"></i>
+                                Назад</a>
+                            <button type="submit" formaction="{{route('product.store',['edit'=>true])}}" formmethod="post"
+                                    class="btn btn-primary center-block">Сохранить
+                            </button>
+                        </div>
                     </div>
                 </div>
             </form>

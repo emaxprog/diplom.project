@@ -8,6 +8,8 @@
                   data-upload-images-url="{{route('afisha.upload.images',[$afisha])}}"
                   data-destroy-image-url="{{route('afisha.destroy.image',[$afisha])}}">
                 {{csrf_field()}}
+                <a href="{{route('user.index')}}" class="btn-back btn btn-default"><i class="fa fa-arrow-left"></i>
+                    Назад</a>
                 <h2 class="text-center">Редактировать афишу "{!! $afisha->name !!}"</h2>
                 <input type="hidden" name="_method" value="PUT">
                 <div class="form-group">
@@ -74,7 +76,15 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary center-block">Сохранить</button>
+                    <div class="col-md-6">
+                        <div class="btn-group">
+                            <a href="{{route('user.index')}}" class="btn-back btn btn-default"><i class="fa fa-arrow-left"></i>
+                                Назад</a>
+                            <button type="submit" formaction="{{route('product.store',['edit'=>true])}}" formmethod="post"
+                                    class="btn btn-primary center-block">Сохранить
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </form>
         </div>

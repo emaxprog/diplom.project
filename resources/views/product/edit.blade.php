@@ -9,6 +9,8 @@
                   data-destroy-image-url="{{route('product.destroy.image',[$product])}}">
                 <input type="hidden" name="_method" value="PUT">
                 {{csrf_field()}}
+                <a href="{{route('user.index')}}" class="btn-back btn btn-default"><i class="fa fa-arrow-left"></i>
+                    Назад</a>
                 <h2 class="text-center">Редактировать товар</h2>
                 <div class="form-group">
                     <label class="control-label col-md-2">Превью-изображение товара</label>
@@ -61,7 +63,7 @@
                 <div class="form-group">
                     <label class="control-label col-md-2">Производитель</label>
                     <div class="col-md-8">
-                        <select name="manufacturer_id" class="form-control" id="manufacturer">
+                        <select name="manufacturer_id" class="form-control " id="manufacturer">
                             @foreach($manufacturers as $manufacturer)
                                 <option value="{{$manufacturer->id}}"
                                         @if($manufacturer->id==$product->manufacturer_id) selected @endif>
@@ -118,7 +120,7 @@
                 <div class="form-group">
                     <label class="control-label col-md-2">Категория</label>
                     <div class="col-md-10">
-                        <select name="category_id" class="form-control">
+                        <select name="category_id" class="form-control ">
                             @foreach ($categories as $category)
                                 @foreach($category->subcategories as $subcategory)
                                     <option value="{{$subcategory->id}}"
@@ -139,7 +141,7 @@
                 <div class="form-group">
                     <label class="control-label col-md-2">Новинка</label>
                     <div class="col-md-10">
-                        <select name="is_new" class="form-control">
+                        <select name="is_new" class="form-control ">
                             <option value="1" @if($product->is_new==1) selected @endif>Да</option>
                             <option value="0" @if($product->is_new==0) selected @endif>Нет</option>
                         </select>
@@ -148,7 +150,7 @@
                 <div class="form-group">
                     <label class="control-label col-md-2">Рекомендуемый</label>
                     <div class="col-md-10">
-                        <select name="is_recommended" class="form-control">
+                        <select name="is_recommended" class="form-control ">
                             <option value="1" @if($product->is_recommended==1) selected @endif>Да</option>
                             <option value="0" @if($product->is_recommended==0) selected @endif>Нет</option>
                         </select>
@@ -157,7 +159,7 @@
                 <div class="form-group">
                     <label class="control-label col-md-2">Популярный</label>
                     <div class="col-md-10">
-                        <select name="is_popular" class="form-control">
+                        <select name="is_popular" class="form-control ">
                             <option value="1" @if($product->is_popular==1) selected @endif>Да</option>
                             <option value="0" @if($product->is_popular==0) selected @endif>Нет</option>
                         </select>
@@ -166,7 +168,7 @@
                 <div class="form-group">
                     <label class="control-label col-md-2">Статус</label>
                     <div class="col-md-10">
-                        <select name="visibility" class="form-control">
+                        <select name="visibility" class="form-control ">
                             <option value="1" @if($product->visibility==1) selected @endif>Отображается</option>
                             <option value="0" @if($product->visibility==0) selected @endif>Скрыт</option>
                         </select>
@@ -196,10 +198,13 @@
                         </div>
                     </div>
                     @foreach($params as $param)
-                        <div class="form-group">
+                        <div class="params-group">
                             <label class=" control-label col-md-2">Параметр</label>
+                            <button type="button" class="btn btn-default btn-remove-attribute col-md-1"><i
+                                        class="fa fa-minus"></i>
+                            </button>
                             <div class="col-md-3">
-                                <select name="parameters[]" class="form-control">
+                                <select name="parameters[]" class="form-control ">
                                     @foreach($productAttributes as $attribute)
                                         <option value="{{$attribute->id}}"
                                                 @if($attribute->id==$param->id) selected @endif>{!! $attribute->name !!}
@@ -208,9 +213,6 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <button type="button" class="btn btn-default btn-remove-attribute col-md-1"><i
-                                        class="fa fa-minus"></i>
-                            </button>
                             <button type="button" class="btn btn-default btn-add-parameter col-md-1" data-toggle="modal"
                                     data-target="#modal-add-attribute"><i class="fa fa-plus"></i>
                             </button>
@@ -227,7 +229,18 @@
                     @endforeach
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary center-block">Сохранить</button>
+                    <div class="col-md-6">
+                        <div class="btn-group">
+                            <a href="{{route('user.index')}}" class="btn-back btn btn-default"><i class="fa fa-arrow-left"></i>
+                                Назад</a>
+                            <button type="submit" formaction="{{route('product.store',['edit'=>true])}}" formmethod="post"
+                                    class="btn btn-primary center-block">Сохранить
+                            </button>
+                            <button type="submit" formaction="{{route('product.store')}}" formmethod="post"
+                                    class="btn btn-inverse center-block">Сохранить и закрыть
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </form>
         </div>
@@ -248,7 +261,7 @@
                     </div>
                     <div class="form-group">
                         <label class="control-label">Страна производства</label>
-                        <select name="manufacturer-country" class="form-control" id="country">
+                        <select name="manufacturer-country" class="form-control " id="country">
                             @foreach($countries as $country)
                                 <option value="{{$country->id}}">{!! $country->name !!}</option>
                             @endforeach
@@ -289,7 +302,7 @@
                                 <td>
                                     <button type="button" data-id="{{$manufacturer->id}}"
                                             class="btn btn-danger delete-manufacturer"><i
-                                                class="fa fa-trash fa-lg"></i>
+                                                class="fa fa-trash-alt fa-lg"></i>
                                     </button>
                                 </td>
                             </tr>
@@ -357,7 +370,7 @@
                                 <td>{!! $attribute->name !!}</td>
                                 <td>
                                     <button type="button" class="btn btn-danger delete-attribute"
-                                            data-id="{{$attribute->id}}"><i class="fa fa-trash fa-lg"></i>
+                                            data-id="{{$attribute->id}}"><i class="fa fa-trash-alt fa-lg"></i>
                                     </button>
                                 </td>
                             </tr>

@@ -5,6 +5,8 @@
             <form action="{{route('category.update',[$category])}}" method="post"
                   class="form form-horizontal">
                 {{csrf_field()}}
+                <a href="{{route('user.index')}}" class="btn-back btn btn-default"><i class="fa fa-arrow-left"></i>
+                    Назад</a>
                 <h2 class="text-center">Редактировать категорию "{!! $category->name !!}"</h2>
                 <input type="hidden" name="_method" value="PUT">
                 <div class="form-group">
@@ -73,7 +75,15 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary center-block">Сохранить</button>
+                    <div class="col-md-6">
+                        <div class="btn-group">
+                            <a href="{{route('user.index')}}" class="btn-back btn btn-default"><i class="fa fa-arrow-left"></i>
+                                Назад</a>
+                            <button type="submit" formaction="{{route('product.store',['edit'=>true])}}" formmethod="post"
+                                    class="btn btn-primary center-block">Сохранить
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </form>
         </div>
