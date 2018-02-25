@@ -2,8 +2,7 @@
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            <form class="form form-horizontal product-form" action="{{route('product.update',[$product])}}"
-                  method="post"
+            <form class="form form-horizontal product-form"
                   enctype="multipart/form-data"
                   data-upload-images-url="{{route('product.upload.images',[$product])}}"
                   data-destroy-image-url="{{route('product.destroy.image',[$product])}}">
@@ -233,10 +232,10 @@
                         <div class="btn-group">
                             <a href="{{route('user.index')}}" class="btn-back btn btn-default"><i class="fa fa-arrow-left"></i>
                                 Назад</a>
-                            <button type="submit" formaction="{{route('product.store',['edit'=>true])}}" formmethod="post"
+                            <button type="submit" formaction="{{route('product.update',[$product, 'edit'=>true])}}" formmethod="post"
                                     class="btn btn-primary center-block">Сохранить
                             </button>
-                            <button type="submit" formaction="{{route('product.store')}}" formmethod="post"
+                            <button type="submit" formaction="{{route('product.update',[$product])}}" formmethod="post"
                                     class="btn btn-inverse center-block">Сохранить и закрыть
                             </button>
                         </div>

@@ -67,7 +67,7 @@ class ProductController extends \App\Http\Controllers\Controller
             if ($request->has('edit')) {
                 return redirect()->route('product.edit', [$product]);
             }
-            return redirect()->route('product.index', ['message' => 'Товар сохранен!']);
+            return redirect()->route('product.index');
         }
         $product->savePAV($attrValue);
 
@@ -75,7 +75,7 @@ class ProductController extends \App\Http\Controllers\Controller
             return redirect()->route('product.edit', [$product]);
         }
 
-        return redirect()->route('product.index', ['message' => 'Товар сохранен!']);
+        return redirect()->route('product.index');
     }
 
     /**
@@ -142,9 +142,12 @@ class ProductController extends \App\Http\Controllers\Controller
         $attrValue = isset($request->parameters) ? array_combine($request->parameters, $request->values) : null;
         $pavModel->deleteAttributes($product->id);
         if ($attrValue == null)
-            return redirect()->route('product.index', ['message' => 'Товар сохранен!']);
+            return redirect()->route('product.index');
         $product->savePAV($attrValue);
-        return redirect()->route('product.index', ['message' => 'Товар сохранен!']);
+        if ($request->has('edit')) {
+            return redirect()->route('product.edit', [$product]);
+        }
+        return redirect()->route('product.index');
     }
 
     /**

@@ -91,7 +91,7 @@
                 <div class="form-group">
                     <label class="control-label col-md-2">Стоимость со скидкой, руб.</label>
                     <div class="col-md-10">
-                        <input type="text" name="price" placeholder="Введите стоимость товара со скидкой" value="{{old('sale_price')}}"
+                        <input type="text" name="sale_price" placeholder="Введите стоимость товара со скидкой" value="{{old('sale_price')}}"
                                class="form-control">
                         @if ($errors->has('sale_price'))
                             <div class="alert alert-danger">
