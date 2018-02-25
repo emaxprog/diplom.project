@@ -7,7 +7,7 @@
 <![endif]-->
 @include('include/header')
 @yield('content')
-@include('include/sections/brand')
+{{--@include('include/sections/brand')--}}
 @include('include/sections/service')
 @include('include/footer')
 @include('include/scripts')

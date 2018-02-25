@@ -8,7 +8,7 @@
     @include('include/sections/new_products',['recommendedProducts' => $recommendedProducts])
     @include('include/sections/testimonials',['afisha' => $afishaTestimonials])
     @include('include/sections/new_products2')
-    @include('include/sections/blog')
+{{--    @include('include/sections/blog')--}}
 @endsection
 
 
